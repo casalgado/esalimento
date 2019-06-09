@@ -10,9 +10,9 @@ firebase-debug.log*
 .firebase/
 
 # Firebase config
-firebase-app.js
-js/firebase-app.js
-public/firebase-app.js
+firebase-config.js
+js/firebase-config.js
+public/firebase-config.js
 
 # Uncomment this if you'd like others to create their own Firebase project.
 # For a team working on the same Firebase project(s), it is recommended to leave
