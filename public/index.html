@@ -8,9 +8,29 @@
     <title> esalimento </title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
   </head>
 
     <body onload="onLoad()">
+      <div id="landingContainer">
+        <div id="signInFormContainer">
+          <form id="signInForm">
+            <div class="form-group">
+              <input type="email" class="form-control" id="signInEmail" placeholder="email">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="signInPassword" placeholder="password">
+            </div>
+            <button type="submit" onclick="signInUser(); return false" class="btn btn-primary btnSubmit">Sign In</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="mainContainer" class="container">
+        <h3 id='talk'>Bro Quee</h3>
+        
+      </div>
+
       
       <!-- Scripts -->
         <!-- remote -->
@@ -24,6 +44,8 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/velocity/2.0.3/velocity.ui.min.js"></script>
 
         <!-- local -->
+        <script src="/firebase-app.js"></script>
+        <script src="js/users.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>

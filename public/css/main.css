@@ -1,0 +1,7 @@
+#landingContainer, #mainContainer {
+    display: none;
+}
+
+#signInForm{
+    margin: 50px;
+  }
