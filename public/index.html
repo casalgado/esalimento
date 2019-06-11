@@ -14,20 +14,23 @@
     <body onload="onLoad()">
       <div id="landingContainer">
         <div id="signInFormContainer">
-          <form id="signInForm">
+          <form onsubmit="signInUser(); return false" id="signInForm">
             <div class="form-group">
               <input type="email" class="form-control" id="signInEmail" placeholder="email">
             </div>
             <div class="form-group">
               <input type="password" class="form-control" id="signInPassword" placeholder="password">
             </div>
-            <button type="submit" onclick="signInUser(); return false" class="btn btn-primary btnSubmit">Sign In</button>
+            <button type="submit" class="btn btn-primary btnSubmit">Sign In</button>
           </form>
         </div>
       </div>
 
       <div id="mainContainer" class="container">
-        <h3 id='talk'>Bro Quee</h3>
+        <h3 id='talk'>Bro Queeeeeee</h3>
+        <div id="video">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
 
       </div>
 

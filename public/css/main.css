@@ -4,4 +4,11 @@
 
 #signInForm{
     margin: 50px;
-  }
+}
+
+#talk {
+    width: 100%;
+    text-align: center;
+    margin-top: 10%;
+}
+

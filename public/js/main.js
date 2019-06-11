@@ -9,6 +9,9 @@ function onLoad() {
 }
 
 function loadPage(user){
-    document.getElementById('landingContainer').setAttribute('style', 'display:none')
-    document.getElementById('mainContainer').setAttribute('style', 'display:block')
+    if (user){
+        document.getElementById('landingContainer').setAttribute('style', 'display:none')
+        document.getElementById('mainContainer').setAttribute('style', 'display:block')
+    }
 }
+
