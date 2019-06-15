@@ -6,6 +6,14 @@ class Client {
 		this.address = address;
 	}
 
+	static create(form) {
+		let [ name, email, phone, address ] = getFormValues(form);
+		let client = new Client(name, email, phone, address);
+		client.save().then(() => {
+			form.reset();
+		});
+	}
+
 	save() {
 		return new Promise((resolve) => {
 			// @clean if id is not going to be used, this can be refactored
@@ -16,12 +24,15 @@ class Client {
 			CLIENTS.push(this);
 		});
 	}
-}
 
-function createClient(form) {
-	let [ name, email, phone, address ] = getFormValues(form);
-	let client = new Client(name, email, phone, address);
-	client.save().then(() => {
-		form.reset();
-	});
+	static drawAll(id) {
+		let list, item;
+		list = document.createElement('ul');
+		document.getElementById(id).appendChild(list);
+		for (let i = 0; i < CLIENTS.length; i++) {
+			item = document.createElement('li');
+			item.innerHTML = CLIENTS[i].name;
+			list.appendChild(item);
+		}
+	}
 }

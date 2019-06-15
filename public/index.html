@@ -26,15 +26,61 @@
     </div>
     <div id="appContainer" class="container">
       <div class="row">
-        <div id="newOrder" class="col-xs-12 col-lg-4">
-          
-        </div>
-        <div id="showOrder" class="col-xs-12 col-lg-4">
-          
-        </div>
+        <div id="newOrder" class="col-xs-12 col-lg-3">
+          <form onsubmit="createOrder(this); return false" id="" class="localForm">
+           
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <select
+                  class="custom-select custom-select-sm" 
+                  id=""
+                  data-target=""
+                  onchange="">
+                    <option value="undefined" class="selectPlaceholder">Cliente</option>
+                </select>
+              </div>
+  
+              <input required type="text" onkeyup="" class="form-control form-control-sm" id="moneyEntryName" placeholder="">
+            </div>
+  
+            <div class="form-group input-group select-group">
+              <div class="input-group-prepend">
+                <select 
+                  class="custom-select custom-select-sm"
+                  id=""
+                  data-target=""
+                  onchange="" 
+                  onkeyup="">
+                    <option value="undefined" class="selectPlaceholder">Producto</option>
+                </select>
+              </div>
+              <input required type="text" onkeyup="" class="form-control form-control-sm" id="orderProduct" placeholder="">
+            </div>
+  
+            <div class="form-group">
+              <!-- <label for="unitPrice">Precio Unitario</label> -->
+              <input required type="number" min="1" step="0.1" onkeyup="" class="form-control form-control-sm" id="orderUnitPrice" placeholder="Precio Unitario">
+            </div>
 
-        <div id="newClient" class="col-xs-12 col-lg-4">
-          <form onsubmit="createClient(this); return false" class="localForm">
+            <div class="form-group">
+              <!-- <label for="unitPrice">Cantidad</label> -->
+              <input required type="number" min="1" step="0.1" onkeyup="" class="form-control form-control-sm" id="orderQuantity" placeholder="Cantidad">
+            </div>
+
+            <div class="form-group">
+              <!-- <label for="orderTotal">Total</label> -->
+              <input required type="number" min="1" step="0.1" onkeyup="" class="form-control form-control-sm" id="orderTotal" placeholder="Precio Total">
+            </div>
+
+            <button type="submit" class="btn btn-primary btnSubmit">Add</button>
+          </form>
+          
+        </div>
+        <div id="showOrders" class="col-xs-12 col-lg-3">
+          
+        </div>
+        <div id="newClient" class="col-xs-12 col-lg-3">
+          <form onsubmit="Client.create(this); return false" class="localForm">
             <div class="form-group">
               <label for="clientName">Nombre</label>
               <input required type="text" onkeyup="" class="form-control form-control-sm" id="clientName" placeholder="">
@@ -45,7 +91,7 @@
             </div>
             <div class="form-group">
               <label for="clientPhone">Telefono</label>
-              <input required type="number" min="1" step="1" onkeyup="" class="form-control form-control-sm">
+              <input required type="number" min="1" step="1" onkeyup="" id="clientPhone"  class="form-control form-control-sm">
             </div>
             <div class="form-group">
               <label for="clientAddress">Direccion</label>
@@ -55,6 +101,30 @@
             <button type="submit" class="btn btn-primary btnSubmit">Crear Cliente</button>
           </form>
         </div>
+        <div id="showClients" class="col-xs-12 col-lg-3">
+        </div>
+      </div>
+      <div class="row">
+        <div id="newProduct" class="col-xs-12 col-lg-3">
+          <form onsubmit="Product.create(this); return false" class="localForm">
+              <div class="form-group">
+                <label for="productName">Nombre</label>
+                <input required type="text" onkeyup="" class="form-control form-control-sm" id="productName" placeholder="">
+              </div>
+              <div class="form-group">
+                  <label for="productPrice">Precio de Venta</label>
+                  <input required type="number" min="1" step="1" onkeyup="" id="productPrice" class="form-control form-control-sm">
+              </div>
+              <div class="form-group">
+                  <label for="productCost">Costo</label>
+                  <input required type="number" min="1" step="1" onkeyup="" id="productCost" class="form-control form-control-sm">
+              </div>
+              <button type="submit" class="btn btn-primary btnSubmit">Crear Producto</button>
+          </form>
+        </div>
+        <div id="showProducts" class="col-xs-12 col-lg-3"></div>
+        <div id="newExpense" class="col-xs-12 col-lg-3"></div>
+        <div id="showExpense" class="col-xs-12 col-lg-3"></div>
       </div>
     </div>
     
@@ -71,8 +141,10 @@
       <script src="//cdnjs.cloudflare.com/ajax/libs/velocity/2.0.3/velocity.ui.min.js"></script>
       <!-- local -->
       <script src="js/firebase-config.js"></script>
+      <script src="js/database.js"></script>
       <script src="js/admins.js"></script>
-      <script src="js/clients.js"></script>
+      <script src="js/Client.js"></script>
+      <script src="js/Product.js"></script>
       <script src="js/forms.js"></script>
       <script src="js/main.js"></script>
   </body>
