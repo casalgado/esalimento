@@ -11,47 +11,69 @@
     <link rel="stylesheet" href="css/main.css">
   </head>
 
-    <body onload="onLoad()">
-      <div id="landingContainer">
-        <div id="signInFormContainer">
-          <form onsubmit="signInUser(); return false" id="signInForm">
+  <body onload="onLoad()">
+    <div id="loaderContainer" class="container"></div>
+    <div id="siteContainer" class="container">
+        <form onsubmit="signInAdmin(this); return false" class="localForm">
+          <div class="form-group">
+            <input type="email" class="form-control" placeholder="email">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" placeholder="password">
+          </div>
+          <button type="submit" class="btn btn-primary btnSubmit">Iniciar Sesion</button>
+        </form>
+    </div>
+    <div id="appContainer" class="container">
+      <div class="row">
+        <div id="newOrder" class="col-xs-12 col-lg-4">
+          
+        </div>
+        <div id="showOrder" class="col-xs-12 col-lg-4">
+          
+        </div>
+
+        <div id="newClient" class="col-xs-12 col-lg-4">
+          <form onsubmit="createClient(this); return false" class="localForm">
             <div class="form-group">
-              <input type="email" class="form-control" id="signInEmail" placeholder="email">
+              <label for="clientName">Nombre</label>
+              <input required type="text" onkeyup="" class="form-control form-control-sm" id="clientName" placeholder="">
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" id="signInPassword" placeholder="password">
+              <label for="clientEmail">E-mail</label>
+              <input type="email" onkeyup="" class="form-control form-control-sm" id="clientEmail" placeholder="">
             </div>
-            <button type="submit" class="btn btn-primary btnSubmit">Sign In</button>
+            <div class="form-group">
+              <label for="clientPhone">Telefono</label>
+              <input required type="number" min="1" step="1" onkeyup="" class="form-control form-control-sm">
+            </div>
+            <div class="form-group">
+              <label for="clientAddress">Direccion</label>
+              <input type="text" onkeyup="" class="form-control form-control-sm" id="clientAddress" placeholder="">
+            </div>
+
+            <button type="submit" class="btn btn-primary btnSubmit">Crear Cliente</button>
           </form>
         </div>
       </div>
-
-      <div id="mainContainer" class="container">
-        <h3 id='talk' class="text">Bro Queeeeeee</h3>
-        <div id="video">
-          <div id="coverup" onclick="playVideo()">
-            <button id="rbutton" class="btn btn-primary"> click to continue </button>
-          </div>
-          <iframe id="frame" width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <h2 id="rickrolled" class="text">¡¡Rick Roll!!</h2>
-      </div>
-
-      
-      <!-- Scripts -->
-        <!-- remote -->
-        <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-database.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-auth.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/velocity/2.0.3/velocity.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/velocity/2.0.3/velocity.ui.min.js"></script>
-
-        <!-- local -->
-        <script src="js/firebase-config.js"></script>
-        <script src="js/users.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+    </div>
+    
+    
+    <!-- Scripts -->
+      <!-- remote -->
+      <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-database.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase-auth.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/velocity/2.0.3/velocity.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/velocity/2.0.3/velocity.ui.min.js"></script>
+      <!-- local -->
+      <script src="js/firebase-config.js"></script>
+      <script src="js/admins.js"></script>
+      <script src="js/clients.js"></script>
+      <script src="js/forms.js"></script>
+      <script src="js/main.js"></script>
+  </body>
 </html>
