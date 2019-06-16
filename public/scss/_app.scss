@@ -1,5 +1,10 @@
 .row {
-	div {
+	> div {
 		background-color: $gray2;
+		padding: 20px;
 	}
+}
+
+.hide {
+	display: none;
 }

@@ -1,14 +1,19 @@
-.localForm {
-  margin: 20px;
-}
-
 .custom-select {
   border-bottom-right-radius: 0px;
   border-top-right-radius: 0px;
 }
 
-.row div {
+.formTitle {
+  cursor: pointer;
+}
+
+.row > div {
   background-color: #e1e2e1;
+  padding: 20px;
+}
+
+.hide {
+  display: none;
 }
 
 #siteContainer,

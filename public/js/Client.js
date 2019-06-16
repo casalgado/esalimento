@@ -24,15 +24,4 @@ class Client {
 			CLIENTS.push(this);
 		});
 	}
-
-	static drawAll(id) {
-		let list, item;
-		list = document.createElement('ul');
-		document.getElementById(id).appendChild(list);
-		for (let i = 0; i < CLIENTS.length; i++) {
-			item = document.createElement('li');
-			item.innerHTML = CLIENTS[i].name;
-			list.appendChild(item);
-		}
-	}
 }
