@@ -1,12 +1,16 @@
 .row {
 	> div {
-		background-color: $gray2;
+		background-color: $gray1;
 		padding: 20px;
 	}
 }
 
 .hide {
 	display: none;
+}
+
+.show {
+	display: block;
 }
 
 table {

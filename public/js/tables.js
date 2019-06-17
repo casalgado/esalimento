@@ -35,15 +35,3 @@ function appendToTable(tableId, object) {
 	table = document.getElementById(tableId);
 	table.appendChild(drawTableRow(object));
 }
-
-function addPopoverEvent(tableId) {
-	let id = '#' + tableId;
-	rows = document.querySelectorAll(`${id} tr`);
-	for (let i = 1; i < rows.length; i++) {
-		rows[i].addEventListener('click', showPopover);
-	}
-}
-
-function showPopover() {
-	console.log(this.getAttribute('data-id'));
-}

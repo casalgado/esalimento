@@ -69,11 +69,11 @@ class Order {
 	}
 
 	getColumnTitles() {
-		return [ 'producto', 'cantidad', 'estado' ];
+		return [ 'producto', 'cliente', 'cdt', 'estado' ];
 	}
 
 	getTableContent() {
-		return [ this.product, this.quantity, this.currentStatus() ];
+		return [ this.product, this.clientCode(), this.quantity, this.currentStatus() ];
 	}
 
 	currentStatus() {
@@ -87,5 +87,21 @@ class Order {
 			}
 		}
 		return stat;
+	}
+
+	clientCode() {
+		return this.client
+			.toUpperCase()
+			.split(' ')
+			.map((i) => {
+				return i.charAt(0);
+			})
+			.join('.');
+	}
+
+	static getById(id) {
+		return ORDERS.find((obj) => {
+			return obj.id === id;
+		});
 	}
 }

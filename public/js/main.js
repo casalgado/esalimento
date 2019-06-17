@@ -5,6 +5,7 @@ function onLoad() {
 	EXPENSES = [];
 	PROVIDERS = [];
 	SHOWING = { period: 'day', current: moment() };
+	POPOVER = { speed: 150 };
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			loadPage(user);
@@ -12,7 +13,7 @@ function onLoad() {
 			document.getElementById('siteContainer').setAttribute('style', 'display:block');
 		}
 	});
-	$('[data-toggle="popover"]').popover();
+	document.getElementById('popoverContainer').addEventListener('click', hidePopover);
 }
 
 function loadPage(user) {
@@ -44,7 +45,7 @@ function loadPage(user) {
 			EXPENSE_CATEGORIES = propList(EXPENSES, 'category');
 		})
 		.then(() => {
-			drawAll(EXPENSES, 'showExpenses', 'name');
+			drawTable('showExpensesTable', EXPENSES);
 		});
 	document.getElementById('siteContainer').setAttribute('style', 'display:none');
 	document.getElementById('loaderContainer').setAttribute('style', 'display:none');

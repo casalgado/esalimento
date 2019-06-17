@@ -12,6 +12,9 @@
   </head>
 
   <body onload="onLoad()">
+    <div id="popoverContainer" class="hide">
+      <div id="popoverContent"></div>
+    </div>
     <div id="loaderContainer" class="container"></div>
     <div id="siteContainer" class="container">
         <form onsubmit="signInAdmin(this); return false" class="localForm">
@@ -204,7 +207,9 @@
               <button type="submit" class="btn btn-primary btnSubmit">Crear Gasto</button>
           </form>
         </div>
-        <div id="showExpenses" class="col-xs-12 col-lg-3"></div>
+        <div id="showExpenses" class="col-xs-12 col-lg-3">
+          <table id="showExpensesTable"></table>
+        </div>
       </div>
     </div>
     
@@ -230,6 +235,7 @@
       <script src="js/Status.js"></script>
       <script src="js/Product.js"></script>
       <script src="js/tables.js"></script>
+      <script src="js/popover.js"></script>
       <script src="js/forms.js"></script>
       <script src="js/main.js"></script>
     </span>

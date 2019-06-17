@@ -24,4 +24,12 @@ class Expense {
 			EXPENSES.push(this);
 		});
 	}
+
+	getColumnTitles() {
+		return [ 'nombre', 'precio', 'proveedor' ];
+	}
+
+	getTableContent() {
+		return [ this.name, this.price, this.provider ];
+	}
 }

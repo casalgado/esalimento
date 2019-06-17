@@ -1,0 +1,19 @@
+#popoverContainer {
+	position: absolute;
+	width: 100vw;
+	height: 500vh;
+	margin-top: -200vh;
+	background-color: rgba(0, 0, 0, 0);
+	z-index: 10;
+}
+
+#popoverContent {
+	position: fixed;
+	top: 50%;
+	margin: 0 auto;
+	background-color: $gray1;
+	width: 500px;
+	height: 200px;
+	z-index: 20;
+	opacity: 1 !important;
+}
