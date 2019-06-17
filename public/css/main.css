@@ -16,6 +16,10 @@
   display: none;
 }
 
+table {
+  width: 100%;
+}
+
 #siteContainer,
 #appContainer {
   display: none;

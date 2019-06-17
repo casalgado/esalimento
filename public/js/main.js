@@ -2,6 +2,9 @@ function onLoad() {
 	CLIENTS = [];
 	PRODUCTS = [];
 	ORDERS = [];
+	EXPENSES = [];
+	PROVIDERS = [];
+	SHOWING = { period: 'day', current: moment() };
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			loadPage(user);
@@ -9,6 +12,7 @@ function onLoad() {
 			document.getElementById('siteContainer').setAttribute('style', 'display:block');
 		}
 	});
+	$('[data-toggle="popover"]').popover();
 }
 
 function loadPage(user) {
@@ -31,7 +35,16 @@ function loadPage(user) {
 			ORDERS = Order.instantiateStatus(orders);
 		})
 		.then(() => {
-			drawAll(ORDERS, 'showOrders', 'product');
+			drawTable('showOrdersTable', ORDERS);
+			addPopoverEvent('showOrdersTable');
+		});
+	fetchAll(Expense, 'expenses')
+		.then((expenses) => {
+			EXPENSES = expenses;
+			EXPENSE_CATEGORIES = propList(EXPENSES, 'category');
+		})
+		.then(() => {
+			drawAll(EXPENSES, 'showExpenses', 'name');
 		});
 	document.getElementById('siteContainer').setAttribute('style', 'display:none');
 	document.getElementById('loaderContainer').setAttribute('style', 'display:none');
@@ -58,3 +71,14 @@ function drawAll(array, target, property) {
 		list.appendChild(item);
 	}
 }
+
+function propList(objects, property) {
+	// returns list of property values of an array of objects
+	onlyProps = objects.map((e) => e[property]).getUnique();
+	return onlyProps;
+}
+
+Array.prototype.getUnique = function() {
+	let uniq = [ ...new Set(this) ];
+	return uniq;
+};

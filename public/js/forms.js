@@ -15,7 +15,7 @@ function getFormValues(form) {
 function updatePriceValues(input) {
 	[ unit, quantity, total ] = getPriceInputs();
 	if (input.id == 'orderTotal') {
-		unit.value = total.value * quantity.value;
+		unit.value = total.value / quantity.value;
 	} else {
 		total.value = unit.value * quantity.value;
 	}
