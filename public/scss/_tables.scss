@@ -1,0 +1,10 @@
+#showOrdersTableTitleWrapper {
+	display: flex;
+
+	h6 {
+		padding-top: 8px;
+		padding-bottom: 8px;
+		margin-bottom: 0px;
+		// @refactored margin-bottom
+	}
+}

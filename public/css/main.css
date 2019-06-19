@@ -1,4 +1,4 @@
-#popoverContainer {
+#customModalContainer {
   position: absolute;
   width: 100vw;
   height: 500vh;
@@ -7,15 +7,53 @@
   z-index: 10;
 }
 
-#popoverContent {
+#customModalContent {
+  border-color: #ced4da;
+  border-radius: 4.7px;
+  padding: 5px;
   position: fixed;
-  top: 50%;
+  top: 40%;
+  left: 5%;
   margin: 0 auto;
   background-color: #f9fafb;
-  width: 500px;
-  height: 200px;
+  width: 90%;
   z-index: 20;
   opacity: 1 !important;
+}
+
+#customModalContent {
+  text-align: left;
+  text-transform: capitalize;
+}
+
+#customModalContent :nth-child(even) {
+  background-color: white;
+}
+
+#customModalContent .customModalRow p {
+  display: inline-block;
+  margin-left: 5px;
+  margin-bottom: 2px;
+}
+
+#customModalContent .customModalRow p:first-child {
+  font-weight: bold;
+}
+
+#customModalContent .customModalRow p:first-child:after {
+  content: ': ';
+}
+
+#showOrdersTableTitleWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#showOrdersTableTitleWrapper h6 {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-bottom: 0px;
 }
 
 .custom-select {
@@ -47,5 +85,12 @@ table {
 #siteContainer,
 #appContainer {
   display: none;
+}
+
+.btn.focus,
+.btn.active {
+  outline: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
 }
 /*# sourceMappingURL=main.css.map */

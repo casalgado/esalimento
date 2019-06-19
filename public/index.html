@@ -7,13 +7,15 @@
 
     <title> esalimento </title>
 
+    <script src="https://kit.fontawesome.com/349071ea41.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
   </head>
 
   <body onload="onLoad()">
-    <div id="popoverContainer" class="hide">
-      <div id="popoverContent"></div>
+    <div id="customModalContainer" class="hide">
+      <div id="customModalContent">
+      </div>
     </div>
     <div id="loaderContainer" class="container"></div>
     <div id="siteContainer" class="container">
@@ -93,6 +95,11 @@
           
         </div>
         <div id="showOrders" class="col-xs-12 col-lg-3">
+          <div id="showOrdersTableTitleWrapper">
+            <button type="" onclick="showPrevious('showOrdersTable', Order)" class="btn"><i class="fas fa-caret-left fa-lg"></i></button>
+            <h6 id="showOrdersTableTitle">  </h6>
+            <button type="" onclick="showNext('showOrdersTable', Order)" class="btn"><i class="fas fa-caret-right fa-lg"></i></button>
+            </div>
           <table id="showOrdersTable"></table>
         </div>
         <div id="newClient" class="col-xs-12 col-lg-3">
@@ -212,7 +219,17 @@
         </div>
       </div>
     </div>
-    
+    <div id="customModalButtons" class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-secondary active">
+        <input type="checkbox" name="options" id="option1" autocomplete="off"> Active
+      </label>
+      <label class="btn btn-secondary">
+        <input type="checkbox" name="options" id="option2" autocomplete="off"> Radio
+      </label>
+      <label class="btn btn-secondary">
+        <input type="checkbox" name="options" id="option3" autocomplete="off"> Radio
+      </label>
+    </div>
     <span>
     <!-- Scripts -->
       <!-- remote -->
@@ -235,7 +252,7 @@
       <script src="js/Status.js"></script>
       <script src="js/Product.js"></script>
       <script src="js/tables.js"></script>
-      <script src="js/popover.js"></script>
+      <script src="js/customModal.js"></script>
       <script src="js/forms.js"></script>
       <script src="js/main.js"></script>
     </span>

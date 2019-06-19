@@ -1,0 +1,51 @@
+#customModalContainer {
+	position: absolute;
+	width: 100vw;
+	height: 500vh;
+	margin-top: -200vh;
+	background-color: rgba(0, 0, 0, 0);
+	z-index: 10;
+}
+
+#customModalContent {
+	@include bootstrap-borders;
+	padding: 5px;
+	position: fixed;
+	top: 40%;
+	left: 5%;
+	margin: 0 auto;
+	background-color: $gray1;
+	width: 90%;
+	z-index: 20;
+	opacity: 1 !important;
+}
+
+#customModalContent {
+	text-align: left;
+	text-transform: capitalize;
+
+	& :nth-child(even) {
+		background-color: white;
+	}
+
+	& .customModalRow {
+		p {
+			display: inline-block;
+			margin-left: 5px;
+			margin-bottom: 2px;
+		}
+
+		p:first-child {
+			&:after {
+				content: ': ';
+			}
+			font-weight: bold;
+		}
+
+		p:last-child {
+		}
+	}
+}
+
+#customModalButtons {
+}

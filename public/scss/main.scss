@@ -1,9 +1,16 @@
 @import 'variables';
-@import 'popover';
+@import 'customModal';
+@import 'tables';
 @import 'forms';
 @import 'app';
 
 #siteContainer,
 #appContainer {
 	display: none;
+}
+
+.btn.focus,
+.btn.active {
+	outline: none !important;
+	box-shadow: none !important;
 }

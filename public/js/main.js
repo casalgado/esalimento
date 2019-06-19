@@ -4,8 +4,8 @@ function onLoad() {
 	ORDERS = [];
 	EXPENSES = [];
 	PROVIDERS = [];
-	SHOWING = { period: 'day', current: moment() };
-	POPOVER = { speed: 150 };
+	SHOWING = { period: 'Week', current: moment() };
+	MODAL = { speed: 150 };
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			loadPage(user);
@@ -13,7 +13,7 @@ function onLoad() {
 			document.getElementById('siteContainer').setAttribute('style', 'display:block');
 		}
 	});
-	document.getElementById('popoverContainer').addEventListener('click', hidePopover);
+	document.getElementById('customModalContainer').addEventListener('click', hideCustomModal);
 }
 
 function loadPage(user) {
@@ -36,8 +36,9 @@ function loadPage(user) {
 			ORDERS = Order.instantiateStatus(orders);
 		})
 		.then(() => {
-			drawTable('showOrdersTable', ORDERS);
-			addPopoverEvent('showOrdersTable');
+			drawTable('showOrdersTable', Order.byWeek());
+			setTableTitle();
+			addCustomModalEvent('showOrdersTable');
 		});
 	fetchAll(Expense, 'expenses')
 		.then((expenses) => {
@@ -50,16 +51,6 @@ function loadPage(user) {
 	document.getElementById('siteContainer').setAttribute('style', 'display:none');
 	document.getElementById('loaderContainer').setAttribute('style', 'display:none');
 	document.getElementById('appContainer').setAttribute('style', 'display:block');
-}
-
-function instantiateEntry(constructor, dbObj) {
-	// called when retreiving objects from database
-	var entry = new constructor();
-	var json = JSON.parse(JSON.stringify(dbObj));
-	for (var i = 0; i < Object.keys(json).length; i++) {
-		entry[Object.keys(json)[i]] = Object.values(json)[i];
-	}
-	return entry;
 }
 
 function drawAll(array, target, property) {
@@ -83,3 +74,29 @@ Array.prototype.getUnique = function() {
 	let uniq = [ ...new Set(this) ];
 	return uniq;
 };
+
+// pagination
+
+function currentlyShowing() {
+	// returns a string
+	let current = moment(SHOWING.current.format('X'), 'X');
+	return `${current.startOf(SHOWING.period).format('D MMMM')} - ${current.endOf(SHOWING.period).format('D MMMM')}`;
+}
+
+function setTableTitle() {
+	document.getElementById('showOrdersTableTitle').innerHTML = currentlyShowing();
+}
+
+function showNext(table, constructor) {
+	SHOWING.current.add(1, SHOWING.period);
+	array = constructor.byWeek();
+	drawTable(table, array);
+	setTableTitle();
+}
+
+function showPrevious(table, constructor) {
+	SHOWING.current.subtract(1, SHOWING.period);
+	array = constructor.byWeek();
+	drawTable(table, array);
+	setTableTitle();
+}

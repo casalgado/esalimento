@@ -1,7 +1,7 @@
 class Product {
 	constructor(name, category, price, cost) {
 		this.name = name;
-		this.category = category;
+		this.category = category || '';
 		this.price = price;
 		this.cost = cost;
 	}

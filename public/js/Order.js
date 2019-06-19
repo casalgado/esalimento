@@ -1,13 +1,13 @@
 class Order {
-	constructor(client, product, quantity, unitPrice, total, id) {
+	constructor(client, product, quantity, unitPrice, total, status, paid, id) {
 		this.client = client;
 		this.product = product;
 		this.quantity = quantity;
 		this.unitPrice = unitPrice;
 		this.total = total;
-		this.status = new Status();
+		this.status = status || new Status();
 		this.paid = false;
-		this.id = '';
+		this.id = id || '';
 	}
 
 	static create(form) {
@@ -39,7 +39,7 @@ class Order {
 
 	static instantiateStatus(orders) {
 		for (let i = 0; i < orders.length; i++) {
-			orders[i].status = new Status(JSON.parse(orders[i].status));
+			orders[i].status = Status.parse(JSON.parse(orders[i].status));
 		}
 		return orders;
 	}
@@ -50,9 +50,9 @@ class Order {
 		}
 	}
 
-	datePrepared() {
-		if (this.status.prepared) {
-			return this.status.prepared.format('dddd MMMM D');
+	dateProduced() {
+		if (this.status.produced) {
+			return this.status.produced.format('dddd MMMM D');
 		}
 	}
 
@@ -68,25 +68,32 @@ class Order {
 		}
 	}
 
-	getColumnTitles() {
-		return [ 'producto', 'cliente', 'cdt', 'estado' ];
+	getTableColumnTitles() {
+		return [ 'producto', 'confirmed', 'ctd', 'estado' ];
 	}
 
 	getTableContent() {
-		return [ this.product, this.clientCode(), this.quantity, this.currentStatus() ];
+		return [ this.product, moment(this.status.confirmed).format('D MMMM'), this.quantity, this.currentStatus() ];
+	}
+
+	getCustomModalTitles() {
+		return [ 'producto', 'cliente', 'total', 'status' ];
+	}
+
+	getCustomModalContent() {
+		return [ this.product, this.client, this.total, this.status ];
 	}
 
 	currentStatus() {
-		let keys, values, stat;
-		keys = Object.keys(this.status);
-		values = Object.values(this.status);
-		for (let i = keys.length - 1; i >= 0; i--) {
-			if (values[i]) {
-				stat = keys[i];
+		let entries, currentStatus;
+		entries = Object.entries(this.status);
+		for (let i = entries.length - 1; i >= 0; i--) {
+			if (entries[i][1]) {
+				currentStatus = entries[i][0];
 				break;
 			}
 		}
-		return stat;
+		return currentStatus;
 	}
 
 	clientCode() {
@@ -102,6 +109,16 @@ class Order {
 	static getById(id) {
 		return ORDERS.find((obj) => {
 			return obj.id === id;
+		});
+	}
+
+	belongsToWeek(date) {
+		return moment(this.status.confirmed).isSame(date, 'week') ? true : false;
+	}
+
+	static byWeek() {
+		return ORDERS.filter((i) => {
+			return i.belongsToWeek(SHOWING.current);
 		});
 	}
 }

@@ -1,2 +1,8 @@
 $gray1: rgb(249, 250, 251);
 $gray2: rgb(225, 226, 225);
+$gray3: rgb(206, 212, 218);
+
+@mixin bootstrap-borders {
+	border-color: $gray3;
+	border-radius: 4.7px;
+}

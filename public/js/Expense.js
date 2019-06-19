@@ -4,6 +4,7 @@ class Expense {
 		this.category = category;
 		this.price = price;
 		this.provider = provider;
+		this.date = moment().format();
 	}
 
 	static create(form) {
@@ -25,7 +26,7 @@ class Expense {
 		});
 	}
 
-	getColumnTitles() {
+	getTableColumnTitles() {
 		return [ 'nombre', 'precio', 'proveedor' ];
 	}
 

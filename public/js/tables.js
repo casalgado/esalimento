@@ -6,7 +6,7 @@ function drawTableRow(object) {
 }
 
 function drawTableHeader(object) {
-	let titles = object.getColumnTitles();
+	let titles = object.getTableColumnTitles();
 	return createTableElements('th', titles);
 }
 
@@ -14,6 +14,7 @@ function drawTableFooter(objects) {}
 
 function drawTable(tableId, objects) {
 	table = document.getElementById(tableId);
+	table.innerHTML = '';
 	table.appendChild(drawTableHeader(objects[0]));
 	for (let i = 0; i < objects.length; i++) {
 		table.appendChild(drawTableRow(objects[i]));
