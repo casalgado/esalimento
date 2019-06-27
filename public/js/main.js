@@ -17,27 +17,22 @@ function onLoad() {
 }
 
 function loadPage(user) {
-	fetchAll(Client, 'clients')
-		.then((clients) => {
-			CLIENTS = clients;
-		})
-		.then(() => {
-			drawAll(CLIENTS, 'showClients', 'name');
-		});
-	fetchAll(Product, 'products')
-		.then((products) => {
-			PRODUCTS = products;
-		})
-		.then(() => {
-			drawAll(PRODUCTS, 'showProducts', 'name');
-		});
+	fetchAll(Client, 'clients').then((clients) => {
+		CLIENTS = clients;
+		drawAll(clients, 'showClients', 'name');
+		drawSelectMenu('clientSelection', clients, 'name');
+	});
+	fetchAll(Product, 'products').then((products) => {
+		PRODUCTS = products;
+		drawAll(products, 'showProducts', 'name');
+		drawSelectMenu('productSelection', products, 'name');
+	});
 	fetchAll(Order, 'orders')
 		.then((orders) => {
 			ORDERS = Order.instantiateStatus(orders);
 		})
 		.then(() => {
 			drawTable('showOrdersTable', Order.byWeek());
-			setTableTitle();
 			addCustomModalEvent('showOrdersTable');
 		});
 	fetchAll(Expense, 'expenses')
@@ -74,29 +69,3 @@ Array.prototype.getUnique = function() {
 	let uniq = [ ...new Set(this) ];
 	return uniq;
 };
-
-// pagination
-
-function currentlyShowing() {
-	// returns a string
-	let current = moment(SHOWING.current.format('X'), 'X');
-	return `${current.startOf(SHOWING.period).format('D MMMM')} - ${current.endOf(SHOWING.period).format('D MMMM')}`;
-}
-
-function setTableTitle() {
-	document.getElementById('showOrdersTableTitle').innerHTML = currentlyShowing();
-}
-
-function showNext(table, constructor) {
-	SHOWING.current.add(1, SHOWING.period);
-	array = constructor.byWeek();
-	drawTable(table, array);
-	setTableTitle();
-}
-
-function showPrevious(table, constructor) {
-	SHOWING.current.subtract(1, SHOWING.period);
-	array = constructor.byWeek();
-	drawTable(table, array);
-	setTableTitle();
-}
