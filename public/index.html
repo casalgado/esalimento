@@ -40,9 +40,11 @@
                 <select
                   class="custom-select custom-select-sm" 
                   id="clientSelection"
-                  data-target=""
-                  onchange="">
-                    <option value="undefined" class="selectPlaceholder">Cliente</option>
+                  data-property="client"
+                  data-input="orderClient"
+                  data-modifiesmenu="productSelection"
+                  onchange="selectionChangeEventHandler(this)">
+                    <option value=" " class="selectPlaceholder">Cliente</option>
                 </select>
               </div>
   
@@ -54,10 +56,12 @@
                 <select 
                   class="custom-select custom-select-sm"
                   id="productSelection"
-                  data-target=""
-                  onchange="" 
+                  data-property="product"
+                  data-input="orderProduct"
+                  data-modifiesMenu="clientSelection"
+                  onchange="selectionChangeEventHandler(this)" 
                   onkeyup="">
-                    <option value="undefined" class="selectPlaceholder">Producto</option>
+                    <option value=" " class="selectPlaceholder">Producto</option>
                 </select>
               </div>
               <input required type="text" onkeyup="" class="form-control form-control-sm" id="orderProduct" placeholder="">

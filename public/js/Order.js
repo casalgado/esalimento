@@ -96,6 +96,10 @@ class Order {
 		return currentStatus;
 	}
 
+	getFormValues() {
+		return [ this.client, this.product, this.unitPrice, this.quantity, this.total ];
+	}
+
 	clientCode() {
 		return this.client
 			.toUpperCase()

@@ -6,6 +6,7 @@ function onLoad() {
 	PROVIDERS = [];
 	SHOWING = { period: 'Week', current: moment() };
 	MODAL = { speed: 150 };
+	FILTERS = {};
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			loadPage(user);
@@ -43,6 +44,7 @@ function loadPage(user) {
 		.then(() => {
 			drawTable('showExpensesTable', EXPENSES);
 		});
+	resetForm('order');
 	document.getElementById('siteContainer').setAttribute('style', 'display:none');
 	document.getElementById('loaderContainer').setAttribute('style', 'display:none');
 	document.getElementById('appContainer').setAttribute('style', 'display:block');

@@ -61,7 +61,7 @@
 .custom-select {
   border-bottom-right-radius: 0px;
   border-top-right-radius: 0px;
-  max-width: 200px;
+  width: 200px;
 }
 
 .formTitle {
