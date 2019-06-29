@@ -15,7 +15,7 @@ class Order {
 		let order = new Order(client, product, quantity, unitPrice, total);
 		order.save().then((order) => {
 			appendToTable('showOrdersTable', order);
-			form.reset();
+			resetForm('order');
 		});
 	}
 
@@ -69,11 +69,11 @@ class Order {
 	}
 
 	getTableColumnTitles() {
-		return [ 'producto', 'confirmed', 'ctd', 'estado' ];
+		return [ 'producto', 'confirmed', 'total', 'estado' ];
 	}
 
 	getTableContent() {
-		return [ this.product, moment(this.status.confirmed).format('D MMMM'), this.quantity, this.currentStatus() ];
+		return [ this.product, moment(this.status.confirmed).format('D MMMM'), this.total, this.currentStatus() ];
 	}
 
 	getCustomModalTitles() {
@@ -116,13 +116,13 @@ class Order {
 		});
 	}
 
-	belongsToWeek(date) {
-		return moment(this.status.confirmed).isSame(date, 'week') ? true : false;
+	belongsToWeek(momentObj) {
+		return moment(this.status.confirmed).isSame(momentObj, 'week') ? true : false;
 	}
 
-	static byWeek() {
+	static byWeek(momentObj) {
 		return ORDERS.filter((i) => {
-			return i.belongsToWeek(SHOWING.current);
+			return i.belongsToWeek(momentObj);
 		});
 	}
 }

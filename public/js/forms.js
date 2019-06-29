@@ -2,6 +2,8 @@ function resetForm(form) {
 	let id = form + 'Form';
 	document.getElementById(id).reset();
 	FILTERS = {};
+	drawSelectMenu('clientSelection', CLIENTS, 'name');
+	drawSelectMenu('productSelection', PRODUCTS, 'name');
 }
 
 function toggleDisplay(form) {

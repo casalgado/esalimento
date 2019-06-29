@@ -56,12 +56,12 @@ function currentlyShowing() {
 
 function showNext(table, constructor) {
 	SHOWING.current.add(1, SHOWING.period);
-	array = constructor.byWeek();
+	array = constructor.byWeek(SHOWING.current);
 	drawTable(table, array);
 }
 
 function showPrevious(table, constructor) {
 	SHOWING.current.subtract(1, SHOWING.period);
-	array = constructor.byWeek();
+	array = constructor.byWeek(SHOWING.current);
 	drawTable(table, array);
 }

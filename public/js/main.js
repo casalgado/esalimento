@@ -20,12 +20,10 @@ function onLoad() {
 function loadPage(user) {
 	fetchAll(Client, 'clients').then((clients) => {
 		CLIENTS = clients;
-		drawAll(clients, 'showClients', 'name');
 		drawSelectMenu('clientSelection', clients, 'name');
 	});
 	fetchAll(Product, 'products').then((products) => {
 		PRODUCTS = products;
-		drawAll(products, 'showProducts', 'name');
 		drawSelectMenu('productSelection', products, 'name');
 	});
 	fetchAll(Order, 'orders')
@@ -33,7 +31,7 @@ function loadPage(user) {
 			ORDERS = Order.instantiateStatus(orders);
 		})
 		.then(() => {
-			drawTable('showOrdersTable', Order.byWeek());
+			drawTable('showOrdersTable', Order.byWeek(SHOWING.current));
 			addCustomModalEvent('showOrdersTable');
 		});
 	fetchAll(Expense, 'expenses')

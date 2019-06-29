@@ -198,10 +198,6 @@
                 <input required type="text" onkeyup="" class="form-control form-control-sm" id="expenseCategory" placeholder="">
               </div>
 
-              <div class="form-group">
-                  <label for="productPrice">Precio de Venta</label>
-                  <input required type="number" min="1" step="1" onkeyup="" id="expensePrice" class="form-control form-control-sm">
-              </div>
               <div class="form-group input-group">
                 <div class="input-group-prepend">
                   <select
@@ -213,8 +209,24 @@
                   </select>
                 </div>
   
-                <input required type="text" onkeyup="" class="form-control form-control-sm" id="expenseProvider" placeholder="">
+                <input type="text" onkeyup="" class="form-control form-control-sm" id="expenseProvider" placeholder="">
               </div>
+
+              <div class="form-group">
+                <label for="expenseUnitPrice">Precio Unitario</label>
+                <input required type="number" min="1" step="1" onkeyup="" id="expensePrice" class="form-control form-control-sm">
+            </div>
+
+              <div class="form-group">
+                  <label for="expenseQuantity">Cantidad</label>
+                  <input required type="number" min="1" step="1" onkeyup="" id="expensePrice" class="form-control form-control-sm">
+              </div>
+
+              <div class="form-group">
+                  <label for="expenseTotal">Total</label>
+                  <input required type="number" min="1" step="1" onkeyup="" id="expensePrice" class="form-control form-control-sm">
+              </div>
+        
               <button type="submit" class="btn btn-primary btnSubmit">Crear Gasto</button>
           </form>
         </div>
@@ -255,6 +267,7 @@
       <script src="js/Order.js"></script>
       <script src="js/Status.js"></script>
       <script src="js/Product.js"></script>
+      <script src="js/Report.js"></script>
       <script src="js/tables.js"></script>
       <script src="js/customModal.js"></script>
       <script src="js/forms.js"></script>

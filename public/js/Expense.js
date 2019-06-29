@@ -1,16 +1,18 @@
 class Expense {
-	constructor(name, category, price, provider) {
+	constructor(name, category, provider, unitPrice, quantity, total) {
 		this.name = name;
 		this.category = category;
-		this.price = price;
+		this.quantity = quantity;
+		this.unitPrice = unitPrice;
+		this.total = total;
 		this.provider = provider;
 		this.date = moment().format();
 	}
 
 	static create(form) {
-		let [ name, category, price, provider ] = getFormValues(form);
-		let product = new Expense(name, category, price, provider);
-		product.save().then(() => {
+		let [ name, category, provider, unitPrice, quantity, total ] = getFormValues(form);
+		let expense = new Expense(name, category, provider, unitPrice, quantity, total);
+		expense.save().then(() => {
 			form.reset();
 		});
 	}
@@ -18,12 +20,20 @@ class Expense {
 	save() {
 		return new Promise((resolve) => {
 			// @clean if id is not going to be used, this can be refactored
-			// client var doesn't have to be declared or returned
-			var product = firebase.database().ref(`devAccount/expenses`).push(this);
-			return resolve(product);
-		}).then((product) => {
+			// expense var doesn't have to be declared or returned
+			var expense = firebase.database().ref(`devAccount/expenses`).push(this);
+			return resolve(expense);
+		}).then((expense) => {
+			firebase.database().ref(`devAccount/expenses`).child(expense.key).update({
+				id : expense.key
+			});
+			this.id = expense.key;
 			EXPENSES.push(this);
 		});
+	}
+
+	instantiateDate() {
+		return moment(JSON.parse(this.date));
 	}
 
 	getTableColumnTitles() {
@@ -31,6 +41,16 @@ class Expense {
 	}
 
 	getTableContent() {
-		return [ this.name, this.price, this.provider ];
+		return [ this.name, this.total, this.provider ];
+	}
+
+	belongsToWeek(momentObj) {
+		return moment(this.date).isSame(momentObj, 'week') ? true : false;
+	}
+
+	static byWeek(momentObj) {
+		return EXPENSES.filter((i) => {
+			return i.belongsToWeek(momentObj);
+		});
 	}
 }
