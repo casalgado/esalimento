@@ -36,11 +36,11 @@ class Expense {
 		return moment(JSON.parse(this.date));
 	}
 
-	getTableColumnTitles() {
+	columnTitles() {
 		return [ 'nombre', 'precio', 'proveedor' ];
 	}
 
-	getTableContent() {
+	rowContent() {
 		return [ this.name, this.total, this.provider ];
 	}
 

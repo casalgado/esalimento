@@ -1,6 +1,6 @@
 class Report {
 	constructor(cash, bank, id) {
-		this.id = id || '';
+		this.id = id || moment().format('X');
 		this.cash = cash;
 		this.bank = bank;
 	}
@@ -9,8 +9,22 @@ class Report {
 		columnTitles = [ 'ingresos', 'gastos', 'utilidad neta' ];
 	}
 
-	total() {
-		columnTitles = [ 'inicio periodo', 'utilidad neta', 'fin periodo', 'efectivo', 'banco', 'por cobrar' ];
+	getTableColumnTitles() {
+		return [
+			'inicio periodo',
+			'ingresos',
+			'gastos',
+			'utilidad neta',
+			'fin periodo',
+			'efectivo',
+			'banco',
+			'por cobrar',
+			'capital total'
+		];
+	}
+
+	getTableContent() {
+		return [ ',', this.grossIncome(), this.expenses(), this.netIncome(), ',', '_', '_', '_', '_' ];
 	}
 
 	grossIncome(date) {

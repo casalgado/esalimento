@@ -1,40 +1,49 @@
 //@optimization convert tables.js to Table.js (create a class)
+// this class draws a table with the draw method, Table.draw()
+// it takes in two argumentns. The id of a <table> element, and
+// an array of objects.
+// These objects must have the following methods defined:
+// object.columTitles() and object.rowContent()
+// the limitation of this approach is that it allows one table per class.
 
-function drawTableRow(object) {
-	let content = object.getTableContent();
-	let row = createTableElements('td', content);
-	row.setAttribute('data-id', object.id);
-	return row;
-}
-
-function drawTableHeader(object) {
-	let titles = object.getTableColumnTitles();
-	return createTableElements('th', titles);
-}
-
-function drawTableFooter(objects) {}
-
-function drawTable(tableId, objects) {
-	table = document.getElementById(tableId);
-	table.innerHTML = '';
-	setTableTitle();
-	if (objects[0]) {
-		table.appendChild(drawTableHeader(objects[0]));
+class Table {
+	constructor(id, objects) {
+		this.draw(id, objects);
 	}
-	for (let i = 0; i < objects.length; i++) {
-		table.appendChild(drawTableRow(objects[i]));
-	}
-}
 
-function createTableElements(typeOfCell, values) {
-	let row, cell;
-	row = document.createElement('tr');
-	for (let i = 0; i < values.length; i++) {
-		cell = document.createElement(typeOfCell);
-		cell.innerHTML = values[i];
-		row.appendChild(cell);
+	draw(id, objects) {
+		let table = document.getElementById(id);
+		table.innerHTML = '';
+		setTableTitle('showOrdersTableTitle'); // se puede sacar de aqui.
+		objects[0] ? table.appendChild(this.drawHeader(objects[0])) : false;
+		for (let i = 0; i < objects.length; i++) {
+			table.appendChild(this.drawRow(objects[i]));
+		}
 	}
-	return row;
+
+	drawHeader(object) {
+		let titles = object.columnTitles();
+		let row = this.createHTML('th', titles);
+		return row;
+	}
+
+	drawRow(object) {
+		let content = object.rowContent();
+		let row = this.createHTML('td', content);
+		row.setAttribute('data-id', object.id);
+		return row;
+	}
+
+	createHTML(typeOfCell, values) {
+		let row, cell;
+		row = document.createElement('tr');
+		for (let i = 0; i < values.length; i++) {
+			cell = document.createElement(typeOfCell);
+			cell.innerHTML = values[i];
+			row.appendChild(cell);
+		}
+		return row;
+	}
 }
 
 function appendToTable(tableId, object) {
@@ -42,8 +51,8 @@ function appendToTable(tableId, object) {
 	table.appendChild(drawTableRow(object));
 }
 
-function setTableTitle() {
-	document.getElementById('showOrdersTableTitle').innerHTML = currentlyShowing();
+function setTableTitle(elementId) {
+	document.getElementById(elementId).innerHTML = currentlyShowing();
 }
 
 // pagination
@@ -57,11 +66,11 @@ function currentlyShowing() {
 function showNext(table, constructor) {
 	SHOWING.current.add(1, SHOWING.period);
 	array = constructor.byWeek(SHOWING.current);
-	drawTable(table, array);
+	new Table(table, array);
 }
 
 function showPrevious(table, constructor) {
 	SHOWING.current.subtract(1, SHOWING.period);
 	array = constructor.byWeek(SHOWING.current);
-	drawTable(table, array);
+	new Table(table, array);
 }

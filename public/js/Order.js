@@ -68,6 +68,14 @@ class Order {
 		}
 	}
 
+	columnTitles() {
+		return [ 'producto', 'confirmed', 'total', 'estado' ];
+	}
+
+	rowContent() {
+		return [ this.product, moment(this.status.confirmed).format('D MMMM'), this.total, this.currentStatus() ];
+	}
+
 	getTableColumnTitles() {
 		return [ 'producto', 'confirmed', 'total', 'estado' ];
 	}

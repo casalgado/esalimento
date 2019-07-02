@@ -1,20 +1,23 @@
 function onLoad() {
-	CLIENTS = [];
-	PRODUCTS = [];
-	ORDERS = [];
-	EXPENSES = [];
-	PROVIDERS = [];
-	SHOWING = { period: 'Week', current: moment() };
-	MODAL = { speed: 150 };
-	FILTERS = {};
-	firebase.auth().onAuthStateChanged(function(user) {
-		if (user) {
-			loadPage(user);
-		} else {
-			document.getElementById('siteContainer').setAttribute('style', 'display:block');
-		}
-	});
-	document.getElementById('customModalContainer').addEventListener('click', hideCustomModal);
+	// CLIENTS = [];
+	// PRODUCTS = [];
+	// ORDERS = [];
+	// EXPENSES = [];
+	// PROVIDERS = [];
+	// SHOWING = { period: 'Week', current: moment() };
+	// MODAL = { speed: 150 };
+	// FILTERS = {};
+	// firebase.auth().onAuthStateChanged(function(user) {
+	// 	if (user) {
+	// 		loadPage(user);
+	// 	} else {
+	// 		document.getElementById('siteContainer').setAttribute('style', 'display:block');
+	// 	}
+	// });
+	// three lines below should de deleted when uncommeting
+	document.getElementById('siteContainer').setAttribute('style', 'display:none');
+	document.getElementById('loaderContainer').setAttribute('style', 'display:none');
+	document.getElementById('appContainer').setAttribute('style', 'display:block');
 }
 
 function loadPage(user) {
@@ -31,7 +34,7 @@ function loadPage(user) {
 			ORDERS = Order.instantiateStatus(orders);
 		})
 		.then(() => {
-			drawTable('showOrdersTable', Order.byWeek(SHOWING.current));
+			new Table('showOrdersTable', Order.byWeek(SHOWING.current));
 			addCustomModalEvent('showOrdersTable');
 		});
 	fetchAll(Expense, 'expenses')
@@ -40,7 +43,7 @@ function loadPage(user) {
 			EXPENSE_CATEGORIES = propList(EXPENSES, 'category');
 		})
 		.then(() => {
-			drawTable('showExpensesTable', EXPENSES);
+			new Table('showExpensesTable', EXPENSES);
 		});
 	resetForm('order');
 	document.getElementById('siteContainer').setAttribute('style', 'display:none');
