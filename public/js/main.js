@@ -1,12 +1,12 @@
 function onLoad() {
-	// CLIENTS = [];
-	// PRODUCTS = [];
-	// ORDERS = [];
-	// EXPENSES = [];
-	// PROVIDERS = [];
-	// SHOWING = { period: 'Week', current: moment() };
-	// MODAL = { speed: 150 };
-	// FILTERS = {};
+	CLIENTS = [];
+	PRODUCTS = [];
+	ORDERS = [];
+	EXPENSES = [];
+	PROVIDERS = [];
+	SHOWING = { period: 'Week', current: moment() };
+	MODAL = { speed: 150 };
+	FILTERS = {};
 	// firebase.auth().onAuthStateChanged(function(user) {
 	// 	if (user) {
 	// 		loadPage(user);

@@ -10,12 +10,20 @@ function fetchAll(constructor, directory) {
 	});
 }
 
+function instantiate(constructor, dbObj) {
+	// called when retreiving objects from database
+	var localObj = new constructor();
+	for (var i = 0; i < Object.keys(dbObj).length; i++) {
+		localObj[Object.keys(dbObj)[i]] = Object.values(dbObj)[i];
+	}
+	return localObj;
+}
+
 function instantiateEntry(constructor, dbObj) {
 	// called when retreiving objects from database
 	var entry = new constructor();
-	var json = JSON.parse(JSON.stringify(dbObj));
-	for (var i = 0; i < Object.keys(json).length; i++) {
-		entry[Object.keys(json)[i]] = Object.values(json)[i];
+	for (var i = 0; i < Object.keys(dbObj).length; i++) {
+		entry[Object.keys(dbObj)[i]] = Object.values(dbObj)[i];
 	}
 	return entry;
 }
