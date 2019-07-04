@@ -1,51 +1,30 @@
 function onLoad() {
+	SQUARE = document.getElementById('square');
 	CLIENTS = [];
 	PRODUCTS = [];
 	ORDERS = [];
 	EXPENSES = [];
-	PROVIDERS = [];
+	REPORTS = [];
 	SHOWING = { period: 'Week', current: moment() };
-	MODAL = { speed: 150 };
 	FILTERS = {};
-	// firebase.auth().onAuthStateChanged(function(user) {
-	// 	if (user) {
-	// 		loadPage(user);
-	// 	} else {
-	// 		document.getElementById('siteContainer').setAttribute('style', 'display:block');
-	// 	}
-	// });
-	// three lines below should de deleted when uncommeting
-	document.getElementById('siteContainer').setAttribute('style', 'display:none');
-	document.getElementById('loaderContainer').setAttribute('style', 'display:none');
-	document.getElementById('appContainer').setAttribute('style', 'display:block');
+	firebase.auth().onAuthStateChanged(function(user) {
+		if (user) {
+			loadPage(user);
+		} else {
+			document.getElementById('siteContainer').setAttribute('style', 'display:block');
+		}
+	});
 }
 
 function loadPage(user) {
-	fetchAll(Client, 'clients').then((clients) => {
-		CLIENTS = clients;
-		drawSelectMenu('clientSelection', clients, 'name');
-	});
-	fetchAll(Product, 'products').then((products) => {
-		PRODUCTS = products;
-		drawSelectMenu('productSelection', products, 'name');
-	});
-	fetchAll(Order, 'orders')
-		.then((orders) => {
-			ORDERS = Order.instantiateStatus(orders);
-		})
-		.then(() => {
-			new Table('showOrdersTable', Order.byWeek(SHOWING.current));
-			addCustomModalEvent('showOrdersTable');
-		});
-	fetchAll(Expense, 'expenses')
-		.then((expenses) => {
-			EXPENSES = expenses;
-			EXPENSE_CATEGORIES = propList(EXPENSES, 'category');
-		})
-		.then(() => {
-			new Table('showExpensesTable', EXPENSES);
-		});
-	resetForm('order');
+	SQUARE = document.getElementById('square');
+	CLIENTS = Client.all();
+	PRODUCTS = Product.all();
+	ORDERS = Order.all();
+	EXPENSES = Expense.all();
+	// REPORTS = Report.all();
+	SHOWING = { period: 'Week', current: moment() };
+	FILTERS = {};
 	document.getElementById('siteContainer').setAttribute('style', 'display:none');
 	document.getElementById('loaderContainer').setAttribute('style', 'display:none');
 	document.getElementById('appContainer').setAttribute('style', 'display:block');

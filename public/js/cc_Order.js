@@ -1,6 +1,6 @@
-class Order extends FireClass {
-	constructor(id, client, product, quantity, unitPrice, total, status) {
-		super(id);
+class Order extends Sheet {
+	constructor(id, name, client, product, quantity, unitPrice, total, status) {
+		super(id, name);
 		this.client = client;
 		this.product = product;
 		this.quantity = quantity;
@@ -10,7 +10,20 @@ class Order extends FireClass {
 		this.paid = false;
 	}
 
-	static directory() {
+	static sheet() {
 		return 'orders';
+	}
+
+	static local() {
+		return ORDERS;
+	}
+
+	table() {
+		return {
+			title   : 'Pedidos',
+			header  : [ 'Producto', 'Cliente', 'Ctd', 'Total' ],
+			row     : [ this.product, this.client, this.quantity, this.total ],
+			datestr : JSON.parse(this.status).confirmed
+		};
 	}
 }

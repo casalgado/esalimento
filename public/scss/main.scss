@@ -1,13 +1,19 @@
 @import 'variables';
 @import 'layout';
 @import 'customModal';
-@import 'tables';
+@import 'table';
+@import 'card';
 @import 'forms';
 @import 'app';
 
 #siteContainer,
 #appContainer {
 	display: none;
+	color: $fontColor;
+}
+
+i {
+	color: $fontColor;
 }
 
 .btn.focus,

@@ -1,9 +1,16 @@
-$gray1: rgb(249, 250, 251);
-$gray2: rgb(225, 226, 225);
-$gray3: rgb(206, 212, 218);
+$offWhite: rgb(255, 255, 255);
+$firstGray: rgb(249, 250, 251);
+$borderGray: rgb(206, 212, 218);
+$fontColor: black;
+
+// dark mode
+$offWhite: rgb(38, 38, 38);
+$firstGray: rgb(55, 55, 55);
+$borderGray: rgb(87, 88, 90);
+$fontColor: rgb(249, 250, 251);
 
 @mixin bootstrap-borders {
-	border-color: $gray3;
+	border-color: $borderGray;
 	border-radius: 4.7px;
 }
 
