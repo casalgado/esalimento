@@ -26,21 +26,18 @@ class Order extends Sheet {
 	}
 
 	datestr() {
-		let current = this.delivered || this.prepared || this.confirmed || this.submitted;
+		let current = this.produced || this.confirmed || this.submitted;
 		return current;
 	}
 
 	currentStatus() {
 		if (this.delivered) {
 			return 'entregada';
-		}
-		if (this.produced) {
+		} else if (this.produced) {
 			return 'producida';
-		}
-		if (this.confirmed) {
+		} else if (this.confirmed) {
 			return 'confirmada';
-		}
-		if (this.submitted) {
+		} else {
 			return 'recibida';
 		}
 	}

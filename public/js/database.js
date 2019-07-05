@@ -44,7 +44,7 @@ function importData() {
 		}
 		// create order
 		newOrder = new Order(
-			'id',
+			undefined,
 			'No. de Pedido',
 			j[i].client,
 			j[i].product,

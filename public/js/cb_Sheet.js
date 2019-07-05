@@ -11,6 +11,9 @@ class Sheet {
 	save() {
 		const c = this.constructor;
 		firebase.database().ref(c.path()).push(this).then((e) => {
+			firebase.database().ref(c.path()).child(e.getKey()).update({
+				id : e.getKey()
+			});
 			this.id = e.getKey();
 			c.local().push(this);
 		});
@@ -25,6 +28,24 @@ class Sheet {
 			});
 		});
 		return objects;
+	}
+
+	static getFromDB(id) {
+		const c = this;
+		let objects = [];
+		firebase.database().ref(`${this.path()}`).child(id).once('value').then(function(snapshot) {
+			objects.push(instantiate(c, snapshot.val()));
+		});
+		return objects;
+	}
+
+	static get(id) {
+		const local = this.local();
+		for (let i = 0; i < local.length; i++) {
+			if (local[i].id == id) {
+				return local[i];
+			}
+		}
 	}
 
 	belongsToWeek(momentObj) {
