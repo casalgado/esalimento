@@ -12,6 +12,16 @@
 	color: $fontColor;
 }
 
+.hide {
+	display: none;
+}
+
+.selected {
+	color: $offWhite;
+	background-color: $mildGray !important;
+	font-weight: 500;
+}
+
 i,
 p {
 	color: $fontColor;

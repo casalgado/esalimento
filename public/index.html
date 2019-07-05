@@ -15,6 +15,7 @@
   <body onload="onLoad()">
     <div id="loaderContainer" class="container"></div>
     <div id="siteContainer" class="container">
+      <!-- @ creo que este return false de abajo no esta haciendo nada -->
         <form onsubmit="signInAdmin(this); return false" class="localForm">
           <div class="form-group">
             <input type="email" class="form-control" placeholder="email">
@@ -28,7 +29,7 @@
     <div id="appContainer" class="">
       <div id="content">
           <div id="square"></div>
-          <div id="rectangle"></div>
+          <div id="rectangle" class="hide"></div>
       </div>
     </div>
 

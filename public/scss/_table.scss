@@ -2,6 +2,10 @@ section.localTable {
 	background-color: $offWhite;
 	font-size: 14px;
 
+	.tableRow {
+		cursor: pointer;
+	}
+
 	& > div {
 		background-color: $offWhite;
 		position: sticky;

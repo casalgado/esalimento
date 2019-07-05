@@ -2,7 +2,7 @@ class Table {
 	constructor(parentId, objects) {
 		if (!objects[0]) {
 			let q;
-			q = document.querySelectorAll('.rowObject');
+			q = document.querySelectorAll('.tableRow');
 			Array.from(q).map((e) => {
 				e.innerHTML = '';
 			});
@@ -21,7 +21,7 @@ class Table {
 		for (let i = 0; i < objects.length; i++) {
 			let row = t.createRow(objects[i].table().row);
 			row.setAttribute('data-id', objects[i].id);
-			row.setAttribute('class', 'rowObject');
+			row.setAttribute('class', 'tableRow');
 			row.addEventListener('click', () => {
 				Inter.showCard(c, row);
 			});
