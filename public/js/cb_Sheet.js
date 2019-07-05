@@ -1,7 +1,7 @@
 class Sheet {
 	constructor(id, name) {
 		this.id = id || '';
-		this.id = name;
+		this.name = name;
 	}
 
 	static path() {
@@ -28,7 +28,7 @@ class Sheet {
 	}
 
 	belongsToWeek(momentObj) {
-		return moment(this.datestr()).isSame(momentObj, 'week') ? true : false;
+		return moment(this.table().datestr).isSame(momentObj, 'week') ? true : false;
 	}
 
 	static byWeek(momentObj) {
@@ -36,4 +36,13 @@ class Sheet {
 			return localObj.belongsToWeek(momentObj);
 		});
 	}
+}
+
+function instantiate(constructor, dbObj) {
+	// called when retreiving objects from database
+	var localObj = new constructor();
+	for (var i = 0; i < Object.keys(dbObj).length; i++) {
+		localObj[Object.keys(dbObj)[i]] = Object.values(dbObj)[i];
+	}
+	return localObj;
 }

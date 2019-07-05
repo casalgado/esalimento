@@ -30,19 +30,8 @@
   overflow: hidden;
 }
 
-#content section {
-  width: 100%;
-  height: 100%;
-  overflow-y: scroll;
-  padding-right: 17px;
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
-  left: 7px;
-}
-
 #content #rectangle {
-  margin: 0px 15px 15px 15px;
-  border-radius: 10px;
+  display: none;
   position: relative;
   padding-bottom: 61.8%;
   -ms-grid-column: 1;
@@ -52,6 +41,19 @@
   -ms-grid-row-span: 1;
   grid-row: 2/3;
   overflow: hidden;
+  border-radius: 10px;
+  margin: 0px 15px 15px 15px;
+}
+
+#content section {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  padding-right: 17px;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  left: 7px;
 }
 
 #customModalContainer {
@@ -101,8 +103,6 @@
 }
 
 section.localTable {
-  position: absolute;
-  width: 100%;
   background-color: #262626;
   font-size: 14px;
 }
@@ -129,7 +129,8 @@ section.localTable table tr:nth-child(even) {
   border-bottom: 1px solid #57585a;
 }
 
-#card {
+section.card {
+  border: none;
   display: -ms-grid;
   display: grid;
   width: 100%;
@@ -137,7 +138,7 @@ section.localTable table tr:nth-child(even) {
       grid-template-columns: 61.8% 38.2%;
 }
 
-#card #title {
+section.card #title {
   -ms-grid-column: 1;
   -ms-grid-column-span: 1;
   grid-column: 1 / 2;
@@ -146,7 +147,7 @@ section.localTable table tr:nth-child(even) {
   grid-row: 1/2;
 }
 
-#card #sub-title {
+section.card #sub-title {
   -ms-grid-column: 2;
   -ms-grid-column-span: 1;
   grid-column: 2 / 3;
@@ -155,16 +156,14 @@ section.localTable table tr:nth-child(even) {
   grid-row: 1/2;
 }
 
-#card .main {
+section.card .main {
   -ms-grid-column: 1;
-  -ms-grid-column-span: 1;
-  grid-column: 1 / 2;
+  grid-column: 1;
 }
 
-#card .side {
+section.card .side {
   -ms-grid-column: 2;
-  -ms-grid-column-span: 1;
-  grid-column: 2 / 3;
+  grid-column: 2;
 }
 
 .custom-select {

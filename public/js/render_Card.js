@@ -1,6 +1,6 @@
 class Card {
 	constructor(parentId, object) {
-		let card = HTML.create('div', 'card');
+		let card = HTML.create('section', 'card', 'card');
 		let p = HTML.get(parentId);
 		let t, st, main, side;
 

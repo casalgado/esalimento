@@ -10,15 +10,6 @@ function fetchAll(constructor, directory) {
 	});
 }
 
-function instantiate(constructor, dbObj) {
-	// called when retreiving objects from database
-	var localObj = new constructor();
-	for (var i = 0; i < Object.keys(dbObj).length; i++) {
-		localObj[Object.keys(dbObj)[i]] = Object.values(dbObj)[i];
-	}
-	return localObj;
-}
-
 function instantiateEntry(constructor, dbObj) {
 	// called when retreiving objects from database
 	var entry = new constructor();
@@ -36,36 +27,34 @@ function reformatTime(s) {
 function importData() {
 	clients = [];
 	products = [];
-	let newClient, newProduct, newOrder, newStatus;
+	let newClient, newProduct, newOrder;
 	j = jsonDatabase;
 	for (let i = 0; i < j.length; i++) {
 		//create client
 		if (!clients.includes(j[i].client)) {
-			newClient = new Client(j[i].client);
+			newClient = new Client('id', j[i].client, 'test@test.com', '234 243 3425', 'Cra 57 # 85 - 85');
 			newClient.save();
 			clients.push(j[i].client);
 		}
 		// create product
 		if (!products.includes(j[i].product)) {
-			newProduct = new Product(j[i].product, '', j[i].unitPrice, j[i].cost);
+			newProduct = new Product('id', j[i].product, 'cat', j[i].unitPrice, j[i].cost);
 			newProduct.save();
 			products.push(j[i].product);
 		}
-		// create status
-		newStatus = new Status(
-			moment(reformatTime(j[i].confirmed)).format(),
-			moment(reformatTime(j[i].confirmed)).format(),
-			moment(reformatTime(j[i].prepared)).format(),
-			moment(reformatTime(j[i].delivered)).format()
-		);
 		// create order
 		newOrder = new Order(
+			'id',
+			'No. de Pedido',
 			j[i].client,
 			j[i].product,
 			j[i].quantity,
 			j[i].unitPrice,
 			j[i].total,
-			newStatus,
+			moment(j[i].confirmed.split('/').reverse().join('-')).format(),
+			moment(j[i].confirmed.split('/').reverse().join('-')).format(),
+			moment(j[i].prepared.split('/').reverse().join('-')).format(),
+			moment(j[i].delivered.split('/').reverse().join('-')).format(),
 			j[i].paid
 		);
 		newOrder.save();
@@ -87,7 +76,7 @@ var jsonDatabase2 = [
 		'Less cost' : 10682
 	},
 	{
-		confirmed   : '01/02/2019',
+		confirmed   : '13/02/2019',
 		client      : 'el caminante',
 		quantity    : 1,
 		product     : 'brownie de coco',
@@ -115,7 +104,7 @@ var jsonDatabase = [
 		'Less cost' : 10682
 	},
 	{
-		confirmed   : '01/02/2019',
+		confirmed   : '02/01/2019',
 		client      : 'el caminante',
 		quantity    : 1,
 		product     : 'brownie de coco',
@@ -128,7 +117,7 @@ var jsonDatabase = [
 		'Less cost' : 18141
 	},
 	{
-		confirmed   : '01/03/2019',
+		confirmed   : '03/01/2019',
 		client      : 'el caminante',
 		quantity    : 1,
 		product     : 'torta de zanahoria',
@@ -141,7 +130,7 @@ var jsonDatabase = [
 		'Less cost' : 17775
 	},
 	{
-		confirmed   : '01/04/2019',
+		confirmed   : '04/01/2019',
 		client      : 'el caminante',
 		quantity    : 1,
 		product     : 'torta de chia',
@@ -154,7 +143,7 @@ var jsonDatabase = [
 		'Less cost' : 22629
 	},
 	{
-		confirmed   : '01/05/2019',
+		confirmed   : '05/01/2019',
 		client      : 'el caminante',
 		quantity    : 1,
 		product     : 'Galletas',
@@ -167,7 +156,7 @@ var jsonDatabase = [
 		'Less cost' : 4107
 	},
 	{
-		confirmed   : '01/06/2019',
+		confirmed   : '06/01/2019',
 		client      : 'el caminante',
 		quantity    : 2,
 		product     : 'pan de masa madre',

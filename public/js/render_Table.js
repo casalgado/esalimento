@@ -1,5 +1,13 @@
 class Table {
 	constructor(parentId, objects) {
+		if (!objects[0]) {
+			let q;
+			q = document.querySelectorAll('.rowObject');
+			Array.from(q).map((e) => {
+				e.innerHTML = '';
+			});
+			return '';
+		}
 		const t = this;
 		const o = objects[0];
 		const c = o.constructor;
@@ -13,6 +21,7 @@ class Table {
 		for (let i = 0; i < objects.length; i++) {
 			let row = t.createRow(objects[i].table().row);
 			row.setAttribute('data-id', objects[i].id);
+			row.setAttribute('class', 'rowObject');
 			table.appendChild(row);
 		}
 
@@ -67,19 +76,24 @@ class Table {
 	createRow(values) {
 		return this.createTableRow('td', values);
 	}
+
+	static reRender(constructor) {
+		let objects = constructor.byWeek(SHOWING.current);
+		new Table('square', objects);
+	}
 }
 
 class Pagination {
 	constructor(object) {
+		let t = this;
 		let o = object;
-		let d = o.table().datestr;
 		let c = o.constructor;
 
 		let p = this.createPagination(c.sheet());
 
-		p.appendChild(this.createButton('fas fa-caret-left fa-lg', showNext(c)));
-		p.appendChild(this.createShowing());
-		p.appendChild(this.createButton('fas fa-caret-right fa-lg', showNext(c)));
+		p.appendChild(t.createButton('fas fa-caret-left fa-lg', showPrevious, c));
+		p.appendChild(Pagination.renderCurrentlyShowing());
+		p.appendChild(t.createButton('fas fa-caret-right fa-lg', showNext, c));
 		return p;
 	}
 
@@ -91,18 +105,21 @@ class Pagination {
 		return p;
 	}
 
-	createButton(iconClass, funcToCall) {
+	createButton(iconClass, funcToCall, constructor) {
 		let button = document.createElement('button');
 		button.setAttribute('class', 'btn');
-		button.addEventListener('click', funcToCall);
+		button.addEventListener('click', function() {
+			funcToCall(constructor);
+		});
 		let icon = document.createElement('i');
 		icon.setAttribute('class', iconClass);
 		button.appendChild(icon);
 		return button;
 	}
 
-	createShowing() {
-		let p = document.createElement('h6');
+	static renderCurrentlyShowing() {
+		let p = document.getElementById('currentlyShowing') || document.createElement('h6');
+		p.setAttribute('id', 'currentlyShowing');
 		let current = moment(SHOWING.current.format('X'), 'X');
 		p.innerHTML = `${current.startOf(SHOWING.period).format('D MMMM')} - ${current
 			.endOf(SHOWING.period)
@@ -111,4 +128,20 @@ class Pagination {
 	}
 }
 
-function showNext(e) {}
+function currentlyShowing() {
+	// returns a string
+	let current = moment(SHOWING.current.format('X'), 'X');
+	return `${current.startOf(SHOWING.period).format('D MMMM')} - ${current.endOf(SHOWING.period).format('D MMMM')}`;
+}
+
+function showNext(constructor) {
+	SHOWING.current.add(1, SHOWING.period);
+	Pagination.renderCurrentlyShowing();
+	Table.reRender(constructor);
+}
+
+function showPrevious(constructor) {
+	SHOWING.current.subtract(1, SHOWING.period);
+	Pagination.renderCurrentlyShowing();
+	Table.reRender(constructor);
+}
