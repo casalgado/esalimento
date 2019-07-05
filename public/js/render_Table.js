@@ -22,6 +22,9 @@ class Table {
 			let row = t.createRow(objects[i].table().row);
 			row.setAttribute('data-id', objects[i].id);
 			row.setAttribute('class', 'rowObject');
+			row.addEventListener('click', () => {
+				Inter.showCard(c, row);
+			});
 			table.appendChild(row);
 		}
 
@@ -108,7 +111,7 @@ class Pagination {
 	createButton(iconClass, funcToCall, constructor) {
 		let button = document.createElement('button');
 		button.setAttribute('class', 'btn');
-		button.addEventListener('click', function() {
+		button.addEventListener('click', () => {
 			funcToCall(constructor);
 		});
 		let icon = document.createElement('i');

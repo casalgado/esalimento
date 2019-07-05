@@ -1,8 +1,8 @@
 class Card {
 	constructor(parentId, object) {
-		let card = HTML.create('section', 'card', 'card');
+		let card = HTML.create('section', '', 'localCard');
 		let p = HTML.get(parentId);
-		let t, st, main, side;
+		let t, st;
 
 		t = HTML.create('h6', 'title');
 		st = HTML.create('h6', 'subtitle');
@@ -12,9 +12,10 @@ class Card {
 		card.appendChild(t);
 		card.appendChild(st);
 
-		main = HTML.list(card, 'p', 'main', object.card().main);
-		side = HTML.list(card, 'p', 'side', object.card().side);
+		HTML.list(card, 'p', 'main', object.card().main);
+		HTML.list(card, 'p', 'side', object.card().side);
 
+		p.innerHTML = '';
 		p.appendChild(card);
 	}
 }
