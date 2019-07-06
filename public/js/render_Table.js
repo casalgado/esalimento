@@ -22,8 +22,8 @@ class Table {
 			let row = t.createRow(objects[i].table().row);
 			row.setAttribute('data-id', objects[i].id);
 			row.setAttribute('class', 'tableRow');
-			row.addEventListener('click', () => {
-				Inter.showCard(c, row);
+			row.addEventListener('click', (e) => {
+				Inter.toggleCard(c, row, e);
 			});
 			table.appendChild(row);
 		}

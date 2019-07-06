@@ -37,7 +37,6 @@ function loadPage(user) {
 	document.getElementById('siteContainer').setAttribute('style', 'display:none');
 	document.getElementById('loaderContainer').setAttribute('style', 'display:none');
 	document.getElementById('appContainer').setAttribute('style', 'display:block');
-	Inter.loadEvents();
 }
 
 function drawAll(array, target, property) {

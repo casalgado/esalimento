@@ -11,6 +11,7 @@ section.localTable {
 		position: sticky;
 		top: 0;
 		padding-left: 20%;
+		border-radius: 0px !important;
 	}
 
 	h6 {
@@ -19,6 +20,11 @@ section.localTable {
 		margin-bottom: 0px;
 		min-width: 205px;
 		text-align: center;
+	}
+
+	table tr td:first-child,
+	table tr th:first-child {
+		padding-left: 10px;
 	}
 
 	table tr:nth-child(even) {

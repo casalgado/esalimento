@@ -9,20 +9,25 @@ class Inter {
 	}
 
 	static hideCard() {
-		if (
-			// esto esta horrible
-			arguments[0].target.parentElement.classList.contains('tableRow') ||
-			arguments[0].target.parentElement.classList.contains('localCard') ||
-			arguments[0].target.classList.contains('localCard')
-		) {
-		} else {
+		if (arguments[0].target.parentElement.classList.contains('selected')) {
 			HTML.get('rectangle').innerHTML = '';
 			HTML.addClass('rectangle', 'hide');
 			HTML.removeClassAll('tr', 'selected');
 		}
 	}
 
-	static loadEvents() {
-		document.body.addEventListener('click', this.hideCard);
+	static toggleCard(constructor, row, event) {
+		const id = row.dataset.id;
+		const obj = constructor.get(id);
+		if (event.target.parentElement.classList.contains('selected')) {
+			HTML.get('rectangle').innerHTML = '';
+			HTML.addClass('rectangle', 'hide');
+			HTML.removeClassAll('tr', 'selected');
+		} else {
+			HTML.removeClassAll('tr', 'selected');
+			row.classList.add('selected');
+			HTML.removeClass('rectangle', 'hide');
+			new Card('rectangle', obj);
+		}
 	}
 }
