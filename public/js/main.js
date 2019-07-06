@@ -18,10 +18,19 @@ function onLoad() {
 
 function loadPage(user) {
 	SQUARE = document.getElementById('square');
-	CLIENTS = Client.all();
-	PRODUCTS = Product.all();
-	ORDERS = Order.all();
-	EXPENSES = Expense.all();
+	Client.all().then((objs) => {
+		CLIENTS = objs;
+	});
+	Product.all().then((objs) => {
+		PRODUCTS = objs;
+	});
+	Order.all().then((objs) => {
+		ORDERS = objs;
+		new Table('square', objs);
+	});
+	Expense.all().then((objs) => {
+		EXPENSES = objs;
+	});
 	// REPORTS = Report.all();
 	SHOWING = { period: 'Week', current: moment() };
 	FILTERS = {};

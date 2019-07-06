@@ -20,14 +20,22 @@ class Sheet {
 	}
 
 	static all() {
-		const c = this;
-		const objects = [];
-		firebase.database().ref(c.path()).once('value').then(function(snapshot) {
-			snapshot.forEach(function(obj) {
-				objects.push(instantiate(c, obj.val()));
-			});
+		return new Promise((resolve) => {
+			const c = this;
+			const objects = [];
+			firebase
+				.database()
+				.ref(c.path())
+				.once('value')
+				.then(function(snapshot) {
+					snapshot.forEach(function(obj) {
+						objects.push(instantiate(c, obj.val()));
+					});
+				})
+				.then(() => {
+					resolve(objects);
+				});
 		});
-		return objects;
 	}
 
 	static getFromDB(id) {
