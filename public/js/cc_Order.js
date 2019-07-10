@@ -22,12 +22,12 @@ class Order extends Sheet {
 	}
 
 	localId() {
+		// @rename: this is the name property
 		return 'No. de Pedido';
 	}
 
 	datestr() {
-		let current = this.produced || this.confirmed || this.submitted;
-		return current;
+		return this.produced || this.confirmed || this.submitted;
 	}
 
 	currentStatus() {
@@ -55,16 +55,37 @@ class Order extends Sheet {
 		return {
 			t    : this.localId(),
 			main : {
-				producto : this.product,
-				cliente  : this.client,
-				pagada   : this.paid,
-				status   : this.currentStatus()
+				p      : this.product,
+				c      : this.client,
+				pagada : this.paid,
+				status : this.currentStatus()
 			},
 			side : {
 				unidad   : this.unitPrice,
 				cantidad : this.quantity,
 				total    : this.total
 			}
+		};
+	}
+
+	static form() {
+		return {
+			fields : {
+				// custom-select means that these fields will modify each others select menus.
+				// this means, if client is selected, the product's select menu is filtered to show
+				// only products that this client has bought before.
+				// the same if a product is selected, the client's select menu is filtered to show
+				// only clients who have bought this product.
+				// it supports only two custom-select fields per form at the moment.
+				'custom-select' : [ client, product ],
+				// price means something similar. If the three 'price' fields are included
+				// (this means quantity, unitPrice, total),
+				// the interactions between them should be added. If only one price field
+				// is necessary (like with the products class), it is not a price field!.
+				// it is a normal number field because it has no special interaction.
+				price           : [ unitPrice, quantity, total ]
+			},
+			button : 'Crear Pedido'
 		};
 	}
 }

@@ -1,6 +1,7 @@
 class Table {
 	constructor(parentId, objects) {
 		if (!objects[0]) {
+			// @refactor, this can be a method
 			let q;
 			q = document.querySelectorAll('.tableRow');
 			Array.from(q).map((e) => {
@@ -10,6 +11,7 @@ class Table {
 		}
 		const t = this;
 		const o = objects[0];
+		//@refactor, include props instead of o.table()
 		const c = o.constructor;
 		const p = document.getElementById(parentId);
 		const s = document.createElement('section');
