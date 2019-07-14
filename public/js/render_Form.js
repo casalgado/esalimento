@@ -11,7 +11,7 @@ class Form {
 		});
 
 		form.addEventListener('submit', (e) => {
-			constructor.create();
+			constructor.create(form);
 			e.preventDefault();
 		});
 
@@ -121,6 +121,16 @@ class Form {
 		drawSelectMenu('expenses-name-selection', EXPENSES, 'name');
 		drawSelectMenu('expenses-provider-selection', EXPENSES, 'provider');
 		drawSelectMenu('expenses-category-selection', EXPENSES, 'category');
+	}
+
+	// for create()
+
+	static getFormValues(form) {
+		const props = {};
+		Array.from(form.getElementsByTagName('input')).map((e) => {
+			props[e.id.split('-')[1]] = e.value.toLowerCase();
+		});
+		return props;
 	}
 }
 

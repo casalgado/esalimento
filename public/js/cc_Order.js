@@ -21,14 +21,25 @@ class Order extends Sheet {
 		return ORDERS;
 	}
 
-	static create() {
-		console.log('create');
+	static extendsCreate() {
+		return true;
+	}
+
+	static create(form) {
+		const newObject = super.create(form);
+		const props = {
+			name      : Order.setLocalId(),
+			submitted : moment().format(),
+			confirmed : moment().format()
+		};
+		Object.assign(newObject, props);
+		newObject.save();
 		Form.reset();
 	}
 
-	localId() {
+	static setLocalId() {
 		// @rename: this is the name property
-		return 'No. de Pedido';
+		return moment().format('YY') + '.' + zeroPad(Order.local().length + 1, 3);
 	}
 
 	datestr() {

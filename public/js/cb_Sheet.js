@@ -19,6 +19,18 @@ class Sheet {
 		});
 	}
 
+	static create(form) {
+		const newObject = new this();
+		const props = Form.getFormValues(form);
+		Object.assign(newObject, props);
+		if (this.extendsCreate) {
+			return newObject;
+		} else {
+			newObject.save();
+		}
+		Form.reset();
+	}
+
 	static all() {
 		return new Promise((resolve) => {
 			const c = this;
@@ -94,4 +106,9 @@ function instantiate(constructor, dbObj) {
 		localObj[Object.keys(dbObj)[i]] = Object.values(dbObj)[i];
 	}
 	return localObj;
+}
+
+function zeroPad(value, padding) {
+	var zeroes = new Array(padding + 1).join('0');
+	return (zeroes + value).slice(-padding);
 }
