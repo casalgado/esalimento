@@ -35,4 +35,16 @@ class Product extends Sheet {
 			}
 		};
 	}
+
+	static form() {
+		return {
+			fields : [
+				{ basicField: [ 'name', 'text' ] },
+				{ basicField: [ 'category', 'text' ] },
+				{ basicField: [ 'price', 'number' ] },
+				{ basicField: [ 'cost', 'number' ] }
+			],
+			button : 'Crear Producto'
+		};
+	}
 }

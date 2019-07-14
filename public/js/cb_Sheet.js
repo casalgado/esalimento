@@ -65,6 +65,26 @@ class Sheet {
 			return localObj.belongsToWeek(momentObj);
 		});
 	}
+
+	static getLocal(sheet) {
+		switch (sheet) {
+			case 'orders':
+				return Order.local();
+				break;
+			case 'products':
+				return Product.local();
+				break;
+			case 'expenses':
+				return Expense.local();
+				break;
+			case 'clients':
+				return Client.local();
+				break;
+			case 'reports':
+				return Report.local();
+				break;
+		}
+	}
 }
 
 function instantiate(constructor, dbObj) {

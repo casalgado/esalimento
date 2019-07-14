@@ -21,6 +21,11 @@ class Order extends Sheet {
 		return ORDERS;
 	}
 
+	static create() {
+		console.log('create');
+		Form.reset();
+	}
+
 	localId() {
 		// @rename: this is the name property
 		return 'No. de Pedido';
@@ -70,21 +75,17 @@ class Order extends Sheet {
 
 	static form() {
 		return {
-			fields : {
-				// custom-select means that these fields will modify each others select menus.
-				// this means, if client is selected, the product's select menu is filtered to show
-				// only products that this client has bought before.
-				// the same if a product is selected, the client's select menu is filtered to show
-				// only clients who have bought this product.
-				// it supports only two custom-select fields per form at the moment.
-				'custom-select' : [ client, product ],
-				// price means something similar. If the three 'price' fields are included
-				// (this means quantity, unitPrice, total),
-				// the interactions between them should be added. If only one price field
-				// is necessary (like with the products class), it is not a price field!.
-				// it is a normal number field because it has no special interaction.
-				price           : [ unitPrice, quantity, total ]
-			},
+			fields : [
+				// the fields array is coded as follows:
+				// keys = method called by Form
+				// values = arguments for method called by form.
+				// even though there is only one argument, it must be in an array.
+				{ customSelectField: [ 'client', 'product' ] },
+				{ customSelectField: [ 'product', 'client' ] },
+				{ priceField: [ 'unitPrice' ] },
+				{ priceField: [ 'quantity', '0.5', '1' ] },
+				{ priceField: [ 'total' ] }
+			],
 			button : 'Crear Pedido'
 		};
 	}

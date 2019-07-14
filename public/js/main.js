@@ -26,7 +26,8 @@ function loadPage(user) {
 	});
 	Order.all().then((objs) => {
 		ORDERS = objs;
-		new Table('square', objs);
+		new Form('square', Order);
+		Form.reset();
 	});
 	Expense.all().then((objs) => {
 		EXPENSES = objs;

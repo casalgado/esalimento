@@ -36,4 +36,16 @@ class Client extends Sheet {
 			}
 		};
 	}
+
+	static form() {
+		return {
+			fields : [
+				{ basicField: [ 'name', 'text' ] },
+				{ basicField: [ 'email', 'email' ] },
+				{ basicField: [ 'phone', 'number' ] },
+				{ basicField: [ 'address', 'text' ] }
+			],
+			button : 'Crear Cliente'
+		};
+	}
 }

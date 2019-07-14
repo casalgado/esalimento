@@ -25,4 +25,18 @@ class Expense extends Sheet {
 			datestr : this.date
 		};
 	}
+
+	static form() {
+		return {
+			fields : [
+				{ customSelectField: [ 'name', 'provider' ] },
+				{ customSelectField: [ 'provider', 'name' ] },
+				{ customSelectField: [ 'category', 'name' ] },
+				{ priceField: [ 'unitPrice' ] },
+				{ priceField: [ 'quantity', '0.5', '1' ] },
+				{ priceField: [ 'total' ] }
+			],
+			button : 'Crear Gasto'
+		};
+	}
 }
