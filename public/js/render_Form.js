@@ -132,6 +132,11 @@ class Form {
 		});
 		return props;
 	}
+
+	static render(constructor) {
+		new Form('square', constructor);
+		HTML.addClass('rectangle', 'hide');
+	}
 }
 
 // select menu behavior

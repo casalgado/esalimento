@@ -1,4 +1,5 @@
 class Inter {
+	// @refactor this class is useless, move these methods to card
 	static showCard(constructor, row) {
 		const id = row.dataset.id;
 		const obj = constructor.get(id);

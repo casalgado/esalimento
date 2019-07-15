@@ -11,7 +11,3 @@ function formatMoney(input) {
 	var temp = input.value;
 	input.value = accounting.formatMoney(temp);
 }
-
-String.prototype.isEmpty = function() {
-	return this.length === 0 || !this.trim();
-};

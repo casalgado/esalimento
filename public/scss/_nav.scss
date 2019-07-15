@@ -1,0 +1,14 @@
+section.localNav {
+	display: grid;
+	grid-gap: 5px;
+	padding: 5px;
+
+	.navBtn {
+		background-color: $fontColor;
+		display: block;
+	}
+
+	.navBtn:hover {
+		background-color: $mildGray;
+	}
+}

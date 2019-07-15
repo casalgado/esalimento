@@ -11,9 +11,9 @@
 		border: 1px solid white;
 		position: fixed;
 		bottom: 10%;
-		width: 96%;
-		margin-left: 2%;
 		overflow: hidden;
+		left: 50%;
+		transform: translateX(-50%);
 		background-color: $offWhite;
 		border-radius: 10px;
 		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -21,7 +21,17 @@
 
 	#custom-nav {
 		position: fixed;
-		bottom: 5%;
+		left: 50%;
+		transform: translateX(-50%);
+		bottom: 2%;
 		width: 50px;
+		height: 50px;
+		background-color: $offWhite;
+		border-radius: 50px;
+		border: 1px solid white;
+
+		& > button > i {
+			padding-left: 1px;
+		}
 	}
 }

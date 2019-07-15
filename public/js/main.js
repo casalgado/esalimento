@@ -1,5 +1,4 @@
 function onLoad() {
-	SQUARE = document.getElementById('square');
 	CLIENTS = [];
 	PRODUCTS = [];
 	ORDERS = [];
@@ -7,17 +6,17 @@ function onLoad() {
 	REPORTS = [];
 	SHOWING = { period: 'Week', current: moment() };
 	FILTERS = {};
+	Nav.renderMainButton();
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
-			loadPage(user);
+			loadPage();
 		} else {
 			document.getElementById('siteContainer').setAttribute('style', 'display:block');
 		}
 	});
 }
 
-function loadPage(user) {
-	SQUARE = document.getElementById('square');
+function loadPage() {
 	Client.all().then((objs) => {
 		CLIENTS = objs;
 	});
@@ -26,7 +25,7 @@ function loadPage(user) {
 	});
 	Order.all().then((objs) => {
 		ORDERS = objs;
-		new Table('square', ORDERS);
+		Table.render(Order);
 	});
 	Expense.all().then((objs) => {
 		EXPENSES = objs;
@@ -59,4 +58,8 @@ function propList(objects, property) {
 Array.prototype.getUnique = function() {
 	let uniq = [ ...new Set(this) ];
 	return uniq;
+};
+
+String.prototype.isEmpty = function() {
+	return this.length === 0 || !this.trim();
 };

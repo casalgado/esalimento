@@ -12,9 +12,10 @@
   border: 1px solid white;
   position: fixed;
   bottom: 10%;
-  width: 96%;
-  margin-left: 2%;
   overflow: hidden;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
   background-color: #262626;
   border-radius: 10px;
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -23,8 +24,19 @@
 
 #content #custom-nav {
   position: fixed;
-  bottom: 5%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  bottom: 2%;
   width: 50px;
+  height: 50px;
+  background-color: #262626;
+  border-radius: 50px;
+  border: 1px solid white;
+}
+
+#content #custom-nav > button > i {
+  padding-left: 1px;
 }
 
 #customModalContainer {
@@ -73,6 +85,22 @@
   content: ': ';
 }
 
+section.localNav {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 5px;
+  padding: 5px;
+}
+
+section.localNav .navBtn {
+  background-color: #f9fafb;
+  display: block;
+}
+
+section.localNav .navBtn:hover {
+  background-color: #ced4da;
+}
+
 section.localTable {
   background-color: #262626;
   font-size: 14px;
@@ -82,7 +110,7 @@ section.localTable .tableRow {
   cursor: pointer;
 }
 
-section.localTable div#ordersPagination {
+section.localTable div.pagination {
   background-color: #262626;
   position: -webkit-sticky;
   position: sticky;
@@ -123,7 +151,7 @@ section.localCard {
   border: none;
   display: -ms-grid;
   display: grid;
-  width: 100%;
+  width: 400px;
   padding: 8px 5px 5px 5px;
   -ms-grid-columns: 61.8% 38.2%;
       grid-template-columns: 61.8% 38.2%;

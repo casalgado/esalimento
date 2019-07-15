@@ -13,6 +13,27 @@ class HTML {
 		return element;
 	}
 
+	static createIconButton(iconClass, funcToCall, argument) {
+		let button = document.createElement('button');
+		button.setAttribute('class', 'btn');
+		button.addEventListener('click', () => {
+			funcToCall(argument);
+		});
+		let icon = document.createElement('i');
+		icon.setAttribute('class', iconClass);
+		button.appendChild(icon);
+		return button;
+	}
+
+	static createButton(btnId, btnClass, display, funcToCall, argument) {
+		let button = HTML.create('button', btnId, btnClass);
+		button.addEventListener('click', () => {
+			funcToCall(argument);
+		});
+		button.innerHTML = display;
+		return button;
+	}
+
 	static get(id) {
 		return document.getElementById(id);
 	}
@@ -32,6 +53,7 @@ class HTML {
 	}
 
 	static list(parent, childType, childClass, object) {
+		// @this method is only used by card. is it possible to combine with navList()?
 		for (const [ key, value ] of Object.entries(object)) {
 			let child = HTML.create(childType, '', childClass);
 			child.innerHTML = `${key}: ${value}`;

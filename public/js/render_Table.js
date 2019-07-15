@@ -82,23 +82,23 @@ class Table {
 		return this.createTableRow('td', values);
 	}
 
-	static reRender(constructor) {
+	static render(constructor) {
 		let objects = constructor.byWeek(SHOWING.current);
 		new Table('square', objects);
+		HTML.addClass('rectangle', 'hide');
 	}
 }
 
 class Pagination {
 	constructor(object) {
-		let t = this;
 		let o = object;
 		let c = o.constructor;
 
 		let p = this.createPagination(c.sheet());
 
-		p.appendChild(t.createButton('fas fa-caret-left fa-lg', showPrevious, c));
+		p.appendChild(HTML.createIconButton('fas fa-caret-left fa-lg', showPrevious, c));
 		p.appendChild(Pagination.renderCurrentlyShowing());
-		p.appendChild(t.createButton('fas fa-caret-right fa-lg', showNext, c));
+		p.appendChild(HTML.createIconButton('fas fa-caret-right fa-lg', showNext, c));
 		return p;
 	}
 
@@ -108,18 +108,6 @@ class Pagination {
 		p.setAttribute('id', idstr);
 		p.setAttribute('class', 'pagination');
 		return p;
-	}
-
-	createButton(iconClass, funcToCall, constructor) {
-		let button = document.createElement('button');
-		button.setAttribute('class', 'btn');
-		button.addEventListener('click', () => {
-			funcToCall(constructor);
-		});
-		let icon = document.createElement('i');
-		icon.setAttribute('class', iconClass);
-		button.appendChild(icon);
-		return button;
 	}
 
 	static renderCurrentlyShowing() {
@@ -142,11 +130,13 @@ function currentlyShowing() {
 function showNext(constructor) {
 	SHOWING.current.add(1, SHOWING.period);
 	Pagination.renderCurrentlyShowing();
-	Table.reRender(constructor);
+	Table.render(constructor);
+	HTML.addClass('rectangle', 'hide');
 }
 
 function showPrevious(constructor) {
 	SHOWING.current.subtract(1, SHOWING.period);
 	Pagination.renderCurrentlyShowing();
-	Table.reRender(constructor);
+	Table.render(constructor);
+	HTML.addClass('rectangle', 'hide');
 }
