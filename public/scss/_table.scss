@@ -6,12 +6,15 @@ section.localTable {
 		cursor: pointer;
 	}
 
-	& > div {
+	div#ordersPagination {
 		background-color: $offWhite;
 		position: sticky;
 		top: 0;
-		padding-left: 20%;
+		padding-left: 5%;
+		padding-right: 5%;
 		border-radius: 0px !important;
+		display: grid;
+		grid-template-columns: 1fr 3fr 1fr;
 	}
 
 	h6 {
@@ -25,6 +28,10 @@ section.localTable {
 	table tr td:first-child,
 	table tr th:first-child {
 		padding-left: 10px;
+	}
+
+	table tr td:last-child {
+		padding-right: 10px;
 	}
 
 	table tr:nth-child(even) {

@@ -39,7 +39,7 @@ class Order extends Sheet {
 
 	static setLocalId() {
 		// @rename: this is the name property
-		return moment().format('YY') + '.' + zeroPad(Order.local().length + 1, 3);
+		return moment().format('YY') + '-' + zeroPad(Order.local().length + 1, 3);
 	}
 
 	datestr() {
@@ -69,7 +69,7 @@ class Order extends Sheet {
 
 	card() {
 		return {
-			t    : this.localId(),
+			t    : 'Pedido ' + this.name,
 			main : {
 				p      : this.product,
 				c      : this.client,
