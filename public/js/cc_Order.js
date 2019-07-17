@@ -100,4 +100,14 @@ class Order extends Sheet {
 			button : 'Crear Pedido'
 		};
 	}
+
+	static totalUnpaid(momentObj) {
+		return this.byWeek(momentObj).reduce((total, current) => {
+			if (current.paid) {
+				return total;
+			} else {
+				return total + parseInt(current.total);
+			}
+		}, 0);
+	}
 }

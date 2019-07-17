@@ -97,6 +97,13 @@ class Sheet {
 				break;
 		}
 	}
+
+	static getTotals(momentObj) {
+		// only works if objects of these sheet have the property 'total'
+		return this.byWeek(momentObj).reduce((total, current) => {
+			return total + parseInt(current.total);
+		}, 0);
+	}
 }
 
 function instantiate(constructor, dbObj) {
