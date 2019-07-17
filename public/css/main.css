@@ -13,6 +13,7 @@
   position: fixed;
   bottom: 10%;
   overflow: hidden;
+  max-width: 92vw !important;
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
@@ -95,6 +96,8 @@ section.localNav {
 section.localNav .navBtn {
   background-color: #f9fafb;
   display: block;
+  -webkit-box-shadow: none;
+          box-shadow: none;
 }
 
 section.localNav .navBtn:hover {
@@ -152,6 +155,7 @@ section.localCard {
   display: -ms-grid;
   display: grid;
   width: 400px;
+  margin: 4px;
   padding: 8px 5px 5px 5px;
   -ms-grid-columns: 61.8% 38.2%;
       grid-template-columns: 61.8% 38.2%;
@@ -234,6 +238,14 @@ table {
   color: #262626;
   background-color: #ced4da !important;
   font-weight: 500;
+}
+
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 i,

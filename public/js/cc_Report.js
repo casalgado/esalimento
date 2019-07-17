@@ -1,9 +1,17 @@
 class Report extends Sheet {
-	constructor(id, name, category, price, cost) {
+	constructor(id, name, weekDate, cash, bank, realWealthAtStart, idealWealthAtEnd, realWealthAtEnd, locked) {
 		super(id, name);
-		this.category = category || '';
-		this.price = price;
-		this.cost = cost;
+		this.weekDate = weekDate; // como guardo el dato de la semana?
+		this.cash = cash || '';
+		this.bank = bank || '';
+		this.wealthAtStart = this.previousReport('realWealthAtEnd');
+		this.profit = this.getProfit();
+		this.expenses = this.getProfit();
+		this.locked = false;
+	}
+
+	previousReport(prop) {
+		console.log(prop);
 	}
 
 	static sheet() {

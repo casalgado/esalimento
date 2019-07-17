@@ -7,8 +7,8 @@ class Nav {
 
 	static showNav() {
 		const rect = HTML.get('rectangle');
+		rect.classList.toggle('hide');
 		let nav = HTML.create('section', '', 'localNav');
-		HTML.removeClass('rectangle', 'hide');
 		for (const [ key, value ] of Object.entries(Nav.props())) {
 			let button = HTML.createButton('test', 'btn navBtn', [ key ], value[0], value[1]);
 			nav.appendChild(button);
@@ -19,8 +19,8 @@ class Nav {
 
 	static props() {
 		return {
-			'ver pedidos'    : [ Table.render, Order ],
-			'ver gastos'     : [ Table.render, Expense ],
+			pedidos        : [ Table.render, Order ],
+			gastos         : [ Table.render, Expense ],
 			'nuevo pedido'   : [ Form.render, Order ],
 			'nuevo gasto'    : [ Form.render, Expense ],
 			'nuevo producto' : [ Form.render, Product ],
