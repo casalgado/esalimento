@@ -6,7 +6,7 @@ class Order extends Sheet {
 		this.quantity = quantity;
 		this.unitPrice = unitPrice;
 		this.total = total;
-		this.submitted = submitted;
+		this.submitted = submitted || false;
 		this.confirmed = confirmed || false;
 		this.produced = produced || false;
 		this.delivered = delivered || false;
@@ -56,6 +56,10 @@ class Order extends Sheet {
 		} else {
 			return 'recibida';
 		}
+	}
+
+	static table() {
+		return { title: 'Pedidos', hasPagination: true };
 	}
 
 	table() {

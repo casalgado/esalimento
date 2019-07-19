@@ -1,12 +1,13 @@
 class Expense extends Sheet {
-	constructor(id, name, category, provider, unitPrice, quantity, total) {
+	constructor(id, name, category, provider, quantity, units, unitPrice, total, date) {
 		super(id, name);
 		this.category = category;
+		this.provider = provider;
 		this.quantity = quantity;
+		this.units = units;
 		this.unitPrice = unitPrice;
 		this.total = total;
-		this.provider = provider;
-		this.date = moment().format();
+		this.date = date || moment().format();
 	}
 
 	static sheet() {
@@ -17,9 +18,27 @@ class Expense extends Sheet {
 		return EXPENSES;
 	}
 
+	static table() {
+		return { title: 'Gastos', hasPagination: true };
+	}
+
+	card() {
+		return {
+			t    : this.category,
+			main : {
+				p : this.provider
+			},
+			side : {
+				unidad   : this.unitPrice,
+				cantidad : this.quantity,
+				total    : this.total
+			}
+		};
+	}
+
 	table() {
 		return {
-			title   : 'Expenses',
+			title   : 'Gastos',
 			header  : [ 'Nombre', 'Total' ],
 			row     : [ this.name, this.total ],
 			datestr : this.date

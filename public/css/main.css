@@ -107,6 +107,7 @@ section.localNav .navBtn:hover {
 section.localTable {
   background-color: #262626;
   font-size: 14px;
+  padding-bottom: 100%;
 }
 
 section.localTable .tableRow {

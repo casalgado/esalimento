@@ -1,42 +1,42 @@
 class Table {
-	constructor(parentId, objects) {
-		if (!objects[0]) {
-			// @refactor, this can be a method
-			let q;
-			q = document.querySelectorAll('.tableRow');
-			Array.from(q).map((e) => {
-				e.innerHTML = '';
-			});
-			return '';
-		}
+	constructor(parentId, objects, constructor) {
 		const t = this;
-		const o = objects[0];
-		//@refactor, include props instead of o.table()
-		const c = o.constructor;
+		const o = objects[0] || { constructor: null };
+		const c = o.constructor || constructor;
 		const p = document.getElementById(parentId);
 		const s = document.createElement('section');
-
 		const table = t.createTable(c.sheet());
-
-		table.appendChild(t.createHeader(o.table().header));
-
-		for (let i = 0; i < objects.length; i++) {
-			let row = t.createRow(objects[i].table().row);
-			row.setAttribute('data-id', objects[i].id);
-			row.setAttribute('class', 'tableRow');
-			row.addEventListener('click', (e) => {
-				Inter.toggleCard(c, row, e);
-			});
-			table.appendChild(row);
-		}
-
 		s.setAttribute('class', 'localTable');
-		s.appendChild(t.createTitle(o.table().title));
-		s.appendChild(t.createPagination(o));
-		s.appendChild(table);
+		s.appendChild(t.createTitle(c.table().title));
+		s.appendChild(t.createPagination(c));
+		if (objects[0]) {
+			table.appendChild(t.createHeader(o.table().header));
+
+			for (let i = 0; i < objects.length; i++) {
+				let row = t.createRow(objects[i].table().row);
+				row.setAttribute('data-id', objects[i].id);
+				row.setAttribute('class', 'tableRow');
+				row.addEventListener('click', (e) => {
+					Inter.toggleCard(c, row, e);
+				});
+				table.appendChild(row);
+			}
+
+			s.appendChild(table);
+		} else {
+			Table.clear();
+		}
 
 		p.innerHTML = '';
 		p.appendChild(s);
+	}
+
+	static clear() {
+		let rows;
+		rows = document.querySelectorAll('.tableRow');
+		Array.from(rows).map((e) => {
+			e.innerHTML = '';
+		});
 	}
 
 	createTable(id) {
@@ -63,14 +63,14 @@ class Table {
 		return t;
 	}
 
-	createPagination(object) {
-		let o = object;
+	createPagination(constructor) {
+		let c = constructor;
 		let p = document.createElement('div');
-		if (o.table().datestr.isEmpty()) {
+		if (c.table().hasPagination) {
+			return new Pagination(c);
+		} else {
 			p.setAttribute('class', 'pagination');
 			return p;
-		} else {
-			return new Pagination(o);
 		}
 	}
 
@@ -84,15 +84,14 @@ class Table {
 
 	static render(constructor) {
 		let objects = constructor.byWeek(SHOWING.current);
-		new Table('square', objects);
+		new Table('square', objects, constructor);
 		HTML.addClass('rectangle', 'hide');
 	}
 }
 
 class Pagination {
-	constructor(object) {
-		let o = object;
-		let c = o.constructor;
+	constructor(constructor) {
+		let c = constructor;
 
 		let p = this.createPagination(c.sheet());
 
