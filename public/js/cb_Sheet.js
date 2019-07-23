@@ -72,13 +72,18 @@ class Sheet {
 	}
 
 	belongsToWeek(momentObj) {
-		return moment(this.table().datestr).isSame(momentObj, 'week') ? true : false;
+		// constructor must have the date() method.
+		return moment(this.datestr()).isSame(momentObj, 'week') ? true : false;
 	}
 
 	static byWeek(momentObj) {
 		return this.local().filter((localObj) => {
 			return localObj.belongsToWeek(momentObj);
 		});
+	}
+
+	datestr() {
+		return this.date;
 	}
 
 	static getLocal(sheet) {
@@ -101,7 +106,7 @@ class Sheet {
 		}
 	}
 
-	static getTotals(momentObj) {
+	static getWeekTotals(momentObj) {
 		// only works if objects of these sheet have the property 'total'
 		return this.byWeek(momentObj).reduce((total, current) => {
 			return total + parseInt(current.total);

@@ -20,7 +20,7 @@ function instantiateEntry(constructor, dbObj) {
 }
 
 function reformatTime(s) {
-	return s.split('/').reverse().join('-');
+	return moment(s.split('/').reverse().join('-')).format();
 }
 
 function importOrders(array) {
@@ -67,7 +67,7 @@ function importOrdersDatabase() {
 			products.push(j[i].product);
 		}
 		// create order
-		let orderName = '19-' + zeroPad(i + 1, 3);
+		let orderName = 'P-19-' + zeroPad(i + 1, 3);
 		newOrder = new Order(
 			'id',
 			orderName,
@@ -105,6 +105,25 @@ function importExpenses(array) {
 	}
 }
 
+function populateReports() {
+	let current = moment(ORDERS[0].confirmed);
+	let wealthAtStart = 0;
+	while (current.week() < moment().week()) {
+		if (REPORTS.length > 0) {
+			wealthAtStart = REPORTS[REPORTS.length - 1].idealWealthAtEnd;
+		}
+		let r = new Report(current, wealthAtStart);
+		r.name = Report.setLocalId();
+		r.cash = 0;
+		r.bank = 0;
+		r.realWealthAtEnd = r.idealWealthAtEnd;
+		r.errorMargin = r.realWealthAtEnd - r.idealWealthAtEnd;
+		r.date = r.date.format();
+		r.save();
+		current.add('1', 'week');
+	}
+}
+
 ordersFromDatabase = [
 	{
 		client    : 'el caminante',
@@ -124,10 +143,10 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 30000,
 		total     : 30000,
-		confirmed : '01/02/2019',
-		prepared  : '07/02/2019',
-		delivered : '08/02/2019',
-		paid      : '08/02/2019',
+		confirmed : '01/01/2019',
+		prepared  : '07/01/2019',
+		delivered : '08/01/2019',
+		paid      : '08/01/2019',
 		cost      : 18141
 	},
 	{
@@ -136,10 +155,10 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 25000,
 		total     : 25000,
-		confirmed : '01/03/2019',
-		prepared  : '07/03/2019',
-		delivered : '08/03/2019',
-		paid      : '08/03/2019',
+		confirmed : '01/01/2019',
+		prepared  : '07/01/2019',
+		delivered : '08/01/2019',
+		paid      : '08/01/2019',
 		cost      : 17775
 	},
 	{
@@ -148,10 +167,10 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 30000,
 		total     : 30000,
-		confirmed : '01/04/2019',
-		prepared  : '07/04/2019',
-		delivered : '08/04/2019',
-		paid      : '08/04/2019',
+		confirmed : '01/01/2019',
+		prepared  : '07/01/2019',
+		delivered : '08/01/2019',
+		paid      : '08/01/2019',
 		cost      : 22629
 	},
 	{
@@ -160,11 +179,23 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 7500,
 		total     : 7500,
-		confirmed : '01/05/2019',
-		prepared  : '07/05/2019',
-		delivered : '08/05/2019',
-		paid      : '08/05/2019',
+		confirmed : '01/01/2019',
+		prepared  : '07/01/2019',
+		delivered : '08/01/2019',
+		paid      : '08/01/2019',
 		cost      : 4107
+	},
+	{
+		client    : 'el caminante',
+		product   : 'pan de masa madre',
+		quantity  : 2,
+		unitPrice : 18000,
+		total     : 36000,
+		confirmed : '06/01/2019',
+		prepared  : '07/01/2019',
+		delivered : '08/01/2019',
+		paid      : '08/01/2019',
+		cost      : 14881
 	},
 	{
 		client    : 'david escaf',
@@ -177,18 +208,6 @@ ordersFromDatabase = [
 		delivered : '08/01/2019',
 		paid      : '08/01/2019',
 		cost      : 16881
-	},
-	{
-		client    : 'el caminante',
-		product   : 'pan de masa madre',
-		quantity  : 2,
-		unitPrice : 18000,
-		total     : 36000,
-		confirmed : '01/06/2019',
-		prepared  : '07/06/2019',
-		delivered : '08/06/2019',
-		paid      : '08/06/2019',
-		cost      : 14881
 	},
 	{
 		client    : 'pablo bustillo',
@@ -244,9 +263,9 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 25000,
 		total     : 25000,
-		confirmed : '10/02/2019',
-		prepared  : '11/02/2019',
-		delivered : '12/02/2019',
+		confirmed : '10/01/2019',
+		prepared  : '11/01/2019',
+		delivered : '12/01/2019',
 		paid      : '14/01/2019',
 		cost      : 17775
 	},
@@ -256,9 +275,9 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 30000,
 		total     : 30000,
-		confirmed : '10/03/2019',
-		prepared  : '11/03/2019',
-		delivered : '12/03/2019',
+		confirmed : '10/01/2019',
+		prepared  : '11/01/2019',
+		delivered : '12/01/2019',
 		paid      : '14/01/2019',
 		cost      : 22629
 	},
@@ -268,9 +287,9 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 7500,
 		total     : 7500,
-		confirmed : '10/04/2019',
-		prepared  : '11/04/2019',
-		delivered : '12/04/2019',
+		confirmed : '10/01/2019',
+		prepared  : '11/01/2019',
+		delivered : '12/01/2019',
 		paid      : '14/01/2019',
 		cost      : 4107
 	},
@@ -280,9 +299,9 @@ ordersFromDatabase = [
 		quantity  : 2,
 		unitPrice : 18000,
 		total     : 36000,
-		confirmed : '10/05/2019',
-		prepared  : '11/05/2019',
-		delivered : '12/05/2019',
+		confirmed : '10/01/2019',
+		prepared  : '11/01/2019',
+		delivered : '12/01/2019',
 		paid      : '14/01/2019',
 		cost      : 14881
 	},
@@ -724,7 +743,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 25000,
 		total     : 25000,
-		confirmed : '03/03/2019',
+		confirmed : '03/02/2019',
 		prepared  : '04/02/2019',
 		delivered : '05/02/2019',
 		paid      : '05/02/2019',
@@ -784,7 +803,7 @@ ordersFromDatabase = [
 		quantity  : 3,
 		unitPrice : 18000,
 		total     : 54000,
-		confirmed : '12/02/2019',
+		confirmed : '11/02/2019',
 		prepared  : '13/02/2019',
 		delivered : '14/02/2019',
 		paid      : '14/02/2019',
@@ -796,7 +815,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 25000,
 		total     : 25000,
-		confirmed : '12/03/2019',
+		confirmed : '11/02/2019',
 		prepared  : '13/02/2019',
 		delivered : '14/02/2019',
 		paid      : '14/02/2019',
@@ -808,7 +827,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 30000,
 		total     : 30000,
-		confirmed : '12/04/2019',
+		confirmed : '11/02/2019',
 		prepared  : '13/02/2019',
 		delivered : '14/02/2019',
 		paid      : '14/02/2019',
@@ -1036,7 +1055,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 25000,
 		total     : 25000,
-		confirmed : '01/04/2019',
+		confirmed : '01/03/2019',
 		prepared  : '05/02/2019',
 		delivered : '06/02/2019',
 		paid      : '13/03/2019',
@@ -1048,7 +1067,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 30000,
 		total     : 30000,
-		confirmed : '01/05/2019',
+		confirmed : '01/03/2019',
 		prepared  : '05/02/2019',
 		delivered : '06/02/2019',
 		paid      : '13/03/2019',
@@ -1060,7 +1079,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 7500,
 		total     : 7500,
-		confirmed : '01/06/2019',
+		confirmed : '01/03/2019',
 		prepared  : '05/02/2019',
 		delivered : '06/02/2019',
 		paid      : '13/03/2019',
@@ -1144,7 +1163,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 25000,
 		total     : 25000,
-		confirmed : '08/04/2019',
+		confirmed : '08/03/2019',
 		prepared  : '08/03/2019',
 		delivered : '09/03/2019',
 		paid      : '13/03/2019',
@@ -1156,7 +1175,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 30000,
 		total     : 30000,
-		confirmed : '08/05/2019',
+		confirmed : '08/03/2019',
 		prepared  : '08/03/2019',
 		delivered : '09/03/2019',
 		paid      : '13/03/2019',
@@ -1168,7 +1187,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 30000,
 		total     : 30000,
-		confirmed : '08/06/2019',
+		confirmed : '08/03/2019',
 		prepared  : '08/03/2019',
 		delivered : '09/03/2019',
 		paid      : '13/03/2019',
@@ -1180,7 +1199,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 30000,
 		total     : 30000,
-		confirmed : '08/07/2019',
+		confirmed : '08/03/2019',
 		prepared  : '08/03/2019',
 		delivered : '09/03/2019',
 		paid      : '13/03/2019',
@@ -1264,7 +1283,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 25000,
 		total     : 25000,
-		confirmed : '12/04/2019',
+		confirmed : '12/03/2019',
 		prepared  : '12/02/2019',
 		delivered : '13/03/2019',
 		paid      : '13/03/2019',
@@ -1276,7 +1295,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 30000,
 		total     : 30000,
-		confirmed : '12/05/2019',
+		confirmed : '12/03/2019',
 		prepared  : '12/02/2019',
 		delivered : '13/03/2019',
 		paid      : '13/03/2019',
@@ -1288,7 +1307,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 7500,
 		total     : 7500,
-		confirmed : '12/06/2019',
+		confirmed : '12/03/2019',
 		prepared  : '12/02/2019',
 		delivered : '13/03/2019',
 		paid      : '13/03/2019',
@@ -1300,7 +1319,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 30000,
 		total     : 30000,
-		confirmed : '12/07/2019',
+		confirmed : '12/03/2019',
 		prepared  : '12/02/2019',
 		delivered : '13/03/2019',
 		paid      : '13/03/2019',
@@ -1432,7 +1451,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 25000,
 		total     : 25000,
-		confirmed : '19/03/2020',
+		confirmed : '19/03/2019',
 		prepared  : '19/03/2019',
 		delivered : '20/03/2019',
 		paid      : '20/03/2019',
@@ -1444,7 +1463,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 30000,
 		total     : 30000,
-		confirmed : '19/03/2021',
+		confirmed : '19/03/2019',
 		prepared  : '19/03/2019',
 		delivered : '20/03/2019',
 		paid      : '20/03/2019',
@@ -1456,7 +1475,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 30000,
 		total     : 30000,
-		confirmed : '19/03/2022',
+		confirmed : '19/03/2019',
 		prepared  : '19/03/2019',
 		delivered : '20/03/2019',
 		paid      : '20/03/2019',
@@ -1936,7 +1955,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 30000,
 		total     : 30000,
-		confirmed : '04/05/2019',
+		confirmed : '04/04/2019',
 		prepared  : '04/04/2019',
 		delivered : '05/04/2019',
 		paid      : '05/04/2019',
@@ -1948,7 +1967,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 30000,
 		total     : 30000,
-		confirmed : '04/06/2019',
+		confirmed : '04/04/2019',
 		prepared  : '04/04/2019',
 		delivered : '05/04/2019',
 		paid      : '05/04/2019',
@@ -1960,7 +1979,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 7500,
 		total     : 7500,
-		confirmed : '04/07/2019',
+		confirmed : '04/04/2019',
 		prepared  : '04/04/2019',
 		delivered : '05/04/2019',
 		paid      : '05/04/2019',
@@ -2044,7 +2063,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 35000,
 		total     : 35000,
-		confirmed : '07/05/2019',
+		confirmed : '07/04/2019',
 		prepared  : '09/04/2019',
 		delivered : '10/04/2019',
 		paid      : '10/04/2019',
@@ -2104,7 +2123,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 25000,
 		total     : 25000,
-		confirmed : '07/05/2019',
+		confirmed : '07/04/2019',
 		prepared  : '08/04/2019',
 		delivered : '09/04/2019',
 		paid      : '09/04/2019',
@@ -2116,7 +2135,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 30000,
 		total     : 30000,
-		confirmed : '07/06/2019',
+		confirmed : '07/04/2019',
 		prepared  : '08/04/2019',
 		delivered : '09/04/2019',
 		paid      : '09/04/2019',
@@ -2128,7 +2147,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 30000,
 		total     : 30000,
-		confirmed : '07/07/2019',
+		confirmed : '07/04/2019',
 		prepared  : '08/04/2019',
 		delivered : '09/04/2019',
 		paid      : '09/04/2019',
@@ -2188,7 +2207,7 @@ ordersFromDatabase = [
 		quantity  : 3,
 		unitPrice : 20000,
 		total     : 60000,
-		confirmed : '09/05/2019',
+		confirmed : '09/04/2019',
 		prepared  : '10/04/2019',
 		delivered : '12/04/2019',
 		paid      : '12/04/2019',
@@ -2224,7 +2243,7 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 15000,
 		total     : 15000,
-		confirmed : '10/05/2019',
+		confirmed : '10/04/2019',
 		prepared  : '14/04/2019',
 		delivered : '15/04/2019',
 		paid      : '15/04/2019',
@@ -2776,7 +2795,7 @@ ordersFromDatabase = [
 		quantity  : 0.5,
 		unitPrice : 25000,
 		total     : 12500,
-		confirmed : '28/0/42019',
+		confirmed : '28/04/2019',
 		prepared  : '29/04/2019',
 		delivered : '29/04/2019',
 		paid      : '21/05/2019',
@@ -2896,9 +2915,9 @@ ordersFromDatabase = [
 		quantity  : 6,
 		unitPrice : 16000,
 		total     : 96000,
-		confirmed : '02/04/2019',
+		confirmed : '02/05/2019',
 		prepared  : '02/05/2019',
-		delivered : '03/04/2019',
+		delivered : '03/05/2019',
 		paid      : '08/05/2019',
 		cost      : 12889
 	},
@@ -2908,9 +2927,9 @@ ordersFromDatabase = [
 		quantity  : 4,
 		unitPrice : 16000,
 		total     : 64000,
-		confirmed : '02/04/2019',
-		prepared  : '03/04/2019',
-		delivered : '04/04/2019',
+		confirmed : '02/05/2019',
+		prepared  : '03/05/2019',
+		delivered : '04/05/2019',
 		paid      : '08/05/2019',
 		cost      : 12889
 	},
@@ -2920,9 +2939,9 @@ ordersFromDatabase = [
 		quantity  : 3,
 		unitPrice : 18000,
 		total     : 54000,
-		confirmed : '02/04/2019',
+		confirmed : '02/05/2019',
 		prepared  : '03/05/2019',
-		delivered : '04/04/2019',
+		delivered : '04/05/2019',
 		paid      : '07/05/2019',
 		cost      : 14881
 	},
@@ -2932,9 +2951,9 @@ ordersFromDatabase = [
 		quantity  : 2,
 		unitPrice : 18000,
 		total     : 36000,
-		confirmed : '04/04/2019',
-		prepared  : '05/04/2019',
-		delivered : '06/04/2019',
+		confirmed : '04/05/2019',
+		prepared  : '05/05/2019',
+		delivered : '06/05/2019',
 		paid      : '09/05/2019',
 		cost      : 14881
 	},
@@ -2944,9 +2963,9 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 25000,
 		total     : 25000,
-		confirmed : '04/04/2019',
-		prepared  : '05/04/2019',
-		delivered : '06/04/2019',
+		confirmed : '04/05/2019',
+		prepared  : '05/05/2019',
+		delivered : '06/05/2019',
 		paid      : '09/05/2019',
 		cost      : 17775
 	},
@@ -2956,9 +2975,9 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 7500,
 		total     : 7500,
-		confirmed : '04/04/2019',
-		prepared  : '05/04/2019',
-		delivered : '06/04/2019',
+		confirmed : '04/05/2019',
+		prepared  : '05/05/2019',
+		delivered : '06/05/2019',
 		paid      : '09/05/2019',
 		cost      : 4107
 	},
@@ -2968,9 +2987,9 @@ ordersFromDatabase = [
 		quantity  : 1,
 		unitPrice : 20000,
 		total     : 20000,
-		confirmed : '03/04/2019',
-		prepared  : '05/04/2019',
-		delivered : '06/04/2019',
+		confirmed : '03/05/2019',
+		prepared  : '05/05/2019',
+		delivered : '06/05/2019',
 		paid      : '07/05/2019',
 		cost      : 16881
 	},
@@ -2980,9 +2999,9 @@ ordersFromDatabase = [
 		quantity  : 2154,
 		unitPrice : 700,
 		total     : 1507800,
-		confirmed : '29/04/2019',
-		prepared  : 'Del 29/04 al 5/05',
-		delivered : 'Del 29/04 al 5/05',
+		confirmed : '29/05/2019',
+		prepared  : '05/05/2019',
+		delivered : '05/05/2019',
 		paid      : '07/05/2019',
 		cost      : 432
 	},
@@ -3088,7 +3107,7 @@ ordersFromDatabase = [
 		quantity  : 5,
 		unitPrice : 16000,
 		total     : 80000,
-		confirmed : '08/04/2019',
+		confirmed : '08/05/2019',
 		prepared  : '08/05/2019',
 		delivered : '09/05/2019',
 		paid      : '14/05/2019',
@@ -3100,7 +3119,7 @@ ordersFromDatabase = [
 		quantity  : 5,
 		unitPrice : 16000,
 		total     : 80000,
-		confirmed : '08/04/2019',
+		confirmed : '08/05/2019',
 		prepared  : '09/05/2019',
 		delivered : '10/05/2019',
 		paid      : '14/05/2019',
@@ -3112,7 +3131,7 @@ ordersFromDatabase = [
 		quantity  : 5,
 		unitPrice : 16000,
 		total     : 80000,
-		confirmed : '08/04/2019',
+		confirmed : '08/05/2019',
 		prepared  : '10/05/2019',
 		delivered : '11/05/2019',
 		paid      : '14/05/2019',
@@ -4444,7 +4463,7 @@ ordersFromDatabase = [
 		quantity  : 58,
 		unitPrice : 800,
 		total     : 46400,
-		confirmed : '12//06/2019',
+		confirmed : '12/06/2019',
 		prepared  : '13/06/2019',
 		delivered : '14/06/2019',
 		paid      : '14/06/2019',

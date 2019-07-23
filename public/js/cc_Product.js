@@ -14,6 +14,10 @@ class Product extends Sheet {
 		return PRODUCTS;
 	}
 
+	datestr() {
+		return this.createdAt;
+	}
+
 	table() {
 		return {
 			title   : 'Products',

@@ -14,6 +14,10 @@ class Client extends Sheet {
 		return CLIENTS;
 	}
 
+	datestr() {
+		return this.createdAt;
+	}
+
 	table() {
 		return {
 			title   : 'Clientes',

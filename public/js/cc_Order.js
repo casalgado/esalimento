@@ -38,12 +38,12 @@ class Order extends Sheet {
 	}
 
 	static setLocalId() {
-		// @rename: this is the name property
-		return moment().format('YY') + '-' + zeroPad(Order.local().length + 1, 3);
+		// this is the name property
+		return 'P-' + moment().format('YY') + '-' + zeroPad(Order.local().length + 1, 3);
 	}
 
 	datestr() {
-		return this.produced || this.confirmed || this.submitted;
+		return this.confirmed;
 	}
 
 	currentStatus() {
