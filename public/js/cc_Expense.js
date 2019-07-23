@@ -1,6 +1,6 @@
 class Expense extends Sheet {
-	constructor(id, name, category, provider, quantity, units, unitPrice, total, date) {
-		super(id, name);
+	constructor(id, name, category, provider, quantity, units, unitPrice, total, date, comment) {
+		super(id, name, comment);
 		this.category = category;
 		this.provider = provider;
 		this.quantity = quantity;

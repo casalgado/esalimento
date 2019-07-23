@@ -1,7 +1,10 @@
 class Sheet {
-	constructor(id, name) {
+	constructor(id, name, comment) {
 		this.id = id || '';
 		this.name = name;
+		this.createdAt = moment().format();
+		this.lastModified = moment().format();
+		this.comment = comment || '';
 	}
 
 	static path() {
