@@ -6,6 +6,7 @@ class Table {
 		const p = document.getElementById(parentId);
 		const s = document.createElement('section');
 		const table = t.createTable(c.sheet());
+		let totals, totals_cont;
 		s.setAttribute('class', 'localTable');
 		s.appendChild(t.createTitle(c.table().title));
 		s.appendChild(t.createPagination(c));
@@ -14,7 +15,7 @@ class Table {
 
 			for (let i = 0; i < objects.length; i++) {
 				let row = t.createRow(objects[i].table().row);
-				row.setAttribute('data-id', objects[i].id);
+				row.setAttribute('data-id', objects[i].name); // @ .name or .id? name removes dependency on db, this is connected to the toggleCard method in Inter.js
 				row.setAttribute('class', 'tableRow');
 				row.addEventListener('click', (e) => {
 					Inter.toggleCard(c, row, e);
@@ -22,7 +23,13 @@ class Table {
 				table.appendChild(row);
 			}
 
+			totals = objects.reduce((total, current) => {
+				return total + parseInt(current.total);
+			}, 0);
+			totals_cont = HTML.create('p', 'total');
+			totals_cont.innerHTML = totals;
 			s.appendChild(table);
+			s.appendChild(totals_cont);
 		} else {
 			Table.clear();
 		}

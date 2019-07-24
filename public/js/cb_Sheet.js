@@ -18,7 +18,7 @@ class Sheet {
 				id : e.getKey()
 			});
 			this.id = e.getKey();
-			c.local().push(this);
+			// c.local().push(this);
 		});
 	}
 
@@ -62,10 +62,10 @@ class Sheet {
 		return objects;
 	}
 
-	static get(id) {
+	static get(key, value) {
 		const local = this.local();
 		for (let i = 0; i < local.length; i++) {
-			if (local[i].id == id) {
+			if (local[i][key] == value) {
 				return local[i];
 			}
 		}

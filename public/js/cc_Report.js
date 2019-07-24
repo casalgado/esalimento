@@ -15,10 +15,6 @@ class Report extends Sheet {
 		this.locked = false;
 	}
 
-	save() {
-		REPORTS.push(this);
-	}
-
 	static sheet() {
 		return 'reports';
 	}
@@ -42,7 +38,7 @@ class Report extends Sheet {
 	}
 
 	datestr() {
-		return 'TBD';
+		return this.date;
 	}
 
 	static setLocalId() {
@@ -70,11 +66,36 @@ class Report extends Sheet {
 		return this.cash + this.bank + Order.totalUnpaid(moment(this.date));
 	}
 
+	dateAtStart() {
+		return moment(this.date).startOf('week').format('D MMM');
+	}
+
+	dateAtEnd() {
+		return moment(this.date).endOf('week').format('D MMM');
+	}
+
+	static table() {
+		return { title: 'Reportes', hasPagination: true };
+	}
+
+	card() {
+		return {
+			t    : 'Reporte ' + this.name,
+			main : {
+				d : this.dateAtStart(),
+				i : this.grossIncome,
+				e : this.totalExpenses
+			},
+			side : {
+				error : this.errorMargin
+			}
+		};
+	}
+
 	table() {
 		return {
-			title  : 'Reports',
-			header : [ 'Nombre', 'Categoria', 'Costo', 'Venta' ],
-			row    : [ this.name, this.category, this.cost, this.price ]
+			header : [ 'Nombre', 'start D', 'at Start', 'Profit', 'at End' ],
+			row    : [ this.name, this.dateAtStart(), this.wealthAtStart, this.profit, this.realWealthAtEnd ]
 		};
 	}
 }

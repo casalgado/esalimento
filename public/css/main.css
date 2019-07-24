@@ -151,6 +151,11 @@ section.localTable table tr:nth-child(even) {
   border-bottom: 1px solid #57585a;
 }
 
+section.localTable p#total {
+  text-align: center;
+  font-weight: bold;
+}
+
 section.localCard {
   border: none;
   display: -ms-grid;

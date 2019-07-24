@@ -119,6 +119,7 @@ function populateReports() {
 		r.realWealthAtEnd = r.idealWealthAtEnd;
 		r.errorMargin = r.realWealthAtEnd - r.idealWealthAtEnd;
 		r.date = r.date.format();
+		REPORTS.push(r);
 		r.save();
 		current.add('1', 'week');
 	}

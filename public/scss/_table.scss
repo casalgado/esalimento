@@ -40,4 +40,9 @@ section.localTable {
 		border-top: 1px solid $borderGray;
 		border-bottom: 1px solid $borderGray;
 	}
+
+	p#total {
+		text-align: center;
+		font-weight: bold;
+	}
 }

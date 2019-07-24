@@ -30,6 +30,9 @@ function loadPage() {
 	Expense.all().then((objs) => {
 		EXPENSES = objs;
 	});
+	Report.all().then((objs) => {
+		REPORTS = objs;
+	});
 	// REPORTS = Report.all();
 	SHOWING = { period: 'Week', current: moment() };
 	FILTERS = {};

@@ -19,8 +19,9 @@ class Nav {
 
 	static props() {
 		return {
-			pedidos        : [ Table.render, Order ],
-			gastos         : [ Table.render, Expense ],
+			pedidos          : [ Table.render, Order ],
+			gastos           : [ Table.render, Expense ],
+			reportes         : [ Table.render, Report ],
 			'nuevo pedido'   : [ Form.render, Order ],
 			'nuevo gasto'    : [ Form.render, Expense ],
 			'nuevo producto' : [ Form.render, Product ],
