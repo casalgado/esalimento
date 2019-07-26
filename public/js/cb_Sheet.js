@@ -13,13 +13,43 @@ class Sheet {
 
 	save() {
 		const c = this.constructor;
-		firebase.database().ref(c.path()).push(this).then((e) => {
-			firebase.database().ref(c.path()).child(e.getKey()).update({
-				id : e.getKey()
+		firebase
+			.database()
+			.ref(c.path())
+			.push(this, function(error) {
+				if (error) {
+					console.log('The write failed');
+				} else {
+					console.log('Data saved successfully!');
+				}
+			})
+			.then((e) => {
+				firebase.database().ref(c.path()).child(e.getKey()).update({
+					id : e.getKey()
+				});
+				this.id = e.getKey();
+				c.local().push(this);
 			});
-			this.id = e.getKey();
-			// c.local().push(this);
+	}
+
+	update() {
+		const c = this.constructor;
+		const key = this.id;
+		const path = c.path() + '/' + key;
+		firebase.database().ref(path).update(this, function(error) {
+			if (error) {
+				console.log('The write failed');
+			} else {
+				console.log('Data saved successfully!');
+			}
 		});
+	}
+
+	delete() {
+		const c = this.constructor;
+		const key = this.id;
+		const path = c.path() + '/' + key;
+		firebase.database().ref(path).remove();
 	}
 
 	static create(form) {
@@ -32,6 +62,10 @@ class Sheet {
 			newObject.save();
 		}
 		Form.reset();
+	}
+
+	static update(form) {
+		console.log(form);
 	}
 
 	static all() {
@@ -109,6 +143,12 @@ class Sheet {
 	static getWeekTotals(momentObj) {
 		// only works if objects of these sheet have the property 'total'
 		return this.byWeek(momentObj).reduce((total, current) => {
+			return total + parseInt(current.total);
+		}, 0);
+	}
+
+	static getAllTimeTotals() {
+		return this.local().reduce((total, current) => {
 			return total + parseInt(current.total);
 		}, 0);
 	}

@@ -1,8 +1,8 @@
 class Form {
-	constructor(id, constructor) {
+	constructor(parentId, constructor) {
 		this.sheet = `${constructor.sheet()}`;
 		const props = constructor.form();
-		const parent = HTML.get(id);
+		const parent = HTML.get(parentId);
 		const title = HTML.create('h6', '', 'formTitle', {
 			onclick : 'Form.reset()'
 		});
@@ -10,15 +10,10 @@ class Form {
 			'data-constructor' : constructor.sheet()
 		});
 
-		form.addEventListener('submit', (e) => {
-			constructor.create(form);
-			e.preventDefault();
-		});
-
 		title.innerHTML = this.sheet;
 		form.appendChild(title);
 		this.createFields(form, props.fields);
-		form.appendChild(this.submitBtn(props.button));
+		form.appendChild(this.submitBtn(`Crear ${props.button}`));
 
 		parent.innerHTML = '';
 		parent.appendChild(form);
@@ -101,7 +96,9 @@ class Form {
 	}
 
 	submitBtn(innerHTML) {
-		let button = HTML.create('button', '', 'btn btn-primary btnSubmit', { type: 'submit' });
+		let button = HTML.create('button', `${this.sheet}-button`, 'btn btn-primary btnSubmit', {
+			type : 'submit'
+		});
 		button.innerHTML = innerHTML;
 		return button;
 	}
@@ -132,10 +129,42 @@ class Form {
 		});
 		return props;
 	}
+}
+
+class FormCreate extends Form {
+	constructor(parentId, constructor) {
+		super(parentId, constructor);
+		const form = HTML.get(`${constructor.sheet()}Form`);
+
+		form.addEventListener('submit', (e) => {
+			constructor.create(form);
+			e.preventDefault();
+		});
+	}
 
 	static render(constructor) {
-		new Form('square', constructor);
+		new FormCreate('square', constructor);
 		HTML.addClass('rectangle', 'hide');
+	}
+}
+
+class FormEdit extends Form {
+	constructor(parentId, constructor, object) {
+		super(parentId, constructor);
+		const key = object;
+		const form = HTML.get(`${constructor.sheet()}Form`);
+
+		form.setAttribute('id', `${constructor.sheet()}EditForm`);
+
+		form.addEventListener('submit', (e) => {
+			constructor.update(form);
+			e.preventDefault();
+		});
+		HTML.get(`${constructor.sheet()}-button`).innerHTML = `Editar ${constructor.form().button}`;
+	}
+
+	static render(constructor, object) {
+		new FormEdit('rectangle', constructor, object);
 	}
 }
 

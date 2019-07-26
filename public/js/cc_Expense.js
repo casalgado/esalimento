@@ -55,7 +55,7 @@ class Expense extends Sheet {
 				{ priceField: [ 'quantity', '0.5', '1' ] },
 				{ priceField: [ 'total' ] }
 			],
-			button : 'Crear Gasto'
+			button : 'Gasto'
 		};
 	}
 }

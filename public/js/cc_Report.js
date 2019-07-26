@@ -4,14 +4,7 @@ class Report extends Sheet {
 		this.date = date || moment();
 		this.cash = cash;
 		this.bank = bank;
-		this.week = this.date.week();
 		this.wealthAtStart = wealthAtStart;
-		this.grossIncome = this.getGrossIncome();
-		this.totalExpenses = this.getTotalExpenses();
-		this.profit = this.grossIncome - this.totalExpenses;
-		this.idealWealthAtEnd = this.wealthAtStart + this.profit;
-		this.realWealthAtEnd = this.getRealWealthAtEnd();
-		this.errorMargin = this.realWealthAtEnd - this.idealWealthAtEnd;
 		this.locked = false;
 	}
 
@@ -37,6 +30,29 @@ class Report extends Sheet {
 		Form.reset();
 	}
 
+	week() {
+		return this.date.week();
+	}
+
+	grossIncome() {
+		return Order.getWeekTotals(moment(this.date));
+	}
+	grossExpenses() {
+		return Expense.getWeekTotals(moment(this.date));
+	}
+	profit() {
+		return this.grossIncome() - this.grossExpenses();
+	}
+	idealWealthAtEnd() {
+		return this.wealthAtStart + this.profit();
+	}
+	realWealthAtEnd() {
+		return this.cash + this.bank; // + Order.totalUnpaid();
+	}
+	errorMargin() {
+		return this.idealWealthAtEnd() - this.realWealthAtEnd();
+	}
+
 	datestr() {
 		return this.date;
 	}
@@ -52,14 +68,6 @@ class Report extends Sheet {
 		} else {
 			return REPORTS.slice('-1')[0];
 		}
-	}
-
-	getGrossIncome() {
-		return Order.getWeekTotals(moment(this.date));
-	}
-
-	getTotalExpenses() {
-		return Expense.getWeekTotals(moment(this.date));
 	}
 
 	getRealWealthAtEnd() {
@@ -83,11 +91,12 @@ class Report extends Sheet {
 			t    : 'Reporte ' + this.name,
 			main : {
 				d : this.dateAtStart(),
-				i : this.grossIncome,
-				e : this.totalExpenses
+				i : this.grossIncome(),
+				e : this.grossExpenses()
 			},
 			side : {
-				error : this.errorMargin
+				error : this.errorMargin(),
+				p     : this.profit()
 			}
 		};
 	}
@@ -95,7 +104,7 @@ class Report extends Sheet {
 	table() {
 		return {
 			header : [ 'Nombre', 'start D', 'at Start', 'Profit', 'at End' ],
-			row    : [ this.name, this.dateAtStart(), this.wealthAtStart, this.profit, this.realWealthAtEnd ]
+			row    : [ this.name, this.dateAtStart(), this.wealthAtStart, this.profit(), this.realWealthAtEnd() ]
 		};
 	}
 }

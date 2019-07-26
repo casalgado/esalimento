@@ -1,4 +1,9 @@
 // fix bug with Expense.card and with Expense table styles
-// solo se puede generar un Report por semama. Si hay un cambio en los pedidos,
-//   se puede agrerar un pedido nuevo, regenerar el reporte, y guardarlo en la db con un update.
-// updates/deletes for Sheet.js
+// database update/delete for Sheet.js
+// form validations + form titles
+
+// static addCreateEvent(form, constructor) {
+//     const event = window.event;
+//     constructor.create(form);
+//     event.preventDefault();
+// }

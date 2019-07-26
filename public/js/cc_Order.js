@@ -101,12 +101,12 @@ class Order extends Sheet {
 				{ priceField: [ 'quantity', '0.5', '1' ] },
 				{ priceField: [ 'total' ] }
 			],
-			button : 'Crear Pedido'
+			button : 'Pedido'
 		};
 	}
 
-	static totalUnpaid(momentObj) {
-		return this.byWeek(momentObj).reduce((total, current) => {
+	static totalUnpaid() {
+		return this.local().reduce((total, current) => {
 			if (current.paid) {
 				return total;
 			} else {

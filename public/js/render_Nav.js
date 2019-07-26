@@ -22,10 +22,10 @@ class Nav {
 			pedidos          : [ Table.render, Order ],
 			gastos           : [ Table.render, Expense ],
 			reportes         : [ Table.render, Report ],
-			'nuevo pedido'   : [ Form.render, Order ],
-			'nuevo gasto'    : [ Form.render, Expense ],
-			'nuevo producto' : [ Form.render, Product ],
-			'nuevo cliente'  : [ Form.render, Client ]
+			'nuevo pedido'   : [ FormCreate.render, Order ],
+			'nuevo gasto'    : [ FormCreate.render, Expense ],
+			'nuevo producto' : [ FormCreate.render, Product ],
+			'nuevo cliente'  : [ FormCreate.render, Client ]
 		};
 	}
 }

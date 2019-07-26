@@ -1,5 +1,6 @@
 section.localCard {
 	border: none;
+	position: relative;
 	display: grid;
 	width: 400px;
 	margin: 4px;
@@ -26,5 +27,11 @@ section.localCard {
 
 	.side {
 		grid-column: 2;
+	}
+
+	.card-button {
+		position: absolute;
+		right: 10px;
+		top: 8px;
 	}
 }

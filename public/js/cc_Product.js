@@ -48,7 +48,7 @@ class Product extends Sheet {
 				{ basicField: [ 'price', 'number' ] },
 				{ basicField: [ 'cost', 'number' ] }
 			],
-			button : 'Crear Producto'
+			button : 'Producto'
 		};
 	}
 }

@@ -49,7 +49,7 @@ class Client extends Sheet {
 				{ basicField: [ 'phone', 'number' ] },
 				{ basicField: [ 'address', 'text' ] }
 			],
-			button : 'Crear Cliente'
+			button : 'Cliente'
 		};
 	}
 }

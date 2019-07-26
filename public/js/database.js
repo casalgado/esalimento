@@ -110,14 +110,12 @@ function populateReports() {
 	let wealthAtStart = 0;
 	while (current.week() < moment().week()) {
 		if (REPORTS.length > 0) {
-			wealthAtStart = REPORTS[REPORTS.length - 1].idealWealthAtEnd;
+			wealthAtStart = REPORTS[REPORTS.length - 1].idealWealthAtEnd();
 		}
 		let r = new Report(current, wealthAtStart);
 		r.name = Report.setLocalId();
-		r.cash = 0;
-		r.bank = 0;
-		r.realWealthAtEnd = r.idealWealthAtEnd;
-		r.errorMargin = r.realWealthAtEnd - r.idealWealthAtEnd;
+		r.cash = r.wealthAtStart;
+		r.bank = r.profit();
 		r.date = r.date.format();
 		REPORTS.push(r);
 		r.save();
