@@ -43,6 +43,7 @@ class Sheet {
 				console.log('Data saved successfully!');
 			}
 		});
+		Table.render(c);
 	}
 
 	delete() {
@@ -64,8 +65,11 @@ class Sheet {
 		Form.reset();
 	}
 
-	static update(form) {
-		console.log(form);
+	static update(form, object) {
+		const props = Form.getFormValues(form);
+		Object.assign(object, props);
+		object.update();
+		Form.reset();
 	}
 
 	static all() {

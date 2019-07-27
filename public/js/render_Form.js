@@ -151,19 +151,20 @@ class FormCreate extends Form {
 class FormEdit extends Form {
 	constructor(parentId, constructor, object) {
 		super(parentId, constructor);
-		const key = object;
 		const form = HTML.get(`${constructor.sheet()}Form`);
 
 		form.setAttribute('id', `${constructor.sheet()}EditForm`);
 
 		form.addEventListener('submit', (e) => {
-			constructor.update(form);
+			constructor.update(form, object);
 			e.preventDefault();
 		});
+		fillInForm(form, object);
 		HTML.get(`${constructor.sheet()}-button`).innerHTML = `Editar ${constructor.form().button}`;
 	}
 
-	static render(constructor, object) {
+	static render(array) {
+		let [ constructor, object ] = array;
 		new FormEdit('rectangle', constructor, object);
 	}
 }

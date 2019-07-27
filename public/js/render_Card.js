@@ -1,6 +1,7 @@
 class Card {
 	constructor(parentId, object) {
 		let props = object.card();
+		let c = object.constructor;
 		let card = HTML.create('section', '', 'localCard');
 		let p = HTML.get(parentId);
 		let t, st, eb;
@@ -10,7 +11,7 @@ class Card {
 		t.innerHTML = props.t || '';
 		st.innerHTML = props.st || '';
 
-		eb = HTML.createIconButton('far fa-edit card-button');
+		eb = HTML.createIconButton('far fa-edit card-button', FormEdit.render, [ c, object ]);
 
 		card.appendChild(t);
 		card.appendChild(st);
