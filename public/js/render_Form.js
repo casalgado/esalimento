@@ -5,7 +5,8 @@ class Form {
 		const props = constructor.form();
 		const parent = HTML.get(parentId);
 		const title = HTML.create('h6', '', 'formTitle', {
-			onclick : 'Form.reset()'
+			ondblclick : 'Form.reset()',
+			onclick    : 'Form.drawSelectMenus(); Form.removeFormEvents()'
 		});
 		const form = HTML.create('form', `${constructor.sheet()}Form`, 'localForm', {
 			'data-constructor' : constructor.sheet()
@@ -115,11 +116,17 @@ class Form {
 	}
 
 	static drawSelectMenus() {
-		drawSelectMenu('orders-client-selection', CLIENTS, 'name');
-		drawSelectMenu('orders-product-selection', PRODUCTS, 'name');
-		drawSelectMenu('expenses-name-selection', EXPENSES, 'name');
-		drawSelectMenu('expenses-provider-selection', EXPENSES, 'provider');
-		drawSelectMenu('expenses-category-selection', EXPENSES, 'category');
+		drawSelectMenu('orders-client-selection', mostUsedClientsFirst('client', 10), 'name');
+		drawSelectMenu('orders-product-selection', PRODUCTS.sortByName(), 'name');
+		drawSelectMenu('expenses-name-selection', EXPENSES.sortByName(), 'name');
+		drawSelectMenu('expenses-provider-selection', EXPENSES.sortByName(), 'provider');
+		drawSelectMenu('expenses-category-selection', EXPENSES.sortByName(), 'category');
+	}
+
+	static removeFormEvents() {
+		Array.from(document.querySelectorAll('.custom-select')).map((e) => {
+			e.setAttribute('onchange', 'fillInSelection(this)');
+		});
 	}
 
 	// for create()

@@ -66,3 +66,36 @@ Array.prototype.getUnique = function() {
 String.prototype.isEmpty = function() {
 	return this.length === 0 || !this.trim();
 };
+
+function compareNames(a, b) {
+	if (a.name < b.name) {
+		return -1;
+	}
+	if (a.name > b.name) {
+		return 1;
+	}
+	return 0;
+}
+
+Array.prototype.sortByName = function() {
+	return this.sort(compareNames);
+};
+
+Array.prototype.countByProp = function(key, value) {
+	let count = 0;
+	for (let i = 0; i < this.length; i++) {
+		if (this[i][key] == value) {
+			count++;
+		}
+	}
+	return count;
+};
+
+function mostUsedClientsFirst(prop, number) {
+	const spotlight = Order.getMostUsed(prop, number);
+	const clients = CLIENTS.sortByName();
+	for (let i = 0; i < clients.length; i++) {
+		spotlight.push(clients[i]);
+	}
+	return spotlight;
+}

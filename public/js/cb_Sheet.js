@@ -100,6 +100,44 @@ class Sheet {
 		});
 	}
 
+	static getRecent(prop, number) {
+		const mostRecent = [];
+		const objects = this.local().reverse();
+		for (let i = 0; i < objects.length; i++) {
+			mostRecent.push(objects[i][prop]);
+			if (mostRecent.getUnique().length > number) {
+				break;
+			}
+		}
+		return mostRecent.getUnique();
+	}
+
+	static getMostUsed(prop, number) {
+		const useCount = [];
+		let sorted,
+			mostUsed = [];
+		const objects = this.local();
+		const properties = getPropertyList(prop, objects);
+		for (let i = 0; i < properties.length; i++) {
+			let singleCount = [ properties[i], objects.countByProp(prop, properties[i]) ];
+			useCount.push(singleCount);
+		}
+		sorted = useCount
+			.sort((a, b) => {
+				return b[1] - a[1];
+			})
+			.slice(0, number);
+		for (let i = 0; i < sorted.length; i++) {
+			for (let j = 0; j < CLIENTS.length; j++) {
+				if (CLIENTS[j].name == sorted[i][0]) {
+					mostUsed.push(CLIENTS[j]);
+					break;
+				}
+			}
+		}
+		return mostUsed;
+	}
+
 	static getFromDB(id) {
 		const c = this;
 		let objects = [];

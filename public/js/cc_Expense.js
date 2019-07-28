@@ -4,7 +4,7 @@ class Expense extends Sheet {
 		this.category = category;
 		this.provider = provider;
 		this.quantity = quantity;
-		this.units = units;
+		this.units = units || '';
 		this.unitPrice = unitPrice;
 		this.total = total;
 		this.date = date || moment().format();
@@ -53,6 +53,7 @@ class Expense extends Sheet {
 				{ customSelectField: [ 'category', 'name' ] },
 				{ priceField: [ 'unitPrice' ] },
 				{ priceField: [ 'quantity', '0.5', '1' ] },
+				{ basicField: [ 'units' ] },
 				{ priceField: [ 'total' ] }
 			],
 			button : 'Gasto'
