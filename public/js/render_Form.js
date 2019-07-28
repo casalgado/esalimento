@@ -1,6 +1,7 @@
 class Form {
 	constructor(parentId, constructor) {
 		this.sheet = `${constructor.sheet()}`;
+		const formCont = HTML.create('section', 'formCont', 'formCont');
 		const props = constructor.form();
 		const parent = HTML.get(parentId);
 		const title = HTML.create('h6', '', 'formTitle', {
@@ -14,9 +15,10 @@ class Form {
 		form.appendChild(title);
 		this.createFields(form, props.fields);
 		form.appendChild(this.submitBtn(`Crear ${props.button}`));
+		formCont.appendChild(form);
 
 		parent.innerHTML = '';
-		parent.appendChild(form);
+		parent.appendChild(formCont);
 		Form.reset();
 	}
 
@@ -68,7 +70,7 @@ class Form {
 		// custom-select means that these fields will modify another field's select menus.
 
 		// create elements
-		let formGroup = HTML.create('div', '', 'form-group input-group select group');
+		let formGroup = HTML.create('div', '', 'form-group input-group select-group');
 		let inputGroupPrepend = HTML.create('div', '', 'input-group-prepend');
 		let textField = HTML.create('input', `${this.sheet}-${property}`, 'form-control form-control-sm', {
 			type : 'text'
@@ -151,14 +153,21 @@ class FormCreate extends Form {
 class FormEdit extends Form {
 	constructor(parentId, constructor, object) {
 		super(parentId, constructor);
+		const formCont = HTML.get(`formCont`);
 		const form = HTML.get(`${constructor.sheet()}Form`);
+		let eb;
 
 		form.setAttribute('id', `${constructor.sheet()}EditForm`);
+		form.classList.add('editForm');
 
 		form.addEventListener('submit', (e) => {
 			constructor.update(form, object);
 			e.preventDefault();
 		});
+
+		eb = HTML.createIconButton('far fa-trash-alt rectangle-button', constructor.remove, object);
+
+		formCont.appendChild(eb);
 		fillInForm(form, object);
 		HTML.get(`${constructor.sheet()}-button`).innerHTML = `Editar ${constructor.form().button}`;
 	}

@@ -46,11 +46,20 @@ class Sheet {
 		Table.render(c);
 	}
 
-	delete() {
+	remove() {
 		const c = this.constructor;
 		const key = this.id;
 		const path = c.path() + '/' + key;
-		firebase.database().ref(path).remove();
+		var result = confirm('Estas seguro que deseas borrar?');
+		if (result) {
+			firebase.database().ref(path).remove();
+			// remove from local as well
+		}
+	}
+
+	static remove(object) {
+		object.remove();
+		HTML.addClass('rectangle', 'hide');
 	}
 
 	static create(form) {

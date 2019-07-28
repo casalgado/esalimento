@@ -2,9 +2,8 @@ section.localCard {
 	border: none;
 	position: relative;
 	display: grid;
-	width: 400px;
-	margin: 4px;
-	padding: 8px 5px 5px 5px;
+	width: 92vw;
+	padding: 12px 9px 9px 9px;
 
 	grid-template-columns: 61.8% 38.2%;
 	grid-template-rows: 50px;
@@ -27,11 +26,5 @@ section.localCard {
 
 	.side {
 		grid-column: 2;
-	}
-
-	.card-button {
-		position: absolute;
-		right: 10px;
-		top: 8px;
 	}
 }

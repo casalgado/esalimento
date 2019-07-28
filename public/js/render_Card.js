@@ -11,7 +11,7 @@ class Card {
 		t.innerHTML = props.t || '';
 		st.innerHTML = props.st || '';
 
-		eb = HTML.createIconButton('far fa-edit card-button', FormEdit.render, [ c, object ]);
+		eb = HTML.createIconButton('far fa-edit rectangle-button', FormEdit.render, [ c, object ]);
 
 		card.appendChild(t);
 		card.appendChild(st);
