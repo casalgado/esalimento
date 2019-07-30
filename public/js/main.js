@@ -86,12 +86,3 @@ Array.prototype.countByProp = function(key, value) {
 	}
 	return count;
 };
-
-function filterBy(Client, prop, number) {
-	const spotlight = Order.mostUsed(Client, prop, number);
-	const clients = CLIENTS.sort(byName);
-	for (let i = 0; i < clients.length; i++) {
-		spotlight.push(clients[i]);
-	}
-	return spotlight;
-}
