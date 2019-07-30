@@ -70,7 +70,8 @@ class Sheet {
 		const c = this.constructor;
 		const key = this.id;
 		const path = c.path() + '/' + key;
-		var result = confirm('Estas seguro que deseas borrar?');
+		let local = c.local();
+		let result = confirm('Estas seguro que deseas borrar?');
 		if (result) {
 			firebase.database().ref(path).remove();
 			// remove from local as well
@@ -174,13 +175,13 @@ class Sheet {
 	}
 
 	belongsToWeek(momentObj) {
-		// constructor must have the date() method.
+		// constructor must have the datestr() method.
 		return moment(this.datestr()).isSame(momentObj, 'week') ? true : false;
 	}
 
 	static byWeek(momentObj) {
-		return this.local().filter((localObj) => {
-			return localObj.belongsToWeek(momentObj);
+		return this.local().filter((e) => {
+			return e.belongsToWeek(momentObj);
 		});
 	}
 

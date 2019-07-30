@@ -203,14 +203,12 @@ function selectionChangeEventHandler(option) {
 	let ownProperty = option.dataset.property;
 	let objectArray = Sheet.getLocal(option.form.dataset.constructor);
 	Object.assign(FILTERS, { [ownProperty]: option.value });
-	// a filters falta agregarle el ownForm. ex. Filters.order = {}
 	fillInSelection(option);
 	let objects = filterByPropertyValues(FILTERS, objectArray);
 	let targetProperty = document.getElementById(targetMenu).dataset.property;
-	// falta hacer ORDERS dynamic. Puede ser metiendo un constructor e implementando Order.all
 	drawSelectMenu(targetMenu, objects, targetProperty);
 	if (firstSelectionFilled(option.form)) {
-		fillInForm(option.form, objects[0]);
+		fillInForm(option.form, objects.reverse()[0]);
 	}
 }
 
@@ -258,11 +256,12 @@ function fillInForm(form, object) {
 			if (form.classList.contains('editForm')) {
 				object[inputs[i].id.split('-')[1]] = moment(object[inputs[i].id.split('-')[1]]).format('YYYY-MM-DD');
 			} else {
-				object[inputs[i].id.split('-')[1]] = moment().format('YYYY-MM-DD');
+				inputs[i].value = moment().format('YYYY-MM-DD');
 			}
-		}
-		if (object[inputs[i].id.split('-')[1]]) {
-			inputs[i].value = object[inputs[i].id.split('-')[1]];
+		} else {
+			if (object[inputs[i].id.split('-')[1]]) {
+				inputs[i].value = object[inputs[i].id.split('-')[1]];
+			}
 		}
 	}
 }
