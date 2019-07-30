@@ -32,6 +32,18 @@ class Sheet {
 			});
 	}
 
+	static create(form) {
+		const newObject = new this();
+		const props = Form.getFormValues(form);
+		Object.assign(newObject, props);
+		if (this.extendsCreate) {
+			return newObject;
+		} else {
+			newObject.save();
+		}
+		Form.reset();
+	}
+
 	update() {
 		const c = this.constructor;
 		const key = this.id;
@@ -44,6 +56,14 @@ class Sheet {
 			}
 		});
 		Table.render(c);
+	}
+
+	static update(form, object) {
+		const props = Form.getFormValues(form);
+		Object.assign(object, props);
+		object.lastModified = moment().format();
+		object.update();
+		Form.reset();
 	}
 
 	remove() {
@@ -60,28 +80,6 @@ class Sheet {
 	static remove(object) {
 		object.remove();
 		HTML.addClass('rectangle', 'hide');
-	}
-
-	static create(form) {
-		const newObject = new this();
-		const props = Form.getFormValues(form);
-		if (props.date) {
-			props.date = moment(props.date).format();
-		}
-		Object.assign(newObject, props);
-		if (this.extendsCreate) {
-			return newObject;
-		} else {
-			newObject.save();
-		}
-		Form.reset();
-	}
-
-	static update(form, object) {
-		const props = Form.getFormValues(form);
-		Object.assign(object, props);
-		object.update();
-		Form.reset();
 	}
 
 	static all() {
@@ -101,6 +99,10 @@ class Sheet {
 					resolve(objects);
 				});
 		});
+	}
+
+	static extendsEditForm() {
+		return !(this.form().editFormFields == undefined);
 	}
 
 	static getRecent(prop, number) {

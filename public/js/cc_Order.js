@@ -1,16 +1,29 @@
 class Order extends Sheet {
-	constructor(id, name, client, product, quantity, unitPrice, total, submitted, confirmed, produced, delivered) {
+	constructor(
+		id,
+		name,
+		client,
+		product,
+		quantity,
+		unitPrice,
+		total,
+		submitted,
+		confirmed,
+		produced,
+		delivered,
+		paid
+	) {
 		super(id, name);
 		this.client = client;
 		this.product = product;
 		this.quantity = quantity;
 		this.unitPrice = unitPrice;
 		this.total = total;
-		this.submitted = submitted || false;
-		this.confirmed = confirmed || false;
-		this.produced = produced || false;
-		this.delivered = delivered || false;
-		this.paid = true;
+		this.submitted = submitted || '';
+		this.confirmed = confirmed || '';
+		this.produced = produced || '';
+		this.delivered = delivered || '';
+		this.paid = paid || '';
 	}
 
 	static sheet() {
@@ -29,8 +42,7 @@ class Order extends Sheet {
 		const newObject = super.create(form);
 		const props = {
 			name      : Order.setLocalId(),
-			submitted : newObject.date || moment().format(),
-			confirmed : newObject.date || moment().format()
+			submitted : newObject.confirmed || moment().format()
 		};
 		Object.assign(newObject, props);
 		newObject.save();
@@ -90,7 +102,7 @@ class Order extends Sheet {
 
 	static form() {
 		return {
-			fields : [
+			fields         : [
 				// the fields array is coded as follows:
 				// keys = method called by Form
 				// values = arguments for method called by form.
@@ -100,9 +112,14 @@ class Order extends Sheet {
 				{ priceField: [ 'unitPrice' ] },
 				{ priceField: [ 'quantity', '0.5', '1' ] },
 				{ priceField: [ 'total' ] },
-				{ basicField: [ 'date', 'date' ] }
+				{ basicField: [ 'confirmed', 'date' ] }
 			],
-			button : 'Pedido'
+			editFormFields : [
+				{ basicField: [ 'produced', 'date' ] },
+				{ basicField: [ 'delivered', 'date' ] },
+				{ basicField: [ 'paid', 'date' ] }
+			],
+			button         : 'Pedido'
 		};
 	}
 

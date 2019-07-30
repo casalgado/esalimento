@@ -134,7 +134,11 @@ class Form {
 	static getFormValues(form) {
 		const props = {};
 		Array.from(form.getElementsByTagName('input')).map((e) => {
-			props[e.id.split('-')[1]] = e.value.toLowerCase();
+			if (e.type == 'date' && e.value != '') {
+				props[e.id.split('-')[1]] = moment(e.value).format();
+			} else {
+				props[e.id.split('-')[1]] = e.value.toLowerCase();
+			}
 		});
 		return props;
 	}
@@ -160,8 +164,10 @@ class FormCreate extends Form {
 class FormEdit extends Form {
 	constructor(parentId, constructor, object) {
 		super(parentId, constructor);
+		this.edit = true;
 		const formCont = HTML.get(`formCont`);
 		const form = HTML.get(`${constructor.sheet()}Form`);
+		const submitButton = HTML.get(`${constructor.sheet()}-button`);
 		let eb;
 
 		form.setAttribute('id', `${constructor.sheet()}EditForm`);
@@ -174,9 +180,14 @@ class FormEdit extends Form {
 
 		eb = HTML.createIconButton('far fa-trash-alt rectangle-button', constructor.remove, object);
 
+		if (constructor == Order) {
+			this.createFields(form, Order.form().editFormFields);
+		}
+
 		formCont.appendChild(eb);
 		fillInForm(form, object);
-		HTML.get(`${constructor.sheet()}-button`).innerHTML = `Editar ${constructor.form().button}`;
+		submitButton.innerHTML = `Editar ${constructor.form().button}`;
+		form.appendChild(submitButton);
 	}
 
 	static render(array) {
@@ -243,7 +254,13 @@ function filledIn(selection) {
 function fillInForm(form, object) {
 	let inputs = Array.from(form.getElementsByTagName('input'));
 	for (let i = 0; i < inputs.length; i++) {
-		// @volatile, lines below can be improved
+		if (inputs[i].type == 'date') {
+			if (form.classList.contains('editForm')) {
+				object[inputs[i].id.split('-')[1]] = moment(object[inputs[i].id.split('-')[1]]).format('YYYY-MM-DD');
+			} else {
+				object[inputs[i].id.split('-')[1]] = moment().format('YYYY-MM-DD');
+			}
+		}
 		if (object[inputs[i].id.split('-')[1]]) {
 			inputs[i].value = object[inputs[i].id.split('-')[1]];
 		}
