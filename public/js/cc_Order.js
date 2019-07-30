@@ -58,6 +58,14 @@ class Order extends Sheet {
 		return this.confirmed;
 	}
 
+	paidstr() {
+		if (this.paid != '') {
+			return moment(this.paid).format('D-MMM');
+		} else {
+			return 'No';
+		}
+	}
+
 	currentStatus() {
 		if (this.delivered) {
 			return 'entregada';
@@ -89,7 +97,7 @@ class Order extends Sheet {
 			main : {
 				p      : this.product,
 				c      : this.client,
-				pagada : this.paid,
+				pagada : this.paidstr(),
 				status : this.currentStatus()
 			},
 			side : {
