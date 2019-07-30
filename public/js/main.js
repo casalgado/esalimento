@@ -67,7 +67,7 @@ String.prototype.isEmpty = function() {
 	return this.length === 0 || !this.trim();
 };
 
-function compareNames(a, b) {
+function byName(a, b) {
 	if (a.name < b.name) {
 		return -1;
 	}
@@ -76,10 +76,6 @@ function compareNames(a, b) {
 	}
 	return 0;
 }
-
-Array.prototype.sortByName = function() {
-	return this.sort(compareNames);
-};
 
 Array.prototype.countByProp = function(key, value) {
 	let count = 0;
@@ -91,9 +87,9 @@ Array.prototype.countByProp = function(key, value) {
 	return count;
 };
 
-function mostUsedClientsFirst(prop, number) {
-	const spotlight = Order.getMostUsed(prop, number);
-	const clients = CLIENTS.sortByName();
+function filterBy(Client, prop, number) {
+	const spotlight = Order.mostUsed(Client, prop, number);
+	const clients = CLIENTS.sort(byName);
 	for (let i = 0; i < clients.length; i++) {
 		spotlight.push(clients[i]);
 	}

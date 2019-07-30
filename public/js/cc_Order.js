@@ -29,8 +29,8 @@ class Order extends Sheet {
 		const newObject = super.create(form);
 		const props = {
 			name      : Order.setLocalId(),
-			submitted : moment().format(),
-			confirmed : moment().format()
+			submitted : moment(newObject.date).format() || moment().format(),
+			confirmed : moment(newObject.date).format() || moment().format()
 		};
 		Object.assign(newObject, props);
 		newObject.save();
@@ -99,7 +99,8 @@ class Order extends Sheet {
 				{ customSelectField: [ 'product', 'client' ] },
 				{ priceField: [ 'unitPrice' ] },
 				{ priceField: [ 'quantity', '0.5', '1' ] },
-				{ priceField: [ 'total' ] }
+				{ priceField: [ 'total' ] },
+				{ basicField: [ 'date', 'date' ] }
 			],
 			button : 'Pedido'
 		};

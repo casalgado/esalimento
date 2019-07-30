@@ -116,11 +116,11 @@ class Form {
 	}
 
 	static drawSelectMenus() {
-		drawSelectMenu('orders-client-selection', mostUsedClientsFirst('client', 10), 'name');
-		drawSelectMenu('orders-product-selection', PRODUCTS.sortByName(), 'name');
-		drawSelectMenu('expenses-name-selection', EXPENSES.sortByName(), 'name');
-		drawSelectMenu('expenses-provider-selection', EXPENSES.sortByName(), 'provider');
-		drawSelectMenu('expenses-category-selection', EXPENSES.sortByName(), 'category');
+		drawSelectMenu('orders-client-selection', Order.spotlight('client', Client, 'name', 10), 'name');
+		drawSelectMenu('orders-product-selection', PRODUCTS.sort(byName), 'name');
+		drawSelectMenu('expenses-name-selection', Expense.spotlight('name', Expense, 'name', 10), 'name');
+		drawSelectMenu('expenses-provider-selection', EXPENSES.sort(byName), 'provider');
+		drawSelectMenu('expenses-category-selection', EXPENSES.sort(byName), 'category');
 	}
 
 	static removeFormEvents() {

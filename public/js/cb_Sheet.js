@@ -138,6 +138,44 @@ class Sheet {
 		return mostUsed;
 	}
 
+	static spotlight(localProperty, targetConstructor, targetProperty, number) {
+		const objects = this.local();
+		const filters = targetConstructor
+			.local()
+			.sort(byName)
+			.map((e) => {
+				return e[targetProperty];
+			})
+			.getUnique();
+		const useCount = [];
+		let singleCount,
+			sorted,
+			mostUsed = [],
+			wholeList = [];
+		for (let i = 0; i < filters.length; i++) {
+			singleCount = [
+				filters[i],
+				objects.filter((e) => {
+					return e[localProperty] == filters[i];
+				}).length
+			];
+			useCount.push(singleCount);
+		}
+		sorted = useCount
+			.sort((a, b) => {
+				return b[1] - a[1];
+			})
+			.slice(0, number);
+		mostUsed = sorted.map((e) => {
+			return { [targetProperty]: e[0] };
+		});
+		wholeList = mostUsed;
+		for (let i = 0; i < filters.length; i++) {
+			wholeList.push({ [targetProperty]: filters[i] });
+		}
+		return wholeList;
+	}
+
 	static getFromDB(id) {
 		const c = this;
 		let objects = [];
