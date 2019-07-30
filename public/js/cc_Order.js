@@ -10,7 +10,7 @@ class Order extends Sheet {
 		this.confirmed = confirmed || false;
 		this.produced = produced || false;
 		this.delivered = delivered || false;
-		this.paid = false;
+		this.paid = true;
 	}
 
 	static sheet() {
@@ -29,8 +29,8 @@ class Order extends Sheet {
 		const newObject = super.create(form);
 		const props = {
 			name      : Order.setLocalId(),
-			submitted : moment(newObject.date).format() || moment().format(),
-			confirmed : moment(newObject.date).format() || moment().format()
+			submitted : newObject.date || moment().format(),
+			confirmed : newObject.date || moment().format()
 		};
 		Object.assign(newObject, props);
 		newObject.save();

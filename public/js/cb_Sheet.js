@@ -65,6 +65,9 @@ class Sheet {
 	static create(form) {
 		const newObject = new this();
 		const props = Form.getFormValues(form);
+		if (props.date) {
+			props.date = moment(props.date).format();
+		}
 		Object.assign(newObject, props);
 		if (this.extendsCreate) {
 			return newObject;

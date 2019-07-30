@@ -15,7 +15,7 @@ class Table {
 
 			for (let i = 0; i < objects.length; i++) {
 				let row = t.createRow(objects[i].table().row);
-				row.setAttribute('data-id', objects[i].name); // @ .name or .id? name removes dependency on db, this is connected to the toggleCard method in Inter.js
+				row.setAttribute('data-id', objects[i].id);
 				row.setAttribute('class', 'tableRow');
 				row.addEventListener('click', (e) => {
 					Inter.toggleCard(c, row, e);
