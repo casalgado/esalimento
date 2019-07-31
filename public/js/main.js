@@ -33,7 +33,6 @@ function loadPage() {
 	Report.all().then((objs) => {
 		REPORTS = objs;
 	});
-	// REPORTS = Report.all();
 	SHOWING = { period: 'Week', current: moment() };
 	FILTERS = {};
 	document.getElementById('siteContainer').setAttribute('style', 'display:none');

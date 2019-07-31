@@ -26,9 +26,11 @@ function reformatTime(s) {
 function importOrders(array) {
 	let newOrder;
 	j = array;
+	currentOrders = ORDERS.length;
 	for (let i = 0; i < j.length; i++) {
 		// create order
-		let orderName = '19-' + zeroPad(i + 1, 3);
+		let count = i + currentOrders;
+		let orderName = 'P-19-' + zeroPad(c + 1, 3);
 		newOrder = new Order(
 			'id',
 			orderName,
@@ -41,7 +43,7 @@ function importOrders(array) {
 			moment('2019-' + j[i].confirmed.split('/')[1] + '-' + j[i].confirmed.split('/')[0]).format(),
 			moment('2019-' + j[i].prepared.split('/')[1] + '-' + j[i].prepared.split('/')[0]).format(),
 			moment('2019-' + j[i].delivered.split('/')[1] + '-' + j[i].delivered.split('/')[0]).format(),
-			j[i].paid
+			moment('2019-' + j[i].paid.split('/')[1] + '-' + j[i].paid.split('/')[0]).format()
 		);
 		newOrder.save();
 	}

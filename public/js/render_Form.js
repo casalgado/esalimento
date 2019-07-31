@@ -254,7 +254,7 @@ function fillInForm(form, object) {
 	for (let i = 0; i < inputs.length; i++) {
 		if (inputs[i].type == 'date') {
 			if (form.classList.contains('editForm')) {
-				object[inputs[i].id.split('-')[1]] = moment(object[inputs[i].id.split('-')[1]]).format('YYYY-MM-DD');
+				inputs[i].value = moment(object[inputs[i].id.split('-')[1]]).format('YYYY-MM-DD');
 			} else {
 				inputs[i].value = moment().format('YYYY-MM-DD');
 			}

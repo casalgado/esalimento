@@ -73,8 +73,20 @@ class Sheet {
 		let local = c.local();
 		let result = confirm('Estas seguro que deseas borrar?');
 		if (result) {
-			firebase.database().ref(path).remove();
-			// remove from local as well
+			firebase
+				.database()
+				.ref(path)
+				.set(null, function(error) {
+					if (error) {
+						console.log('The delete failed');
+					} else {
+						console.log('Data deleted successfully!');
+					}
+				})
+				.then(() => {
+					local.splice(local.indexOf(c.getFromLocal('id', key)), 1);
+					Table.render(c);
+				});
 		}
 	}
 
@@ -165,7 +177,7 @@ class Sheet {
 		return objects;
 	}
 
-	static get(key, value) {
+	static getFromLocal(key, value) {
 		const local = this.local();
 		for (let i = 0; i < local.length; i++) {
 			if (local[i][key] == value) {

@@ -51,7 +51,7 @@ class Expense extends Sheet {
 				{ customSelectField: [ 'name', 'provider' ] },
 				{ customSelectField: [ 'provider', 'name' ] },
 				{ customSelectField: [ 'category', 'name' ] },
-				{ priceField: [ 'unitPrice' ] },
+				{ priceField: [ 'unitPrice', '0.01' ] },
 				{ priceField: [ 'quantity', '0.5', '1' ] },
 				{ basicField: [ 'units' ] },
 				{ priceField: [ 'total' ] },

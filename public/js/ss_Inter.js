@@ -19,7 +19,7 @@ class Inter {
 
 	static toggleCard(constructor, row, event) {
 		const id = row.dataset.id;
-		const obj = constructor.get('id', id);
+		const obj = constructor.getFromLocal('id', id);
 		if (event.target.parentElement.classList.contains('selected')) {
 			HTML.get('rectangle').innerHTML = '';
 			HTML.addClass('rectangle', 'hide');
