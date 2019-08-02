@@ -175,6 +175,7 @@ class FormEdit extends Form {
 
 		form.addEventListener('submit', (e) => {
 			constructor.update(form, object);
+			Table.render(constructor);
 			e.preventDefault();
 		});
 
@@ -192,7 +193,8 @@ class FormEdit extends Form {
 
 	static render(array) {
 		let [ constructor, object ] = array;
-		new FormEdit('rectangle', constructor, object);
+		new FormEdit('square', constructor, object);
+		HTML.addClass('rectangle', 'hide');
 	}
 }
 
