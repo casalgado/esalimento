@@ -21,9 +21,9 @@ class Order extends Sheet {
 		this.total = total;
 		this.submitted = submitted || '';
 		this.confirmed = confirmed || '';
-		this.produced = produced || '';
-		this.delivered = delivered || '';
-		this.paid = paid || '';
+		this.produced = produced || null;
+		this.delivered = delivered || null;
+		this.paid = paid || null;
 	}
 
 	static sheet() {
@@ -55,7 +55,7 @@ class Order extends Sheet {
 	}
 
 	datestr() {
-		return this.confirmed;
+		return this.produced || this.confirmed;
 	}
 
 	paidstr() {

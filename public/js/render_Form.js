@@ -4,7 +4,7 @@ class Form {
 		const formCont = HTML.create('section', 'formCont', 'formCont');
 		const props = constructor.form();
 		const parent = HTML.get(parentId);
-		const title = HTML.create('h6', '', 'formTitle', {
+		const title = HTML.create('h6', 'formTitleId', 'formTitle', {
 			ondblclick : 'Form.reset()',
 			onclick    : 'Form.drawSelectMenus(); Form.removeFormEvents()'
 		});
@@ -170,6 +170,8 @@ class FormEdit extends Form {
 		const form = HTML.get(`${constructor.sheet()}Form`);
 		const submitButton = HTML.get(`${constructor.sheet()}-button`);
 		let eb;
+
+		Form.removeFormEvents();
 
 		form.setAttribute('id', `${constructor.sheet()}EditForm`);
 		form.classList.add('editForm');
