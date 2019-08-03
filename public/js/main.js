@@ -25,7 +25,7 @@ function loadPage() {
 	});
 	Order.all().then((objs) => {
 		ORDERS = objs;
-		Table.render(Order);
+		DayTable.render(Agenda);
 	});
 	Expense.all().then((objs) => {
 		EXPENSES = objs;

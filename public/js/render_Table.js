@@ -90,8 +90,22 @@ class Table {
 	}
 
 	static render(constructor) {
+		SHOWING.period = 'week';
 		let objects = constructor.byWeek(SHOWING.current);
 		new Table('square', objects, constructor);
+		HTML.addClass('rectangle', 'hide');
+	}
+}
+
+class DayTable extends Table {
+	constructor(parentId, objects, constructor) {
+		super(parentId, objects, constructor);
+	}
+
+	static render(constructor) {
+		SHOWING.period = 'day';
+		let objects = constructor.byDay(SHOWING.current);
+		new DayTable('square', objects, constructor);
 		HTML.addClass('rectangle', 'hide');
 	}
 }
@@ -103,7 +117,7 @@ class Pagination {
 		let p = this.createPagination(c.sheet());
 
 		p.appendChild(HTML.createIconButton('fas fa-caret-left fa-lg', showPrevious, c));
-		p.appendChild(Pagination.renderCurrentlyShowing());
+		p.appendChild(Pagination.renderCurrentlyShowing(SHOWING.period));
 		p.appendChild(HTML.createIconButton('fas fa-caret-right fa-lg', showNext, c));
 		return p;
 	}
@@ -116,13 +130,18 @@ class Pagination {
 		return p;
 	}
 
-	static renderCurrentlyShowing() {
+	static renderCurrentlyShowing(period) {
 		let p = document.getElementById('currentlyShowing') || document.createElement('h6');
 		p.setAttribute('id', 'currentlyShowing');
 		let current = moment(SHOWING.current.format('X'), 'X');
-		p.innerHTML = `${current.startOf(SHOWING.period).format('D MMMM')} - ${current
-			.endOf(SHOWING.period)
-			.format('D MMMM')}`;
+		if (period == 'day') {
+			p.innerHTML = `${current.startOf(SHOWING.period).format('ddd DD MMM')}`;
+		} else {
+			p.innerHTML = `${current.startOf(SHOWING.period).format('D MMMM')} - ${current
+				.endOf(SHOWING.period)
+				.format('D MMMM')}`;
+		}
+
 		return p;
 	}
 }
@@ -136,13 +155,21 @@ function currentlyShowing() {
 function showNext(constructor) {
 	SHOWING.current.add(1, SHOWING.period);
 	Pagination.renderCurrentlyShowing();
-	Table.render(constructor);
+	if (constructor.hasDayTable()) {
+		DayTable.render(constructor);
+	} else {
+		Table.render(constructor);
+	}
 	HTML.addClass('rectangle', 'hide');
 }
 
 function showPrevious(constructor) {
 	SHOWING.current.subtract(1, SHOWING.period);
 	Pagination.renderCurrentlyShowing();
-	Table.render(constructor);
+	if (constructor.hasDayTable()) {
+		DayTable.render(constructor);
+	} else {
+		Table.render(constructor);
+	}
 	HTML.addClass('rectangle', 'hide');
 }

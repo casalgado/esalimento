@@ -19,13 +19,14 @@ class Nav {
 
 	static props() {
 		return {
-			pedidos          : [ Table.render, Order ],
-			gastos           : [ Table.render, Expense ],
-			reportes         : [ Table.render, Report ],
-			'nuevo pedido'   : [ FormCreate.render, Order ],
-			'nuevo gasto'    : [ FormCreate.render, Expense ],
-			'nuevo producto' : [ FormCreate.render, Product ],
-			'nuevo cliente'  : [ FormCreate.render, Client ]
+			'nuevo producto'     : [ FormCreate.render, Product ],
+			'nuevo cliente'      : [ FormCreate.render, Client ],
+			'nuevo gasto'        : [ FormCreate.render, Expense ],
+			'nuevo pedido'       : [ FormCreate.render, Order ],
+			'ver reportes'       : [ Table.render, Report ],
+			'ver gastos'         : [ Table.render, Expense ],
+			'ver pedidos'        : [ Table.render, Order ],
+			'produccion del dia' : [ DayTable.render, Agenda ]
 		};
 	}
 }

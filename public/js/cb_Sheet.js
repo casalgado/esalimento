@@ -1,7 +1,7 @@
 class Sheet {
 	constructor(id, name, comment) {
 		this.id = id || '';
-		this.name = name;
+		this.name = name || '';
 		this.createdAt = moment().format();
 		this.lastModified = moment().format();
 		this.comment = comment || '';
@@ -191,10 +191,25 @@ class Sheet {
 		return moment(this.datestr()).isSame(momentObj, 'week') ? true : false;
 	}
 
+	belongsToDay(momentObj) {
+		// constructor must have the datestr() method.
+		return moment(this.datestr()).isSame(momentObj, 'day') ? true : false;
+	}
+
 	static byWeek(momentObj) {
 		return this.local().filter((e) => {
 			return e.belongsToWeek(momentObj);
 		});
+	}
+
+	static byDay(momentObj) {
+		return this.local().filter((e) => {
+			return e.belongsToDay(momentObj);
+		});
+	}
+
+	static hasDayTable() {
+		return false;
 	}
 
 	datestr() {
