@@ -99,7 +99,8 @@ class Form {
 	}
 
 	submitBtn(innerHTML) {
-		let button = HTML.create('button', `${this.sheet}-button`, 'btn btn-primary btnSubmit', {
+		// @refactor move this declaration to the constructor method  for easier access.
+		let button = HTML.create('button', `${this.sheet}-button`, 'btn btn-default btnSubmit', {
 			type : 'submit'
 		});
 		button.innerHTML = innerHTML;
@@ -179,7 +180,7 @@ class FormEdit extends Form {
 			e.preventDefault();
 		});
 
-		eb = HTML.createIconButton('far fa-trash-alt rectangle-button', constructor.remove, object);
+		eb = HTML.createIconButton('', '', 'far fa-trash-alt rectangle-button', constructor.remove, object);
 
 		if (constructor == Order) {
 			this.createFields(form, Order.form().editFormFields);

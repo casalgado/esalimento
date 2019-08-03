@@ -13,9 +13,8 @@ class HTML {
 		return element;
 	}
 
-	static createIconButton(iconClass, funcToCall, argument) {
-		let button = document.createElement('button');
-		button.setAttribute('class', 'btn');
+	static createIconButton(btnId, btnClass, iconClass, funcToCall, argument) {
+		let button = HTML.create('button', btnId, 'btn ' + btnClass);
 		button.addEventListener('click', () => {
 			funcToCall(argument);
 		});
@@ -26,7 +25,7 @@ class HTML {
 	}
 
 	static createButton(btnId, btnClass, display, funcToCall, argument) {
-		let button = HTML.create('button', btnId, btnClass);
+		let button = HTML.create('button', btnId, 'btn ' + btnClass);
 		button.addEventListener('click', () => {
 			funcToCall(argument);
 		});

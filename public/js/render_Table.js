@@ -116,9 +116,9 @@ class Pagination {
 
 		let p = this.createPagination(c.sheet());
 
-		p.appendChild(HTML.createIconButton('fas fa-caret-left fa-lg', showPrevious, c));
+		p.appendChild(HTML.createIconButton('', '', 'fas fa-caret-left fa-lg', showPrevious, c));
 		p.appendChild(Pagination.renderCurrentlyShowing(SHOWING.period));
-		p.appendChild(HTML.createIconButton('fas fa-caret-right fa-lg', showNext, c));
+		p.appendChild(HTML.createIconButton('', '', 'fas fa-caret-right fa-lg', showNext, c));
 		return p;
 	}
 

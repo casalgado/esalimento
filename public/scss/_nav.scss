@@ -1,15 +1,14 @@
-section.localNav {
+section.insideNav {
 	display: grid;
-	grid-gap: 5px;
-	padding: 5px;
+	grid-gap: 4px;
+	padding: 4px;
 
 	.navBtn {
-		background-color: $fontColor;
 		display: block;
 		box-shadow: none;
 	}
+}
 
-	.navBtn:hover {
-		background-color: $mildGray;
-	}
+.navMainBtn {
+	border-radius: 999px;
 }
