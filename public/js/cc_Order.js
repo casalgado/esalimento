@@ -120,7 +120,9 @@ class Order extends Sheet {
 				{ priceField: [ 'unitPrice' ] },
 				{ priceField: [ 'quantity', '0.5', '1' ] },
 				{ priceField: [ 'total' ] },
-				{ basicField: [ 'confirmed', 'date' ] }
+				{ basicField: [ 'confirmed', 'date' ] },
+				{ basicField: [ 'produced', 'date' ] },
+				{ basicField: [ 'delivered', 'date' ] }
 			],
 			editFormFields : [
 				{ basicField: [ 'produced', 'date' ] },
