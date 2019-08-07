@@ -48,6 +48,7 @@ class Sheet {
 		const c = this.constructor;
 		const key = this.id;
 		const path = c.path() + '/' + key;
+		this.lastModified = moment().format();
 		firebase.database().ref(path).update(this, function(error) {
 			if (error) {
 				console.log('The write failed');
@@ -58,10 +59,18 @@ class Sheet {
 		Table.render(c);
 	}
 
+	static updateAll(property, value) {
+		const objs = this.local();
+		for (let i = 0; i < objs.length; i++) {
+			const o = objs[i];
+			o[property] = value;
+			o.update();
+		}
+	}
+
 	static update(form, object) {
 		const props = Form.getFormValues(form);
 		Object.assign(object, props);
-		object.lastModified = moment().format();
 		object.update();
 		Form.reset();
 	}
@@ -188,12 +197,12 @@ class Sheet {
 
 	belongsToWeek(momentObj) {
 		// constructor must have the datestr() method.
-		return moment(this.datestr()).isSame(momentObj, 'week') ? true : false;
+		return moment(this.datestr()).isSame(momentObj, 'week');
 	}
 
 	belongsToDay(momentObj) {
 		// constructor must have the datestr() method.
-		return moment(this.datestr()).isSame(momentObj, 'day') ? true : false;
+		return moment(this.datestr()).isSame(momentObj, 'day');
 	}
 
 	static byWeek(momentObj) {

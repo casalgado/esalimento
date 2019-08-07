@@ -1,11 +1,10 @@
 class Report extends Sheet {
-	constructor(date, wealthAtStart, cash, bank, id, name) {
+	constructor(name, wealthAtStart, cash, bank, date, id) {
 		super(id, name);
-		this.date = date || moment();
-		this.cash = cash;
-		this.bank = bank;
+		this.date = date || moment().format();
+		this.cash = cash || 0;
+		this.bank = bank || 0;
 		this.wealthAtStart = wealthAtStart;
-		this.locked = false;
 	}
 
 	static sheet() {
@@ -16,18 +15,23 @@ class Report extends Sheet {
 		return REPORTS;
 	}
 
-	static extendsCreate() {
-		return true;
+	static create() {
+		const past = Report.getLast();
+		if (!moment(past.date).isSame(moment(), 'week')) {
+			let newReport = new Report(this.setLocalId(), past.realWealthAtEnd());
+			newReport.save();
+		} else {
+			console.log('Report not created');
+		}
 	}
 
-	static create(form) {
-		const newObject = super.create(form);
-		const props = {
-			name : Report.setLocalId()
-		};
-		Object.assign(newObject, props);
-		newObject.save();
-		Form.reset();
+	static setLocalId() {
+		// this is the name property
+		return 'R-' + moment().format('YY') + '-' + zeroPad(Report.local().length + 1, 2);
+	}
+
+	static getLast() {
+		return REPORTS.slice('-1')[0];
 	}
 
 	week() {
@@ -57,19 +61,6 @@ class Report extends Sheet {
 		return this.date;
 	}
 
-	static setLocalId() {
-		// this is the name property
-		return 'R-' + moment().format('YY') + '-' + zeroPad(Report.local().length + 1, 2);
-	}
-
-	previousReport() {
-		if (REPORTS.length == 0) {
-			return { date: moment().subtract('1', 'week').format(), realWealthAtEnd: 0 };
-		} else {
-			return REPORTS.slice('-1')[0];
-		}
-	}
-
 	getRealWealthAtEnd() {
 		return this.cash + this.bank + Order.totalUnpaid(moment(this.date));
 	}
@@ -82,6 +73,10 @@ class Report extends Sheet {
 		return moment(this.date).endOf('week').format('D MMM');
 	}
 
+	totalMoney() {
+		return 'test';
+	}
+
 	static table() {
 		return { title: 'Reportes', hasPagination: true };
 	}
@@ -90,21 +85,24 @@ class Report extends Sheet {
 		return {
 			t    : 'Reporte ' + this.name,
 			main : {
-				d : this.dateAtStart(),
-				i : this.grossIncome(),
-				e : this.grossExpenses()
+				'week start' : accounting.formatMoney(this.wealthAtStart),
+				income       : accounting.formatMoney(this.grossIncome()),
+				expense      : accounting.formatMoney(this.grossExpenses()),
+				'week end'   : accounting.formatMoney(this.idealWealthAtEnd())
 			},
 			side : {
-				error : this.errorMargin(),
-				p     : this.profit()
+				cash          : accounting.formatMoney(this.cash),
+				bank          : accounting.formatMoney(this.bank),
+				unpaid        : accounting.formatMoney(Order.totalUnpaid()),
+				'total money' : accounting.formatMoney(this.realWealthAtEnd())
 			}
 		};
 	}
 
 	table() {
 		return {
-			header : [ 'Nombre', 'start D', 'at Start', 'Profit', 'at End' ],
-			row    : [ this.name, this.dateAtStart(), this.wealthAtStart, this.profit(), this.realWealthAtEnd() ]
+			header : [ 'Nombre', 'Ingresos', 'Gastos', 'U. Neta' ],
+			row    : [ this.name, this.grossIncome(), this.grossExpenses(), this.profit() ]
 		};
 	}
 }

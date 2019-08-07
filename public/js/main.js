@@ -25,13 +25,14 @@ function loadPage() {
 	});
 	Order.all().then((objs) => {
 		ORDERS = objs;
-		DayTable.render(Agenda);
+		Table.render(Order);
 	});
 	Expense.all().then((objs) => {
 		EXPENSES = objs;
 	});
 	Report.all().then((objs) => {
 		REPORTS = objs;
+		Report.create();
 	});
 	SHOWING = { period: 'Week', current: moment() };
 	FILTERS = {};

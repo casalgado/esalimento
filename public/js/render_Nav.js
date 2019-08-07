@@ -21,7 +21,7 @@ class Nav {
 		return {
 			'ver pedidos'        : [ Table.render, Order, 'default' ],
 			'ver gastos'         : [ Table.render, Expense, 'default' ],
-			'ver reportes'       : [ Table.render, Report, 'basic' ],
+			'ver reportes'       : [ Table.render, Report, 'default' ],
 			'crear producto'     : [ FormCreate.render, Product, 'basic' ],
 			'crear cliente'      : [ FormCreate.render, Client, 'basic' ],
 			'crear pedido'       : [ FormCreate.render, Order, 'default' ],

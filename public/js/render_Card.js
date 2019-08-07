@@ -2,7 +2,7 @@ class Card {
 	constructor(parentId, object) {
 		let props = object.card();
 		let c = object.constructor;
-		let card = HTML.create('section', '', 'localCard');
+		let card = HTML.create('section', c.sheet(), 'localCard');
 		let p = HTML.get(parentId);
 		let t, st, eb;
 

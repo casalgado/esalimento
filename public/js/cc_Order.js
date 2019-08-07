@@ -23,7 +23,7 @@ class Order extends Sheet {
 		this.confirmed = confirmed || '';
 		this.produced = produced || null;
 		this.delivered = delivered || null;
-		this.paid = paid || null;
+		this.paid = paid || '';
 	}
 
 	static sheet() {
@@ -135,7 +135,7 @@ class Order extends Sheet {
 
 	static totalUnpaid() {
 		return this.local().reduce((total, current) => {
-			if (current.paid) {
+			if (current.paid != '') {
 				return total;
 			} else {
 				return total + parseInt(current.total);

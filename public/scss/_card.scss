@@ -5,7 +5,7 @@ section.localCard {
 	width: 92vw;
 	padding: 12px 9px 9px 9px;
 
-	grid-template-columns: 61.8% 38.2%;
+	grid-template-columns: 50% 50%;
 	grid-template-rows: 50px;
 	grid-auto-rows: 30px;
 	grid-auto-flow: column;
@@ -26,5 +26,12 @@ section.localCard {
 
 	.side {
 		grid-column: 2;
+	}
+}
+
+.localCard#reports {
+	.main,
+	.side {
+		text-align: right;
 	}
 }

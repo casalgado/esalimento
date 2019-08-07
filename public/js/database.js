@@ -2,8 +2,20 @@ function fetchAll(constructor, directory) {
 	return new Promise((resolve) => {
 		var objects = [];
 		firebase.database().ref(`devAccount/${directory}`).once('value').then(function(snapshot) {
-			snapshot.forEach(function(client) {
-				objects.push(instantiateEntry(constructor, client.val()));
+			snapshot.forEach(function(item) {
+				objects.push(instantiateEntry(constructor, item.val()));
+			});
+			resolve(objects);
+		});
+	});
+}
+
+function updateAll() {
+	return new Promise((resolve) => {
+		var objects = [];
+		firebase.database().ref(`devAccount/orders`).once('value').then(function(snapshot) {
+			snapshot.forEach(function(item) {
+				objects.push(instantiateEntry(constructor, item.val()));
 			});
 			resolve(objects);
 		});
