@@ -87,6 +87,7 @@ class Order extends Sheet {
 			title   : 'Pedidos',
 			header  : [ 'Producto', 'Cliente', 'Ctd', 'Total' ],
 			row     : [ this.product, this.client, this.quantity, this.total ],
+			sortby  : [ 'product', 'client', 'quantity', 'total' ],
 			datestr : this.datestr()
 		};
 	}
@@ -141,5 +142,11 @@ class Order extends Sheet {
 				return total + parseInt(current.total);
 			}
 		}, 0);
+	}
+
+	static listUnpaid() {
+		return this.local().filter((e) => {
+			return e.paid == '';
+		});
 	}
 }

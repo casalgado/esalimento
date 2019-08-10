@@ -7,3 +7,6 @@
 //     constructor.create(form);
 //     event.preventDefault();
 // }
+
+// hacer mas eficiente la entrada de gastos
+// hacer mas inteligentes las formulas automaticas de gastos

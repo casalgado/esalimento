@@ -67,15 +67,13 @@ String.prototype.isEmpty = function() {
 	return this.length === 0 || !this.trim();
 };
 
-function byName(a, b) {
-	if (a.name < b.name) {
-		return -1;
+Array.prototype.sortBy = function(property) {
+	if (parseInt(this[0][property])) {
+		return this.sort((a, b) => (parseInt(a[property]) > parseInt(b[property]) ? 1 : -1));
+	} else {
+		return this.sort((a, b) => (a[property] > b[property] ? 1 : -1));
 	}
-	if (a.name > b.name) {
-		return 1;
-	}
-	return 0;
-}
+};
 
 Array.prototype.countByProp = function(key, value) {
 	let count = 0;

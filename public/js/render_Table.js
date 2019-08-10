@@ -11,7 +11,7 @@ class Table {
 		s.appendChild(t.createTitle(c.table().title));
 		s.appendChild(t.createPagination(c));
 		if (objects[0]) {
-			table.appendChild(t.createHeader(o.table().header));
+			table.appendChild(t.createHeader(c, o.table()));
 
 			for (let i = 0; i < objects.length; i++) {
 				let row = t.createRow(objects[i].table().row);
@@ -81,17 +81,24 @@ class Table {
 		}
 	}
 
-	createHeader(values) {
-		return this.createTableRow('th', values);
+	createHeader(c, tableObject) {
+		let row = this.createTableRow('th', tableObject.header);
+		for (let i = 0; i < row.children.length; i++) {
+			row.children[i].addEventListener('click', function() {
+				Table.render(c, tableObject.sortby[i]);
+			});
+		}
+		return row;
 	}
 
 	createRow(values) {
 		return this.createTableRow('td', values);
 	}
 
-	static render(constructor) {
+	static render(constructor, property) {
+		let prop = property || 'createdAt';
 		SHOWING.period = 'week';
-		let objects = constructor.byWeek(SHOWING.current);
+		let objects = constructor.byWeek(SHOWING.current).sortBy(prop);
 		new Table('square', objects, constructor);
 		HTML.addClass('rectangle', 'hide');
 	}

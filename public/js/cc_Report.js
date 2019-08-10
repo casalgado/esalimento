@@ -51,7 +51,7 @@ class Report extends Sheet {
 		return this.wealthAtStart + this.profit();
 	}
 	realWealthAtEnd() {
-		return this.cash + this.bank; // + Order.totalUnpaid();
+		return this.cash + this.bank + Order.totalUnpaid();
 	}
 	errorMargin() {
 		return this.idealWealthAtEnd() - this.realWealthAtEnd();

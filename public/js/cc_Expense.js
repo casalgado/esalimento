@@ -41,6 +41,7 @@ class Expense extends Sheet {
 			title   : 'Gastos',
 			header  : [ 'Nombre', 'Total' ],
 			row     : [ this.name, this.total ],
+			sortby  : [ 'name', 'total' ],
 			datestr : this.date
 		};
 	}
