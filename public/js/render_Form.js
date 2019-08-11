@@ -118,10 +118,10 @@ class Form {
 
 	static drawSelectMenus() {
 		drawSelectMenu('orders-client-selection', Order.spotlight('client', Client, 'name', 10), 'name');
-		drawSelectMenu('orders-product-selection', PRODUCTS.sort(byName), 'name');
+		drawSelectMenu('orders-product-selection', PRODUCTS.sortBy('name'), 'name');
 		drawSelectMenu('expenses-name-selection', Expense.spotlight('name', Expense, 'name', 10), 'name');
-		drawSelectMenu('expenses-provider-selection', EXPENSES.sort(byName), 'provider');
-		drawSelectMenu('expenses-category-selection', EXPENSES.sort(byName), 'category');
+		drawSelectMenu('expenses-provider-selection', EXPENSES.sortBy('name'), 'provider');
+		drawSelectMenu('expenses-category-selection', EXPENSES.sortBy('name'), 'category');
 	}
 
 	static removeFormEvents() {
@@ -277,9 +277,9 @@ function updatePriceValues(input) {
 	let sheet = input.form.dataset.constructor;
 	[ unit, quantity, total ] = getPriceInputs(sheet);
 	if (input.id == `${sheet}-total`) {
-		unit.value = parseInt(total.value / quantity.value);
+		unit.value = parseFloat(Math.floor(total.value * 100 / quantity.value) / 100);
 	} else {
-		total.value = parseInt(unit.value * quantity.value);
+		total.value = parseFloat(Math.floor(unit.value * 100 * quantity.value) / 100);
 	}
 }
 

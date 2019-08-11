@@ -143,7 +143,7 @@ class Sheet {
 		const objects = this.local();
 		const filters = targetConstructor
 			.local()
-			.sort(byName)
+			.sortBy('name')
 			.map((e) => {
 				return e[targetProperty];
 			})

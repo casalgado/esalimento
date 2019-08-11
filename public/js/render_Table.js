@@ -88,6 +88,7 @@ class Table {
 				Table.render(c, tableObject.sortby[i]);
 			});
 		}
+		row.setAttribute('class', 'tableHeader');
 		return row;
 	}
 
