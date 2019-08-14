@@ -28,6 +28,14 @@ section.localTable {
 		text-align: center;
 	}
 
+	tr {
+		height: 3em;
+	}
+
+	tr:first-child {
+		height: inherit;
+	}
+
 	table tr td:first-child,
 	table tr th:first-child {
 		padding-left: 10px;
@@ -39,12 +47,44 @@ section.localTable {
 
 	table tr:nth-child(even) {
 		background-color: $firstGray;
-		border-top: 1px solid $borderGray;
-		border-bottom: 1px solid $borderGray;
 	}
 
 	p#total {
 		text-align: center;
 		font-weight: bold;
+	}
+}
+
+#productionTable {
+	table-layout: fixed;
+	width: 100%;
+
+	th:nth-of-type(1) {
+		width: 55%;
+	}
+	th:nth-of-type(2) {
+		width: 10%;
+	}
+	th:nth-of-type(3) {
+		width: 40%;
+	}
+}
+
+#ordersTable {
+	table-layout: fixed;
+	width: 100%;
+
+	th:nth-of-type(1) {
+		width: 13%;
+	}
+	th:nth-of-type(2) {
+		width: 34%;
+	}
+	th:nth-of-type(3) {
+		width: 30%;
+	}
+
+	th:nth-of-type(4) {
+		width: 8%;
 	}
 }

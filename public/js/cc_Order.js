@@ -85,8 +85,8 @@ class Order extends Sheet {
 	table() {
 		return {
 			title   : 'Pedidos',
-			header  : [ 'Fecha', 'Producto', 'Cliente', 'Ctd', 'Total' ],
-			row     : [ moment(this.confirmed).format('DD/MM'), this.product, this.client, this.quantity, this.total ],
+			header  : [ 'Dia', 'Producto', 'Cliente', 'C', 'Total' ],
+			row     : [ moment(this.confirmed).format('DD/M'), this.product, this.client, this.quantity, this.total ],
 			sortby  : [ 'confirmed', 'product', 'client', 'quantity', 'total' ],
 			datestr : this.datestr()
 		};

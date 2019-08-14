@@ -85,10 +85,10 @@ class Report extends Sheet {
 		return {
 			t    : 'Reporte ' + this.name,
 			main : {
-				'week start' : accounting.formatMoney(this.wealthAtStart),
-				income       : accounting.formatMoney(this.grossIncome()),
-				expense      : accounting.formatMoney(this.grossExpenses()),
-				'week end'   : accounting.formatMoney(this.idealWealthAtEnd())
+				start : accounting.formatMoney(this.wealthAtStart),
+				income  : accounting.formatMoney(this.grossIncome()),
+				expense : accounting.formatMoney(this.grossExpenses()),
+				end   : accounting.formatMoney(this.idealWealthAtEnd())
 			},
 			side : {
 				cash          : accounting.formatMoney(this.cash),

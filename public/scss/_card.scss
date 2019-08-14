@@ -10,6 +10,11 @@ section.localCard {
 	grid-auto-rows: 30px;
 	grid-auto-flow: column;
 
+	p {
+		overflow: hidden;
+		margin-bottom: 0px;
+	}
+
 	#title {
 		grid-column: 1 / span 2;
 		grid-row: 1/2;

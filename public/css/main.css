@@ -142,6 +142,14 @@ section.localTable h6 {
   text-align: center;
 }
 
+section.localTable tr {
+  height: 3em;
+}
+
+section.localTable tr:first-child {
+  height: inherit;
+}
+
 section.localTable table tr td:first-child,
 section.localTable table tr th:first-child {
   padding-left: 10px;
@@ -153,13 +161,49 @@ section.localTable table tr td:last-child {
 
 section.localTable table tr:nth-child(even) {
   background-color: #373737;
-  border-top: 1px solid #57585a;
-  border-bottom: 1px solid #57585a;
 }
 
 section.localTable p#total {
   text-align: center;
   font-weight: bold;
+}
+
+#productionTable {
+  table-layout: fixed;
+  width: 100%;
+}
+
+#productionTable th:nth-of-type(1) {
+  width: 55%;
+}
+
+#productionTable th:nth-of-type(2) {
+  width: 10%;
+}
+
+#productionTable th:nth-of-type(3) {
+  width: 40%;
+}
+
+#ordersTable {
+  table-layout: fixed;
+  width: 100%;
+}
+
+#ordersTable th:nth-of-type(1) {
+  width: 13%;
+}
+
+#ordersTable th:nth-of-type(2) {
+  width: 34%;
+}
+
+#ordersTable th:nth-of-type(3) {
+  width: 30%;
+}
+
+#ordersTable th:nth-of-type(4) {
+  width: 8%;
 }
 
 section.localCard {
@@ -175,6 +219,11 @@ section.localCard {
       grid-template-rows: 50px;
   grid-auto-rows: 30px;
   grid-auto-flow: column;
+}
+
+section.localCard p {
+  overflow: hidden;
+  margin-bottom: 0px;
 }
 
 section.localCard #title {
@@ -283,7 +332,7 @@ table {
 .selected {
   color: #262626;
   background-color: #ced4da !important;
-  font-weight: 500;
+  font-weight: 430;
 }
 
 input,
