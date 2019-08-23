@@ -149,4 +149,9 @@ class Order extends Sheet {
 			return e.paid == '';
 		});
 	}
+
+	static showUnpaid() {
+		new Table('square', Order.listUnpaid(), Order);
+		HTML.addClass('rectangle', 'hide');
+	}
 }

@@ -4,6 +4,7 @@ class Report extends Sheet {
 		this.date = date || moment().format();
 		this.cash = cash || 0;
 		this.bank = bank || 0;
+		this.unpaid = null;
 		this.wealthAtStart = wealthAtStart;
 	}
 
@@ -16,9 +17,10 @@ class Report extends Sheet {
 	}
 
 	static create() {
-		const past = Report.getLast();
-		if (!moment(past.date).isSame(moment(), 'week')) {
-			let newReport = new Report(this.setLocalId(), past.realWealthAtEnd());
+		const pastReport = Report.getLast();
+		if (!moment(pastReport.date).isSame(moment(), 'week')) {
+			pastReport.setUnpaid().update();
+			let newReport = new Report(this.setLocalId(), pastReport.realWealthAtEnd());
 			newReport.save();
 		} else {
 			console.log('Report not created');
@@ -41,40 +43,34 @@ class Report extends Sheet {
 	grossIncome() {
 		return Order.getWeekTotals(moment(this.date));
 	}
+
 	grossExpenses() {
 		return Expense.getWeekTotals(moment(this.date));
 	}
+
 	profit() {
 		return this.grossIncome() - this.grossExpenses();
 	}
+
 	idealWealthAtEnd() {
 		return this.wealthAtStart + this.profit();
 	}
+
 	realWealthAtEnd() {
 		return this.cash + this.bank + Order.totalUnpaid();
 	}
-	errorMargin() {
-		return this.idealWealthAtEnd() - this.realWealthAtEnd();
+
+	getUnpaid() {
+		return this.unpaid || Order.totalUnpaid();
+	}
+
+	setUnpaid() {
+		this.unpaid = Order.totalUnpaid();
+		return this;
 	}
 
 	datestr() {
 		return this.date;
-	}
-
-	getRealWealthAtEnd() {
-		return this.cash + this.bank + Order.totalUnpaid(moment(this.date));
-	}
-
-	dateAtStart() {
-		return moment(this.date).startOf('week').format('D MMM');
-	}
-
-	dateAtEnd() {
-		return moment(this.date).endOf('week').format('D MMM');
-	}
-
-	totalMoney() {
-		return 'test';
 	}
 
 	static table() {
@@ -85,16 +81,16 @@ class Report extends Sheet {
 		return {
 			t    : 'Reporte ' + this.name,
 			main : {
-				start : accounting.formatMoney(this.wealthAtStart),
+				start   : accounting.formatMoney(this.wealthAtStart),
 				income  : accounting.formatMoney(this.grossIncome()),
 				expense : accounting.formatMoney(this.grossExpenses()),
-				end   : accounting.formatMoney(this.idealWealthAtEnd())
+				end     : accounting.formatMoney(this.idealWealthAtEnd())
 			},
 			side : {
-				cash          : accounting.formatMoney(this.cash),
-				bank          : accounting.formatMoney(this.bank),
-				unpaid        : accounting.formatMoney(Order.totalUnpaid()),
-				'total money' : accounting.formatMoney(this.realWealthAtEnd())
+				cash   : accounting.formatMoney(this.cash),
+				bank   : accounting.formatMoney(this.bank),
+				unpaid : accounting.formatMoney(this.getUnpaid()),
+				total  : accounting.formatMoney(this.realWealthAtEnd())
 			}
 		};
 	}

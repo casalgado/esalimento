@@ -24,8 +24,9 @@ class Nav {
 			'ver reportes'       : [ Table.render, Report, 'default' ],
 			'crear producto'     : [ FormCreate.render, Product, 'basic' ],
 			'crear cliente'      : [ FormCreate.render, Client, 'basic' ],
-			'crear pedido'       : [ FormCreate.render, Order, 'default' ],
-			'crear gasto'        : [ FormCreate.render, Expense, 'default' ],
+			'por cobrar'         : [ Order.showUnpaid, '', 'basic' ],
+			'nuevo pedido'       : [ FormCreate.render, Order, 'default' ],
+			'nuevo gasto'        : [ FormCreate.render, Expense, 'default' ],
 			'produccion del dia' : [ DayTable.render, Agenda, 'primary' ]
 		};
 	}
