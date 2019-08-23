@@ -91,7 +91,13 @@ class Order extends Sheet {
 		return {
 			title   : 'Pedidos',
 			header  : [ 'Dia', 'Cliente', 'Producto', 'C', 'Total' ],
-			row     : [ moment(this.confirmed).format('DD/M'), this.client, this.product, this.quantity, this.total ],
+			row     : [
+				moment(this.confirmed).format('DD/M'),
+				this.client,
+				this.product,
+				this.quantity,
+				this.total.formatK()
+			],
 			sortby  : [ 'confirmed', 'product', 'client', 'quantity', 'total' ],
 			datestr : this.datestr()
 		};

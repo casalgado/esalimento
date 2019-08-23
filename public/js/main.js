@@ -67,6 +67,13 @@ String.prototype.isEmpty = function() {
 	return this.length === 0 || !this.trim();
 };
 
+String.prototype.formatK = function() {
+	if (this.endsWith('000')) {
+		return this.slice(0, -3) + 'k';
+	}
+	return this;
+};
+
 Array.prototype.sortBy = function(property) {
 	if (this[0] && parseInt(this[0][property])) {
 		return this.sort((a, b) => (parseInt(a[property]) > parseInt(b[property]) ? 1 : -1));
