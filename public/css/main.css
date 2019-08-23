@@ -195,11 +195,11 @@ section.localTable p#total {
 }
 
 #ordersTable th:nth-of-type(2) {
-  width: 34%;
+  width: 30%;
 }
 
 #ordersTable th:nth-of-type(3) {
-  width: 30%;
+  width: 34%;
 }
 
 #ordersTable th:nth-of-type(4) {

@@ -45,6 +45,11 @@ class Order extends Sheet {
 			submitted : newObject.confirmed || moment().format()
 		};
 		Object.assign(newObject, props);
+		if (!clients.includes(newObject.client)) {
+			newClient = new Client('id', newObject.client, '', '', '');
+			newClient.save();
+			CLIENTS.push(newClient);
+		}
 		newObject.save();
 		Form.reset();
 	}
@@ -85,8 +90,8 @@ class Order extends Sheet {
 	table() {
 		return {
 			title   : 'Pedidos',
-			header  : [ 'Dia', 'Producto', 'Cliente', 'C', 'Total' ],
-			row     : [ moment(this.confirmed).format('DD/M'), this.product, this.client, this.quantity, this.total ],
+			header  : [ 'Dia', 'Cliente', 'Producto', 'C', 'Total' ],
+			row     : [ moment(this.confirmed).format('DD/M'), this.client, this.product, this.quantity, this.total ],
 			sortby  : [ 'confirmed', 'product', 'client', 'quantity', 'total' ],
 			datestr : this.datestr()
 		};

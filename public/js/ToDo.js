@@ -8,5 +8,5 @@
 // unpaid R-19-02 = 704,400
 // edit form de order se sale del marco
 // que expense no se llene cuando se pone la categoria / es dificil para hacer un expense nuevo
-// llamar a elizabeth pardo
+
 // hold el sort de las tables (later)
