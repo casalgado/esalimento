@@ -61,4 +61,15 @@ class Expense extends Sheet {
 			button : 'Gasto'
 		};
 	}
+
+	export() {
+		return [
+			moment(this.date).format('DD/MM/YYYY'),
+			this.provider,
+			this.name,
+			this.total,
+			this.quantity,
+			this.units
+		];
+	}
 }

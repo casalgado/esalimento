@@ -150,3 +150,9 @@ function exportExpensesAsCSV(expenses) {
 	let csvContent = 'data:text/csv;charset=utf-8,' + rows.map((e) => e.join(',')).join('\n');
 	return csvContent;
 }
+
+function convertToCSV(objects) {
+	const rows = objects.map((e) => e.export());
+	let csvContent = 'data:text/csv;charset=utf-8,' + rows.map((e) => e.join(',')).join('\n');
+	return csvContent;
+}

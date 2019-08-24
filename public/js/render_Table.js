@@ -27,14 +27,25 @@ class Table {
 				return total + parseInt(current.total);
 			}, 0);
 			totals_cont = HTML.create('p', 'total');
-			totals_cont.innerHTML = totals;
+			totals_cont.innerHTML = `Total: ${accounting.formatMoney(totals)}`;
 
-			let encodedURI = encodeURI(exportExpensesAsCSV(objects));
-			let download_link = HTML.create('a', '', '', { href: encodedURI, download: 'data.csv' });
-			download_link.innerHTML = 'export';
 			s.appendChild(table);
 			s.appendChild(totals_cont);
-			s.appendChild(download_link);
+
+			if (objects[0].export) {
+				let encodedURI = encodeURI(convertToCSV(objects));
+				let current = moment(SHOWING.current.format('X'), 'X');
+				let download_link = HTML.create('a', 'download-as-csv', 'btn btn-default', {
+					href     : encodedURI,
+					download : `${c.sheet()} - ${current.startOf(SHOWING.period).format('D MMM')} - ${current
+						.endOf(SHOWING.period)
+						.format('D MMM')}`
+				});
+				download_link.innerHTML = 'export';
+				let wrapper = HTML.create('div', 'download-link-wrapper');
+				wrapper.appendChild(download_link);
+				s.appendChild(wrapper);
+			}
 		} else {
 			Table.clear();
 		}

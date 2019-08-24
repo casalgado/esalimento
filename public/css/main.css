@@ -164,8 +164,18 @@ section.localTable table tr:nth-child(even) {
 }
 
 section.localTable p#total {
+  margin-top: 15px;
   text-align: center;
   font-weight: bold;
+}
+
+section.localTable #download-link-wrapper {
+  width: 80px;
+  margin: 0 auto;
+}
+
+section.localTable #download-link-wrapper #download-as-csv {
+  width: inherit;
 }
 
 #productionTable {

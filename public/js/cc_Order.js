@@ -145,6 +145,18 @@ class Order extends Sheet {
 		};
 	}
 
+	export() {
+		return [
+			moment(this.confirmed).format('DD/MM/YYYY'),
+			this.client,
+			this.quantity,
+			this.product,
+			this.unitPrice,
+			'',
+			this.total
+		];
+	}
+
 	static totalUnpaid() {
 		return this.local().reduce((total, current) => {
 			if (current.paid != '') {

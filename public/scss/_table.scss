@@ -50,8 +50,18 @@ section.localTable {
 	}
 
 	p#total {
+		margin-top: 15px;
 		text-align: center;
 		font-weight: bold;
+	}
+
+	#download-link-wrapper {
+		width: 80px;
+		margin: 0 auto;
+
+		#download-as-csv {
+			width: inherit;
+		}
 	}
 }
 
