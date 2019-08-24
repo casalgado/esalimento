@@ -139,7 +139,7 @@ function populateReports() {
 
 function exportExpensesAsCSV(expenses) {
 	const rows = expenses.map((e) => [
-		moment(e.date).format('DD/MM'),
+		moment(e.date).format('DD/MM/YYYY'),
 		e.name,
 		e.provider,
 		e.quantity,

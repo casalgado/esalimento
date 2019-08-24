@@ -57,7 +57,7 @@ class Report extends Sheet {
 	}
 
 	realWealthAtEnd() {
-		return this.cash + this.bank + Order.totalUnpaid();
+		return this.cash + this.bank + this.getUnpaid();
 	}
 
 	getUnpaid() {
