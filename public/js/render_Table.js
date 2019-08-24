@@ -28,8 +28,13 @@ class Table {
 			}, 0);
 			totals_cont = HTML.create('p', 'total');
 			totals_cont.innerHTML = totals;
+
+			let encodedURI = encodeURI(exportExpensesAsCSV(objects));
+			let download_link = HTML.create('a', '', '', { href: encodedURI, download: 'data.csv' });
+			download_link.innerHTML = 'export';
 			s.appendChild(table);
 			s.appendChild(totals_cont);
+			s.appendChild(download_link);
 		} else {
 			Table.clear();
 		}

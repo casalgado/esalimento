@@ -136,3 +136,17 @@ function populateReports() {
 		current.add('1', 'week');
 	}
 }
+
+function exportExpensesAsCSV(expenses) {
+	const rows = expenses.map((e) => [
+		moment(e.date).format('DD/MM'),
+		e.name,
+		e.provider,
+		e.quantity,
+		e.unitPrice,
+		e.total
+	]);
+
+	let csvContent = 'data:text/csv;charset=utf-8,' + rows.map((e) => e.join(',')).join('\n');
+	return csvContent;
+}

@@ -45,8 +45,8 @@ class Order extends Sheet {
 			submitted : newObject.confirmed || moment().format()
 		};
 		Object.assign(newObject, props);
-		if (!clients.includes(newObject.client)) {
-			newClient = new Client('id', newObject.client, '', '', '');
+		if (!CLIENTS.includes(newObject.client)) {
+			let newClient = new Client('id', newObject.client, '', '', '');
 			newClient.save();
 			CLIENTS.push(newClient);
 		}
