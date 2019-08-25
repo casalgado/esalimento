@@ -136,11 +136,7 @@ class Order extends Sheet {
 				{ basicField: [ 'produced', 'date' ] },
 				{ basicField: [ 'delivered', 'date' ] }
 			],
-			editFormFields : [
-				{ basicField: [ 'produced', 'date' ] },
-				{ basicField: [ 'delivered', 'date' ] },
-				{ basicField: [ 'paid', 'date' ] }
-			],
+			editFormFields : [ { basicField: [ 'paid', 'date' ] } ],
 			button         : 'Pedido'
 		};
 	}

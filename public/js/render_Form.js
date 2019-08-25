@@ -182,13 +182,14 @@ class FormEdit extends Form {
 			e.preventDefault();
 		});
 
-		eb = HTML.createIconButton('', '', 'far fa-trash-alt rectangle-button', constructor.remove, object);
+		let wrapper = HTML.create('div', 'delete-button-wrapper', '');
+		eb = HTML.createIconButton('', '', 'far fa-trash-alt', constructor.remove, object);
 
 		if (constructor == Order) {
 			this.createFields(form, Order.form().editFormFields);
 		}
-
-		formCont.appendChild(eb);
+		wrapper.appendChild(eb);
+		formCont.appendChild(wrapper);
 		fillInForm(form, object);
 		submitButton.innerHTML = `Editar ${constructor.form().button}`;
 		form.appendChild(submitButton);

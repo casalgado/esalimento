@@ -23,14 +23,15 @@ class Table {
 				table.appendChild(row);
 			}
 
-			totals = objects.reduce((total, current) => {
-				return total + parseInt(current.total);
-			}, 0);
-			totals_cont = HTML.create('p', 'total');
-			totals_cont.innerHTML = `Total: ${accounting.formatMoney(totals)}`;
-
 			s.appendChild(table);
-			s.appendChild(totals_cont);
+			if (objects[0].total) {
+				totals = objects.reduce((total, current) => {
+					return total + parseInt(current.total);
+				}, 0);
+				totals_cont = HTML.create('p', 'total');
+				totals_cont.innerHTML = `Total: ${accounting.formatMoney(totals)}`;
+				s.appendChild(totals_cont);
+			}
 
 			if (objects[0].export) {
 				let encodedURI = encodeURI(convertToCSV(objects));

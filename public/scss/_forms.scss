@@ -2,6 +2,10 @@ section.formCont {
 	.localForm {
 		padding: 15px;
 	}
+
+	#delete-button-wrapper {
+		padding-left: 5px;
+	}
 }
 
 .custom-select {
@@ -16,9 +20,9 @@ section.formCont {
 }
 
 .editForm {
+	padding: 15px;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	width: 92vw;
 	grid-gap: 5px;
 
 	h6 {
