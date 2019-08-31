@@ -176,6 +176,7 @@ section.localTable #download-link-wrapper {
 
 section.localTable #download-link-wrapper #download-as-csv {
   width: inherit;
+  color: #f9fafb;
 }
 
 #productionTable {

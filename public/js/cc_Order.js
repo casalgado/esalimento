@@ -149,7 +149,10 @@ class Order extends Sheet {
 			this.product,
 			this.unitPrice,
 			'',
-			this.total
+			this.total,
+			moment(this.produced).format('DD/MM/YYYY'),
+			moment(this.delivered).format('DD/MM/YYYY'),
+			moment(this.paid).format('DD/MM/YYYY')
 		];
 	}
 

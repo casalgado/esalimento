@@ -36,7 +36,7 @@ class Table {
 			if (objects[0].export) {
 				let encodedURI = encodeURI(convertToCSV(objects));
 				let current = moment(SHOWING.current.format('X'), 'X');
-				let download_link = HTML.create('a', 'download-as-csv', 'btn btn-default', {
+				let download_link = HTML.create('a', 'download-as-csv', 'btn', {
 					href     : encodedURI,
 					download : `${c.sheet()} - ${current.startOf(SHOWING.period).format('D MMM')} - ${current
 						.endOf(SHOWING.period)

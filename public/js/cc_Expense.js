@@ -31,7 +31,7 @@ class Expense extends Sheet {
 			side : {
 				unidad   : this.unitPrice,
 				cantidad : this.quantity,
-				total    : this.total
+				total    : accounting.fomatMoney(this.total)
 			}
 		};
 	}
@@ -40,7 +40,7 @@ class Expense extends Sheet {
 		return {
 			title   : 'Gastos',
 			header  : [ 'Nombre', 'Total' ],
-			row     : [ this.name, this.total ],
+			row     : [ this.name, accounting.formatMoney(this.total) ],
 			sortby  : [ 'name', 'total' ],
 			datestr : this.date
 		};

@@ -91,3 +91,5 @@ Array.prototype.countByProp = function(key, value) {
 	}
 	return count;
 };
+
+module.exports.getUnique = getUnique;
