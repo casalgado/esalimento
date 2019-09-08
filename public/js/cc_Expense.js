@@ -45,7 +45,7 @@ class Expense extends Sheet {
 			side : {
 				unidad   : this.unitPrice,
 				cantidad : this.quantity,
-				total    : accounting.fomatMoney(this.total)
+				total    : accounting.formatMoney(this.total)
 			}
 		};
 	}

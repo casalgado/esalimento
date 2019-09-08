@@ -35,12 +35,14 @@ class Form {
 
 	basicField(property, type) {
 		let formGroup = HTML.create('div', '', 'form-group');
-		let label = HTML.create('label', '', '', { for: `${this.sheet}-${property}` });
+		let label = HTML.create('label', '', `${type}-${property}`, { for: `${this.sheet}-${property}` });
 		label.innerHTML = property;
 		let input = HTML.create('input', `${this.sheet}-${property}`, 'form-control form-control-sm', {
 			type : type
 		});
-		input.setAttribute('required', true);
+		if (property != 'paid') {
+			input.setAttribute('required', true);
+		}
 		formGroup.appendChild(label);
 		formGroup.appendChild(input);
 		return formGroup;
