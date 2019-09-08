@@ -141,7 +141,7 @@ class Order extends Sheet {
 			],
 			editFormFields : [ { basicField: { property: 'paid', type: 'date' } } ],
 			button         : 'Pedido',
-			title          : 'Pedidos'
+			title          : 'Ingresar Pedido'
 		};
 	}
 

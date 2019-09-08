@@ -73,7 +73,7 @@ class Expense extends Sheet {
 				{ basicField: { property: 'date', type: 'date', label: 'fecha de compra:' } }
 			],
 			button : 'Gasto',
-			title  : 'Gastos'
+			title  : 'Ingresar Gasto'
 		};
 	}
 
