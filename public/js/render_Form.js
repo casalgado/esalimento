@@ -2,7 +2,8 @@ class Form {
 	constructor(parentId, constructor) {
 		this.sheet = `${constructor.sheet()}`;
 		const formCont = HTML.create('section', 'formCont', 'formCont');
-		const props = constructor.form();
+		const buttonCont = HTML.create('div', 'buttonCont', 'buttonCont');
+		const local_form = constructor.form();
 		const parent = HTML.get(parentId);
 		const title = HTML.create('h6', 'formTitleId', 'formTitle', {
 			ondblclick : 'Form.reset()',
@@ -12,10 +13,12 @@ class Form {
 			'data-constructor' : constructor.sheet()
 		});
 
-		title.innerHTML = this.sheet;
+		title.innerHTML = local_form.title;
 		form.appendChild(title);
-		this.createFields(form, props.fields);
-		form.appendChild(this.submitBtn(`Crear ${props.button}`));
+		this.createFields(form, local_form.fields);
+
+		buttonCont.appendChild(this.submitBtn(`Crear ${local_form.button}`));
+		form.appendChild(buttonCont);
 		formCont.appendChild(form);
 
 		parent.innerHTML = '';
@@ -28,58 +31,65 @@ class Form {
 			for (const [ key, value ] of Object.entries(props[i])) {
 				// key's here correspond to methods below: basicField, priceField and customSelectField
 				// values correspond to the arguments of these methods. Both come from Sheet.form()
-				form.appendChild(this[key](...value));
+
+				form.appendChild(this[key](value));
 			}
 		}
 	}
 
-	basicField(property, type) {
-		let formGroup = HTML.create('div', '', 'form-group');
-		let label = HTML.create('label', '', `${type}-${property}`, { for: `${this.sheet}-${property}` });
-		label.innerHTML = property;
-		let input = HTML.create('input', `${this.sheet}-${property}`, 'form-control form-control-sm', {
-			type : type
+	basicField({ property, type, defaultValue = '', label = null }) {
+		let formGroup = HTML.create('div', '', 'form-group basicFieldGroup');
+		let labelDOM = HTML.create('label', '', `${type}-${property}`, { for: `${this.sheet}-${property}` });
+		labelDOM.innerHTML = label || property;
+		let input = HTML.create('input', `${this.sheet}-${property}`, 'basicField form-control form-control-sm', {
+			type  : type,
+			value : defaultValue
 		});
 		if (property != 'paid') {
 			input.setAttribute('required', true);
 		}
-		formGroup.appendChild(label);
+		formGroup.appendChild(labelDOM);
 		formGroup.appendChild(input);
 		return formGroup;
 	}
 
-	priceField(property, step, defaultValue) {
+	priceField({ property, step = 1, defaultValue = '', label = null }) {
 		// If the three 'price' fields are included
 		// (this means quantity, unitPrice, total),
-		// the interactions between are added atomatically.
+		// the interactions between them are added atomatically.
 
 		// create elements
-		let formGroup = HTML.create('div', '', 'form-group');
-		let label = HTML.create('label', '', '', { for: `${this.sheet}-${property}` });
-		label.innerHTML = property;
-		let input = HTML.create('input', `${this.sheet}-${property}`, 'form-control form-control-sm', {
+		let formGroup = HTML.create('div', '', 'form-group priceFieldGroup');
+		let labelDOM = HTML.create('label', '', '', { for: `${this.sheet}-${property}` });
+		labelDOM.innerHTML = label || property;
+		let input = HTML.create('input', `${this.sheet}-${property}`, 'priceField form-control form-control-sm', {
 			type     : 'number',
 			min      : '1',
-			step     : step || '1',
+			step     : step,
 			onchange : 'updatePriceValues(this)',
 			onkeyup  : 'updatePriceValues(this)',
 			value    : defaultValue
 		});
-		formGroup.appendChild(label);
+		formGroup.appendChild(labelDOM);
 		formGroup.appendChild(input);
 		return formGroup;
 	}
 
-	customSelectField(property, target) {
+	customSelectField({ property, target }) {
 		// custom-select means that these fields will modify another field's select menus.
 		// @separate: this should be broken into custom select with text and without
 
 		// create elements
 		let formGroup = HTML.create('div', '', 'form-group input-group select-group');
 		let inputGroupPrepend = HTML.create('div', '', 'input-group-prepend');
-		let textField = HTML.create('input', `${this.sheet}-${property}`, 'form-control form-control-sm', {
-			type : 'text'
-		});
+		let textField = HTML.create(
+			'input',
+			`${this.sheet}-${property}`,
+			'customSelectField form-control form-control-sm',
+			{
+				type : 'text'
+			}
+		);
 		let selectMenu = HTML.create(
 			'select',
 			`${this.sheet}-${property}-selection`,
@@ -104,7 +114,7 @@ class Form {
 
 	submitBtn(innerHTML) {
 		// @refactor move this declaration to the constructor method  for easier access.
-		let button = HTML.create('button', `${this.sheet}-button`, 'btn btn-default btnSubmit', {
+		let button = HTML.create('button', `${this.sheet}-button`, 'btn btn-transparent btnSubmit', {
 			type : 'submit'
 		});
 		button.innerHTML = innerHTML;

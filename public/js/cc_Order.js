@@ -130,17 +130,18 @@ class Order extends Sheet {
 				// keys = method called by Form
 				// values = arguments for method called by form.
 				// even though there is only one argument, it must be in an array.
-				{ customSelectField: [ 'client', 'product' ] },
-				{ customSelectField: [ 'product', 'client' ] },
-				{ priceField: [ 'unitPrice' ] },
-				{ priceField: [ 'quantity', '0.5', '1' ] },
-				{ priceField: [ 'total' ] },
-				{ basicField: [ 'confirmed', 'date' ] },
-				{ basicField: [ 'produced', 'date' ] },
-				{ basicField: [ 'delivered', 'date' ] }
+				{ customSelectField: { property: 'client', target: 'product' } },
+				{ customSelectField: { property: 'product', target: 'client' } },
+				{ priceField: { property: 'unitPrice', label: 'precio unitario:' } },
+				{ priceField: { property: 'quantity', step: '0.5', defaultValue: '1', label: 'cantidad:' } },
+				{ priceField: { property: 'total', label: 'total:' } },
+				{ basicField: { property: 'confirmed', type: 'date', label: 'confirmado:' } },
+				{ basicField: { property: 'produced', type: 'date', label: 'para producir:' } },
+				{ basicField: { property: 'delivered', type: 'date', label: 'para entregar:' } }
 			],
-			editFormFields : [ { basicField: [ 'paid', 'date' ] } ],
-			button         : 'Pedido'
+			editFormFields : [ { basicField: { property: 'paid', type: 'date' } } ],
+			button         : 'Pedido',
+			title          : 'Pedidos'
 		};
 	}
 

@@ -30,10 +30,10 @@ class Expense extends Sheet {
 		const newObject = super.create(form);
 		newObject.save();
 		Form.reset();
-		let category = document.getElementById('expenses-category');
-		let provider = document.getElementById('expenses-provider');
-		category.value = newObject.category;
-		provider.value = newObject.provider;
+		Form.removeFormEvents();
+		document.getElementById('expenses-category').value = newObject.category;
+		document.getElementById('expenses-provider').value = newObject.provider;
+		document.getElementById('expenses-date').value = moment(newObject.date).format('YYYY-MM-DD');
 	}
 
 	card() {
@@ -63,16 +63,17 @@ class Expense extends Sheet {
 	static form() {
 		return {
 			fields : [
-				{ customSelectField: [ 'category', 'provider' ] },
-				{ customSelectField: [ 'provider', 'name' ] },
-				{ customSelectField: [ 'name', 'provider' ] },
-				{ priceField: [ 'total' ] },
-				{ priceField: [ 'quantity', '0.5', '1' ] },
-				{ priceField: [ 'unitPrice', '0.01' ] },
-				{ basicField: [ 'units' ] },
-				{ basicField: [ 'date', 'date' ] }
+				{ customSelectField: { property: 'category', target: 'provider' } },
+				{ customSelectField: { property: 'provider', target: 'name' } },
+				{ customSelectField: { property: 'name', target: 'provider' } },
+				{ priceField: { property: 'total', label: 'total:' } },
+				{ priceField: { property: 'quantity', step: '0.5', defaultValue: '1', label: 'cantidad:' } },
+				{ priceField: { property: 'unitPrice', step: '0.01', label: 'precio unitario:' } },
+				{ basicField: { property: 'units', type: 'text', defaultValue: 'g', label: 'unidades:' } },
+				{ basicField: { property: 'date', type: 'date', label: 'fecha de compra:' } }
 			],
-			button : 'Gasto'
+			button : 'Gasto',
+			title  : 'Gastos'
 		};
 	}
 

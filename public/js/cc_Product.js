@@ -43,10 +43,10 @@ class Product extends Sheet {
 	static form() {
 		return {
 			fields : [
-				{ basicField: [ 'name', 'text' ] },
-				{ basicField: [ 'category', 'text' ] },
-				{ basicField: [ 'price', 'number' ] },
-				{ basicField: [ 'cost', 'number' ] }
+				{ basicField: { property: 'name', type: 'text' } },
+				{ basicField: { property: 'category', type: 'text' } },
+				{ basicField: { property: 'price', type: 'number' } },
+				{ basicField: { property: 'cost', type: 'number' } }
 			],
 			button : 'Producto'
 		};

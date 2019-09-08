@@ -8,6 +8,34 @@ section.formCont {
 	}
 }
 
+.buttonCont {
+	display: grid;
+	justify-items: center;
+	margin-top: 30px;
+}
+
+.form-control,
+.custom-select {
+	background-color: $borderGray;
+	color: white;
+	border-color: $offWhite;
+}
+.custom-select:after {
+	border: 1px solid red;
+}
+
+.form-control:focus {
+	background-color: gray;
+	color: white;
+	border-color: $offWhite;
+}
+
+.basicFieldGroup,
+.priceFieldGroup {
+	display: grid;
+	grid-template-columns: 2fr 3fr;
+}
+
 .custom-select {
 	border-bottom-right-radius: 0px;
 	border-top-right-radius: 0px;

@@ -56,8 +56,19 @@ section.localTable {
 	}
 
 	#download-link-wrapper {
-		width: 80px;
+		width: 100px;
 		margin: 0 auto;
+		border: 2px solid white;
+		border-radius: 99px;
+
+		&:hover {
+			background-color: white;
+			color: black;
+
+			#download-as-csv {
+				color: $offWhite;
+			}
+		}
 
 		#download-as-csv {
 			width: inherit;

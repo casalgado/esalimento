@@ -170,8 +170,19 @@ section.localTable p#total {
 }
 
 section.localTable #download-link-wrapper {
-  width: 80px;
+  width: 100px;
   margin: 0 auto;
+  border: 2px solid white;
+  border-radius: 99px;
+}
+
+section.localTable #download-link-wrapper:hover {
+  background-color: white;
+  color: black;
+}
+
+section.localTable #download-link-wrapper:hover #download-as-csv {
+  color: #262626;
 }
 
 section.localTable #download-link-wrapper #download-as-csv {
@@ -278,6 +289,38 @@ section.formCont #delete-button-wrapper {
   padding-left: 5px;
 }
 
+.buttonCont {
+  display: -ms-grid;
+  display: grid;
+  justify-items: center;
+  margin-top: 30px;
+}
+
+.form-control,
+.custom-select {
+  background-color: #57585a;
+  color: white;
+  border-color: #262626;
+}
+
+.custom-select:after {
+  border: 1px solid red;
+}
+
+.form-control:focus {
+  background-color: gray;
+  color: white;
+  border-color: #262626;
+}
+
+.basicFieldGroup,
+.priceFieldGroup {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 2fr 3fr;
+      grid-template-columns: 2fr 3fr;
+}
+
 .custom-select {
   border-bottom-right-radius: 0px;
   border-top-right-radius: 0px;
@@ -376,5 +419,34 @@ p {
 
 .btn-basic {
   background-color: #a8b0b2;
+}
+
+.btn-transparent {
+  border-radius: 99px;
+  border: 2px solid white;
+  color: white;
+  background-color: transparent;
+}
+
+.btn-transparent:hover {
+  background-color: white;
+}
+
+textarea:hover,
+input:hover,
+textarea:active,
+input:active,
+textarea:focus,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active {
+  outline: 0px !important;
+  -webkit-appearance: none;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
 }
 /*# sourceMappingURL=main.css.map */

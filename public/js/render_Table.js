@@ -42,7 +42,7 @@ class Table {
 						.endOf(SHOWING.period)
 						.format('D MMM')}`
 				});
-				download_link.innerHTML = 'export';
+				download_link.innerHTML = 'exportar';
 				let wrapper = HTML.create('div', 'download-link-wrapper');
 				wrapper.appendChild(download_link);
 				s.appendChild(wrapper);
