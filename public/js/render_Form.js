@@ -40,6 +40,7 @@ class Form {
 		let input = HTML.create('input', `${this.sheet}-${property}`, 'form-control form-control-sm', {
 			type : type
 		});
+		input.setAttribute('required', true);
 		formGroup.appendChild(label);
 		formGroup.appendChild(input);
 		return formGroup;
@@ -69,6 +70,7 @@ class Form {
 
 	customSelectField(property, target) {
 		// custom-select means that these fields will modify another field's select menus.
+		// @separate: this should be broken into custom select with text and without
 
 		// create elements
 		let formGroup = HTML.create('div', '', 'form-group input-group select-group');
@@ -120,7 +122,11 @@ class Form {
 		drawSelectMenu('orders-client-selection', Order.spotlight('client', Client, 'name', 10), 'name');
 		drawSelectMenu('orders-product-selection', PRODUCTS.sortBy('name'), 'name');
 		drawSelectMenu('expenses-name-selection', Expense.spotlight('name', Expense, 'name', 10), 'name');
-		drawSelectMenu('expenses-provider-selection', EXPENSES.sortBy('name'), 'provider');
+		drawSelectMenu(
+			'expenses-provider-selection',
+			Expense.spotlight('provider', Expense, 'provider', 10),
+			'provider'
+		);
 		drawSelectMenu('expenses-category-selection', EXPENSES.sortBy('name'), 'category');
 	}
 
@@ -278,6 +284,9 @@ function updatePriceValues(input) {
 	let sheet = input.form.dataset.constructor;
 	[ unit, quantity, total ] = getPriceInputs(sheet);
 	if (input.id == `${sheet}-total`) {
+		quantity.value = quantity.value || 1;
+		unit.value = parseFloat(Math.floor(total.value * 100 / quantity.value) / 100);
+	} else if (input.id == `${sheet}-quantity`) {
 		unit.value = parseFloat(Math.floor(total.value * 100 / quantity.value) / 100);
 	} else {
 		total.value = parseFloat(Math.floor(unit.value * 100 * quantity.value) / 100);

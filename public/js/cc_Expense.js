@@ -22,6 +22,20 @@ class Expense extends Sheet {
 		return { title: 'Gastos', hasPagination: true };
 	}
 
+	static extendsCreate() {
+		return true;
+	}
+
+	static create(form) {
+		const newObject = super.create(form);
+		newObject.save();
+		Form.reset();
+		let category = document.getElementById('expenses-category');
+		let provider = document.getElementById('expenses-provider');
+		category.value = newObject.category;
+		provider.value = newObject.provider;
+	}
+
 	card() {
 		return {
 			t    : this.category,
@@ -49,13 +63,13 @@ class Expense extends Sheet {
 	static form() {
 		return {
 			fields : [
-				{ customSelectField: [ 'name', 'provider' ] },
+				{ customSelectField: [ 'category', 'provider' ] },
 				{ customSelectField: [ 'provider', 'name' ] },
-				{ customSelectField: [ 'category', 'name' ] },
-				{ priceField: [ 'unitPrice', '0.01' ] },
-				{ priceField: [ 'quantity', '0.5', '1' ] },
-				{ basicField: [ 'units' ] },
+				{ customSelectField: [ 'name', 'provider' ] },
 				{ priceField: [ 'total' ] },
+				{ priceField: [ 'quantity', '0.5', '1' ] },
+				{ priceField: [ 'unitPrice', '0.01' ] },
+				{ basicField: [ 'units' ] },
 				{ basicField: [ 'date', 'date' ] }
 			],
 			button : 'Gasto'

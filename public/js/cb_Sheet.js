@@ -21,6 +21,7 @@ class Sheet {
 					console.log('The write failed');
 				} else {
 					console.log('Data saved successfully!');
+					alert('Data saved successfully');
 				}
 			})
 			.then((e) => {
@@ -143,7 +144,7 @@ class Sheet {
 		const objects = this.local();
 		const filters = targetConstructor
 			.local()
-			.sortBy('name')
+			.sortBy(targetProperty)
 			.map((e) => {
 				return e[targetProperty];
 			})

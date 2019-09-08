@@ -65,7 +65,8 @@ class Report extends Sheet {
 	}
 
 	setUnpaid() {
-		this.unpaid = Order.totalUnpaid();
+		let unpaid = this.unpaid || Order.totalUnpaid();
+		this.unpaid = unpaid;
 		return this;
 	}
 
