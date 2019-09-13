@@ -7,14 +7,19 @@
 @import 'forms';
 @import 'app';
 
+#appContainer {
+	padding-bottom: 150px;
+}
+
 #siteContainer,
 #appContainer {
 	display: none;
 	color: $fontColor;
+	background-color: $offWhite;
 }
 
 #rectangle {
-	z-index: 999;
+	z-index: 99;
 }
 
 .hide {

@@ -2,7 +2,6 @@
 section.localTable {
 	background-color: $offWhite;
 	font-size: 14px;
-	padding-bottom: 100%;
 
 	.tableRow,
 	.tableHeader {
@@ -58,6 +57,7 @@ section.localTable {
 	#download-link-wrapper {
 		width: 100px;
 		margin: 0 auto;
+		margin-top: 30px;
 		border: 2px solid white;
 		border-radius: 99px;
 

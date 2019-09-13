@@ -119,6 +119,7 @@ class Table {
 		let objects = constructor.byWeek(SHOWING.current).sortBy(prop);
 		new Table('square', objects, constructor);
 		HTML.addClass('rectangle', 'hide');
+		window.scrollTo(0, 0);
 	}
 }
 
@@ -162,9 +163,9 @@ class Pagination {
 		if (period == 'day') {
 			p.innerHTML = `${current.startOf(SHOWING.period).format('ddd DD MMM')}`;
 		} else {
-			p.innerHTML = `${current.startOf(SHOWING.period).format('D MMMM')} - ${current
+			p.innerHTML = `${current.startOf(SHOWING.period).format('D MMM')} - ${current
 				.endOf(SHOWING.period)
-				.format('D MMMM')}`;
+				.format('D MMM')}`;
 		}
 
 		return p;

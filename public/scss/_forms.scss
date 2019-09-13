@@ -51,15 +51,8 @@ section.formCont {
 
 .editForm {
 	padding: 15px;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-gap: 5px;
 
 	h6 {
-		grid-column: span 2;
-	}
-
-	.btnSubmit {
 		grid-column: span 2;
 	}
 

@@ -61,13 +61,14 @@ class Form {
 		// create elements
 		let formGroup = HTML.create('div', '', 'form-group priceFieldGroup');
 		let labelDOM = HTML.create('label', '', '', { for: `${this.sheet}-${property}` });
+		let firstProperty = this.sheet == 'orders' ? 'unitPrice' : 'total';
 		labelDOM.innerHTML = label || property;
 		let input = HTML.create('input', `${this.sheet}-${property}`, 'priceField form-control form-control-sm', {
 			type     : 'number',
 			min      : '1',
 			step     : step,
-			onchange : 'updatePriceValues(this)',
-			onkeyup  : 'updatePriceValues(this)',
+			onchange : `updatePriceValues(this, '${firstProperty}')`,
+			onkeyup  : `updatePriceValues(this, '${firstProperty}')`,
 			value    : defaultValue
 		});
 		formGroup.appendChild(labelDOM);
@@ -176,7 +177,9 @@ class FormCreate extends Form {
 
 	static render(constructor) {
 		new FormCreate('square', constructor);
+		// @refactor below with table.render
 		HTML.addClass('rectangle', 'hide');
+		window.scrollTo(0, 0);
 	}
 }
 
@@ -292,16 +295,28 @@ function fillInForm(form, object) {
 
 // price input behaviors
 
-function updatePriceValues(input) {
+function updatePriceValues(input, firstProperty) {
 	let sheet = input.form.dataset.constructor;
 	[ unit, quantity, total ] = getPriceInputs(sheet);
-	if (input.id == `${sheet}-total`) {
-		quantity.value = quantity.value || 1;
-		unit.value = parseFloat(Math.floor(total.value * 100 / quantity.value) / 100);
-	} else if (input.id == `${sheet}-quantity`) {
-		unit.value = parseFloat(Math.floor(total.value * 100 / quantity.value) / 100);
-	} else {
-		total.value = parseFloat(Math.floor(unit.value * 100 * quantity.value) / 100);
+	// @refactor horrible code below, needs work.
+	if (firstProperty == 'total') {
+		if (input.id == `${sheet}-total`) {
+			quantity.value = quantity.value || 1;
+			unit.value = parseFloat(Math.floor(total.value * 100 / quantity.value) / 100);
+		} else if (input.id == `${sheet}-quantity`) {
+			unit.value = parseFloat(Math.floor(total.value * 100 / quantity.value) / 100);
+		} else {
+			total.value = parseFloat(Math.floor(unit.value * 100 * quantity.value) / 100);
+		}
+	} else if (firstProperty == 'unitPrice') {
+		if (input.id == `${sheet}-unitPrice`) {
+			quantity.value = quantity.value || 1;
+			total.value = parseFloat(Math.floor(unit.value * 100 * quantity.value) / 100);
+		} else if (input.id == `${sheet}-quantity`) {
+			total.value = parseFloat(Math.floor(unit.value * 100 * quantity.value) / 100);
+		} else {
+			unit.value = parseFloat(Math.floor(total.value * 100 / quantity.value) / 100);
+		}
 	}
 }
 

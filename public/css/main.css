@@ -112,7 +112,6 @@ section.insideNav .navBtn {
 section.localTable {
   background-color: #262626;
   font-size: 14px;
-  padding-bottom: 100%;
 }
 
 section.localTable .tableRow,
@@ -172,6 +171,7 @@ section.localTable p#total {
 section.localTable #download-link-wrapper {
   width: 100px;
   margin: 0 auto;
+  margin-top: 30px;
   border: 2px solid white;
   border-radius: 99px;
 }
@@ -335,18 +335,9 @@ section.formCont #delete-button-wrapper {
 
 .editForm {
   padding: 15px;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
-  grid-gap: 5px;
 }
 
 .editForm h6 {
-  grid-column: span 2;
-}
-
-.editForm .btnSubmit {
   grid-column: span 2;
 }
 
@@ -379,14 +370,19 @@ table {
   width: 100%;
 }
 
+#appContainer {
+  padding-bottom: 150px;
+}
+
 #siteContainer,
 #appContainer {
   display: none;
   color: #f9fafb;
+  background-color: #262626;
 }
 
 #rectangle {
-  z-index: 999;
+  z-index: 99;
 }
 
 .hide {
