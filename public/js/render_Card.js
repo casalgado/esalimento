@@ -4,21 +4,24 @@ class Card {
 		let c = object.constructor;
 		let card = HTML.create('section', c.sheet(), 'localCard');
 		let p = HTML.get(parentId);
-		let t, st, eb;
+		let t, st;
 
-		t = HTML.create('h6', 'title');
-		st = HTML.create('h6', 'subtitle');
+		t = HTML.create('p', 'cardTitle');
 		t.innerHTML = props.t || '';
-		st.innerHTML = props.st || '';
-
-		eb = HTML.createIconButton('', '', 'far fa-edit rectangle-button', FormEdit.render, [ c, object ]);
-
 		card.appendChild(t);
-		card.appendChild(st);
-		card.appendChild(eb);
 
-		HTML.list(card, 'p', 'main', props.main);
-		HTML.list(card, 'p', 'side', props.side);
+		if (props.detail) {
+			HTML.list(card, 'p', 'main', props.detail.main);
+			HTML.list(card, 'p', 'side', props.detail.side);
+		}
+
+		//st = HTML.create('p', 'cardSubtitle');
+		//st.innerHTML = props.st || '';
+		//card.appendChild(st);
+		for (let i = 0; i < props.btnData.length; i++) {
+			let btn = HTML.createSquareButton(props.btnData[i]);
+			card.appendChild(btn);
+		}
 
 		p.innerHTML = '';
 		p.appendChild(card);

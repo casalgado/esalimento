@@ -80,19 +80,37 @@ class Report extends Sheet {
 
 	card() {
 		return {
-			t    : 'Reporte ' + this.name,
-			main : {
-				start   : accounting.formatMoney(this.wealthAtStart),
-				income  : accounting.formatMoney(this.grossIncome()),
-				expense : accounting.formatMoney(this.grossExpenses()),
-				end     : accounting.formatMoney(this.idealWealthAtEnd())
+			t       : `${this.name}`,
+			detail  : {
+				main : {
+					start   : accounting.formatMoney(this.wealthAtStart),
+					income  : accounting.formatMoney(this.grossIncome()),
+					expense : accounting.formatMoney(this.grossExpenses()),
+					end     : accounting.formatMoney(this.idealWealthAtEnd())
+				},
+				side : {
+					cash   : accounting.formatMoney(this.cash),
+					bank   : accounting.formatMoney(this.bank),
+					unpaid : accounting.formatMoney(this.getUnpaid()),
+					total  : accounting.formatMoney(this.realWealthAtEnd())
+				}
 			},
-			side : {
-				cash   : accounting.formatMoney(this.cash),
-				bank   : accounting.formatMoney(this.bank),
-				unpaid : accounting.formatMoney(this.getUnpaid()),
-				total  : accounting.formatMoney(this.realWealthAtEnd())
-			}
+			btnData : [
+				{
+					btnId    : '',
+					btnTitle : moment(this.date).format('MMMM'),
+					btnMain  : moment(this.date).format('DD'),
+					args     : this
+				},
+				{
+					btnId      : 'editBtn',
+					btnTitle   : 'edit',
+					btnMain    : 'E',
+					funcToCall : FormEdit.render,
+					args       : [ Report, this ]
+				},
+				{ btnId: 'deleteBtn', btnTitle: 'delete', btnMain: 'X', funcToCall: Report.remove, args: this }
+			]
 		};
 	}
 

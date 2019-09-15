@@ -70,7 +70,36 @@ class Order extends Sheet {
 		if (this.paid != '') {
 			return moment(this.paid).format('D-MMM');
 		} else {
-			return 'No';
+			return null;
+		}
+	}
+
+	static paidButton() {
+		let button = HTML.createButton('paidButton', 'btn btn-default', 'marcar', Order.setAsPaid, 'id');
+		return button;
+	}
+
+	squareBtnClass() {
+		return this.paid == '' ? 'unpaid' : 'paid';
+	}
+
+	squareBtnTitle() {
+		return this.paid == '' ? 'unpaid' : moment(this.paid).format('MMMM');
+	}
+
+	squareBtnMain() {
+		return this.paid == '' ? '$' : moment(this.paid).format('DD');
+	}
+
+	static setAsPaid(obj) {
+		if (obj.paid == '') {
+			obj.paid = moment().format();
+			obj.update('noRefresh');
+			// @refactor code below
+			document.getElementById('paidBtn').classList.add('paid');
+			document.getElementById('paidBtn').classList.remove('unpaid');
+			document.getElementById('paidBtn-title').innerHTML = obj.squareBtnTitle();
+			document.getElementById('paidBtn-main').innerHTML = obj.squareBtnMain();
 		}
 	}
 
@@ -108,18 +137,25 @@ class Order extends Sheet {
 
 	card() {
 		return {
-			t    : 'Pedido ' + this.name,
-			main : {
-				p      : this.product,
-				c      : this.client,
-				pagada : this.paidstr(),
-				status : this.currentStatus()
-			},
-			side : {
-				unidad   : this.unitPrice,
-				cantidad : this.quantity,
-				total    : this.total
-			}
+			t       : `${this.client} ${this.quantity} ${this.product}`,
+			btnData : [
+				{
+					btnId      : 'paidBtn',
+					btnClass   : this.squareBtnClass(),
+					btnTitle   : this.squareBtnTitle(),
+					btnMain    : this.squareBtnMain(),
+					funcToCall : Order.setAsPaid,
+					args       : this
+				},
+				{
+					btnId      : 'editBtn',
+					btnTitle   : 'edit',
+					btnMain    : 'E',
+					funcToCall : FormEdit.render,
+					args       : [ Order, this ]
+				},
+				{ btnId: 'deleteBtn', btnTitle: 'delete', btnMain: 'X', funcToCall: Order.remove, args: this }
+			]
 		};
 	}
 
@@ -141,7 +177,8 @@ class Order extends Sheet {
 			],
 			editFormFields : [ { basicField: { property: 'paid', type: 'date' } } ],
 			button         : 'Pedido',
-			title          : 'Ingresar Pedido'
+			title          : 'Ingresar Pedido',
+			editTitle      : 'Editar Pedido'
 		};
 	}
 

@@ -24,6 +24,20 @@ class HTML {
 		return button;
 	}
 
+	static createSquareButton({ btnId = '', btnClass = '', btnTitle = '', btnMain = '', funcToCall, args }) {
+		let button = HTML.create('div', btnId, 'btn btn-square ' + btnClass);
+		let title = HTML.create('p', btnId + '-title', btnClass + ' btn-square-title');
+		title.innerHTML = btnTitle;
+		let main = HTML.create('p', btnId + '-main', btnClass + ' btn-square-main');
+		main.innerHTML = btnMain;
+		button.appendChild(title);
+		button.appendChild(main);
+		button.addEventListener('click', () => {
+			funcToCall(args);
+		});
+		return button;
+	}
+
 	static createButton(btnId, btnClass, display, funcToCall, argument) {
 		let button = HTML.create('button', btnId, 'btn ' + btnClass);
 		button.addEventListener('click', () => {

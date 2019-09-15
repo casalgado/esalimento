@@ -38,15 +38,23 @@ class Expense extends Sheet {
 
 	card() {
 		return {
-			t    : this.category,
-			main : {
-				p : this.provider
-			},
-			side : {
-				unidad   : this.unitPrice,
-				cantidad : this.quantity,
-				total    : accounting.formatMoney(this.total)
-			}
+			t       : `${this.quantity}${this.units} ${this.name}, ${this.provider} `,
+			btnData : [
+				{
+					btnId    : '',
+					btnTitle : moment(this.date).format('MMMM'),
+					btnMain  : moment(this.date).format('DD'),
+					args     : this
+				},
+				{
+					btnId      : 'editBtn',
+					btnTitle   : 'edit',
+					btnMain    : 'E',
+					funcToCall : FormEdit.render,
+					args       : [ Expense, this ]
+				},
+				{ btnId: 'deleteBtn', btnTitle: 'delete', btnMain: 'X', funcToCall: Expense.remove, args: this }
+			]
 		};
 	}
 

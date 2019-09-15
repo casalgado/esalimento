@@ -45,7 +45,7 @@ class Sheet {
 		Form.reset();
 	}
 
-	update() {
+	update(noRefresh) {
 		const c = this.constructor;
 		const key = this.id;
 		const path = c.path() + '/' + key;
@@ -57,7 +57,9 @@ class Sheet {
 				console.log('Data saved successfully!');
 			}
 		});
-		Table.render(c);
+		if (noRefresh != 'noRefresh') {
+			Table.render(c);
+		}
 	}
 
 	static updateAll(property, value) {
@@ -274,7 +276,7 @@ function zeroPad(value, padding) {
 	return (zeroes + value).slice(-padding);
 }
 
-module.exports = {
-	Sheet,
-	zeroPad
-};
+// module.exports = {
+// 	Sheet,
+// 	zeroPad
+// };

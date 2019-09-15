@@ -4,33 +4,55 @@ section.localCard {
 	display: grid;
 	width: 92vw;
 	padding: 12px 9px 9px 9px;
+	font-size: 0.8em;
+	grid-gap: 15px;
 
-	grid-template-columns: 50% 50%;
-	grid-template-rows: 50px;
-	grid-auto-rows: 30px;
-	grid-auto-flow: column;
+	grid-template-columns: 1fr 1fr 1fr;
 
 	p {
 		overflow: hidden;
 		margin-bottom: 0px;
 	}
 
-	#title {
-		grid-column: 1 / span 2;
+	#cardTitle {
+		grid-column: 1 / span 3;
 		grid-row: 1/2;
+		text-align: center;
+		padding: 0px;
+		margin: 0px;
+	}
+}
+
+.btn-square {
+	cursor: pointer;
+	border: 1px solid white;
+
+	.btn-square-title {
+		font-size: 0.8em;
 	}
 
-	#sub-title {
-		grid-column: 2 / 3;
-		grid-row: 1/2;
+	.btn-square-main {
+		font-size: 1em;
 	}
 
-	.main {
-		grid-column: 1;
+	&.unpaid {
+		background-color: firebrick;
 	}
 
-	.side {
-		grid-column: 2;
+	&.unpaid:hover {
+		background-color: darkred;
+	}
+
+	&.paid {
+		background-color: forestgreen;
+	}
+
+	&.paid:hover {
+		background-color: darkgreen;
+	}
+
+	&:hover {
+		background-color: rgb(55, 55, 55);
 	}
 }
 

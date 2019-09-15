@@ -9,6 +9,8 @@
 }
 
 #content #rectangle {
+  -webkit-box-shadow: 0px 0px 10px 5px #373737;
+          box-shadow: 0px 0px 10px 5px #373737;
   border: 1px solid #ced4da;
   position: fixed;
   bottom: 10%;
@@ -18,9 +20,7 @@
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
   background-color: #262626;
-  border-radius: 10px;
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 4px;
 }
 
 #content #custom-nav {
@@ -235,12 +235,10 @@ section.localCard {
   display: grid;
   width: 92vw;
   padding: 12px 9px 9px 9px;
-  -ms-grid-columns: 50% 50%;
-      grid-template-columns: 50% 50%;
-  -ms-grid-rows: 50px;
-      grid-template-rows: 50px;
-  grid-auto-rows: 30px;
-  grid-auto-flow: column;
+  font-size: 0.8em;
+  grid-gap: 15px;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
 }
 
 section.localCard p {
@@ -248,32 +246,49 @@ section.localCard p {
   margin-bottom: 0px;
 }
 
-section.localCard #title {
+section.localCard #cardTitle {
   -ms-grid-column: 1;
-  -ms-grid-column-span: 2;
-  grid-column: 1 / span 2;
+  -ms-grid-column-span: 3;
+  grid-column: 1 / span 3;
   -ms-grid-row: 1;
   -ms-grid-row-span: 1;
   grid-row: 1/2;
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
 }
 
-section.localCard #sub-title {
-  -ms-grid-column: 2;
-  -ms-grid-column-span: 1;
-  grid-column: 2 / 3;
-  -ms-grid-row: 1;
-  -ms-grid-row-span: 1;
-  grid-row: 1/2;
+.btn-square {
+  cursor: pointer;
+  border: 1px solid white;
 }
 
-section.localCard .main {
-  -ms-grid-column: 1;
-  grid-column: 1;
+.btn-square .btn-square-title {
+  font-size: 0.8em;
 }
 
-section.localCard .side {
-  -ms-grid-column: 2;
-  grid-column: 2;
+.btn-square .btn-square-main {
+  font-size: 1em;
+}
+
+.btn-square.unpaid {
+  background-color: firebrick;
+}
+
+.btn-square.unpaid:hover {
+  background-color: darkred;
+}
+
+.btn-square.paid {
+  background-color: forestgreen;
+}
+
+.btn-square.paid:hover {
+  background-color: darkgreen;
+}
+
+.btn-square:hover {
+  background-color: #373737;
 }
 
 .localCard#reports .main,

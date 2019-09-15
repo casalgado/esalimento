@@ -187,10 +187,11 @@ class FormEdit extends Form {
 	constructor(parentId, constructor, object) {
 		super(parentId, constructor);
 		this.edit = true;
-		const formCont = HTML.get(`formCont`);
+		const buttonCont = HTML.get(`buttonCont`);
 		const form = HTML.get(`${constructor.sheet()}Form`);
 		const submitButton = HTML.get(`${constructor.sheet()}-button`);
-		let eb;
+		const title = document.getElementById('formTitleId');
+		title.innerHTML = `${constructor.form().editTitle}`;
 
 		Form.removeFormEvents();
 
@@ -203,23 +204,20 @@ class FormEdit extends Form {
 			e.preventDefault();
 		});
 
-		let wrapper = HTML.create('div', 'delete-button-wrapper', '');
-		eb = HTML.createIconButton('', '', 'far fa-trash-alt', constructor.remove, object);
-
 		if (constructor == Order) {
 			this.createFields(form, Order.form().editFormFields);
 		}
-		wrapper.appendChild(eb);
-		formCont.appendChild(wrapper);
 		fillInForm(form, object);
 		submitButton.innerHTML = `Editar ${constructor.form().button}`;
-		form.appendChild(submitButton);
+		buttonCont.appendChild(submitButton);
+		form.appendChild(buttonCont);
 	}
 
 	static render(array) {
 		let [ constructor, object ] = array;
 		new FormEdit('square', constructor, object);
 		HTML.addClass('rectangle', 'hide');
+		window.scrollTo(0, 0);
 	}
 }
 
