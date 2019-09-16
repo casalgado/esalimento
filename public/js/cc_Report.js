@@ -86,7 +86,8 @@ class Report extends Sheet {
 					start   : accounting.formatMoney(this.wealthAtStart),
 					income  : accounting.formatMoney(this.grossIncome()),
 					expense : accounting.formatMoney(this.grossExpenses()),
-					end     : accounting.formatMoney(this.idealWealthAtEnd())
+					end     : accounting.formatMoney(this.idealWealthAtEnd()),
+					'...'   : '...'
 				},
 				side : {
 					cash   : accounting.formatMoney(this.cash),
