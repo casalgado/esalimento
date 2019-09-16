@@ -293,7 +293,7 @@ section.localCard #cardTitle {
 
 .localCard#reports .main,
 .localCard#reports .side {
-  text-align: right;
+  text-align: center;
 }
 
 section.formCont .localForm {
