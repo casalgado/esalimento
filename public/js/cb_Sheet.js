@@ -11,6 +11,18 @@ class Sheet {
 		return `devAccount/${this.sheet()}`;
 	}
 
+	static create(from_form) {
+		const newObject = new this();
+		const props = Form.getFormValues(from_form);
+		Object.assign(newObject, props);
+		if (this.extendsCreate) {
+			return newObject;
+		} else {
+			newObject.save();
+		}
+		Form.reset();
+	}
+
 	save() {
 		const c = this.constructor;
 		firebase
@@ -31,18 +43,6 @@ class Sheet {
 				this.id = e.getKey();
 				c.local().push(this);
 			});
-	}
-
-	static create(form) {
-		const newObject = new this();
-		const props = Form.getFormValues(form);
-		Object.assign(newObject, props);
-		if (this.extendsCreate) {
-			return newObject;
-		} else {
-			newObject.save();
-		}
-		Form.reset();
 	}
 
 	update(noRefresh) {
@@ -81,8 +81,8 @@ class Sheet {
 		}
 	}
 
-	static update(form, object) {
-		const props = Form.getFormValues(form);
+	static update(from_form, object) {
+		const props = Form.getFormValues(from_form);
 		Object.assign(object, props);
 		object.update();
 		Form.reset();
@@ -103,6 +103,7 @@ class Sheet {
 						console.log('The delete failed');
 					} else {
 						console.log('Data deleted successfully!');
+						alert('Data deleted successfully!');
 					}
 				})
 				.then(() => {

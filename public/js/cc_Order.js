@@ -68,27 +68,15 @@ class Order extends Sheet {
 
 	paidstr() {
 		if (this.paid != '') {
-			return moment(this.paid).format('D-MMM');
+			return moment(this.paid).format('DD/MM/YYYY');
 		} else {
-			return null;
+			return '';
 		}
 	}
 
 	static paidButton() {
 		let button = HTML.createButton('paidButton', 'btn btn-default', 'marcar', Order.setAsPaid, 'id');
 		return button;
-	}
-
-	squareBtnClass() {
-		return this.paid == '' ? 'unpaid' : 'paid';
-	}
-
-	squareBtnTitle() {
-		return this.paid == '' ? 'unpaid' : moment(this.paid).format('MMMM');
-	}
-
-	squareBtnMain() {
-		return this.paid == '' ? '$' : moment(this.paid).format('DD');
 	}
 
 	static setAsPaid(obj) {
@@ -141,9 +129,9 @@ class Order extends Sheet {
 			btnData : [
 				{
 					btnId      : 'paidBtn',
-					btnClass   : this.squareBtnClass(),
-					btnTitle   : this.squareBtnTitle(),
-					btnMain    : this.squareBtnMain(),
+					btnClass   : this.paid == '' ? 'unpaid' : 'paid',
+					btnTitle   : this.paid == '' ? 'unpaid' : moment(this.paid).format('MMMM'),
+					btnMain    : this.paid == '' ? '$' : moment(this.paid).format('DD'),
 					funcToCall : Order.setAsPaid,
 					args       : this
 				},
@@ -189,11 +177,10 @@ class Order extends Sheet {
 			this.quantity,
 			this.product,
 			this.unitPrice,
-			'',
 			this.total,
 			moment(this.produced).format('DD/MM/YYYY'),
 			moment(this.delivered).format('DD/MM/YYYY'),
-			moment(this.paid).format('DD/MM/YYYY')
+			this.paidstr()
 		];
 	}
 
