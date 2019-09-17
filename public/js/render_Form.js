@@ -140,7 +140,7 @@ class Form {
 			Expense.spotlight('provider', Expense, 'provider', 10),
 			'provider'
 		);
-		drawSelectMenu('expenses-category-selection', EXPENSES.sortBy('name'), 'category');
+		drawSelectMenu('expenses-category-selection', EXPENSES.sortBy('category'), 'category');
 	}
 
 	static removeFormEvents() {

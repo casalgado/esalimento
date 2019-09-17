@@ -40,7 +40,7 @@ class Table {
 					href     : encodedURI,
 					download : `${c.sheet()} - ${current.startOf(SHOWING.period).format('D MMM')} - ${current
 						.endOf(SHOWING.period)
-						.format('D MMM')}`
+						.format('D MMM')}.csv`
 				});
 				download_link.innerHTML = 'exportar';
 				let wrapper = HTML.create('div', 'download-link-wrapper');

@@ -46,6 +46,9 @@ class Sheet {
 	}
 
 	update(noRefresh) {
+		// @refactor no refresh
+		// refresh should not be a part of this method.
+		// refactor when using router
 		const c = this.constructor;
 		const key = this.id;
 		const path = c.path() + '/' + key;
@@ -62,12 +65,19 @@ class Sheet {
 		}
 	}
 
-	static updateAll(property, value) {
+	static updateAll(property, value, oldValue) {
 		const objs = this.local();
 		for (let i = 0; i < objs.length; i++) {
 			const o = objs[i];
-			o[property] = value;
-			o.update();
+			if (oldValue) {
+				if (o[property] == oldValue) {
+					o[property] = value;
+					o.update();
+				}
+			} else {
+				o[property] = value;
+				o.update();
+			}
 		}
 	}
 

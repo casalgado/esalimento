@@ -61,8 +61,8 @@ class Expense extends Sheet {
 	table() {
 		return {
 			title   : 'Gastos',
-			header  : [ 'Nombre', 'Total' ],
-			row     : [ this.name, accounting.formatMoney(this.total) ],
+			header  : [ 'Dia ', 'Nombre', 'Total' ],
+			row     : [ moment(this.date).format('DD/M'), this.name, accounting.formatMoney(this.total) ],
 			sortby  : [ 'name', 'total' ],
 			datestr : this.date
 		};
@@ -92,7 +92,12 @@ class Expense extends Sheet {
 			this.name,
 			this.total,
 			this.quantity,
-			this.units
+			this.units,
+			this.category
 		];
 	}
 }
+
+// Costo de Mercancia Vendida
+// Costos Indirectos de Fabricacion
+// Gastos Administracion y Ventas
