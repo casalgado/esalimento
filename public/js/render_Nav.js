@@ -19,15 +19,15 @@ class Nav {
 
 	static props() {
 		return {
-			'ver pedidos'        : [ Table.render, Order, 'default' ],
-			'ver gastos'         : [ Table.render, Expense, 'default' ],
-			'ver reportes'       : [ Table.render, Report, 'default' ],
+			'ver pedidos'        : [ onNavigate, '/pedidos', 'default' ],
+			'ver gastos'         : [ onNavigate, '/gastos', 'default' ],
+			'ver reportes'       : [ onNavigate, '/reportes', 'default' ],
 			'crear producto'     : [ FormCreate.render, Product, 'basic' ],
 			'crear cliente'      : [ FormCreate.render, Client, 'basic' ],
-			'por cobrar'         : [ Order.showUnpaid, '', 'basic' ],
-			'nuevo pedido'       : [ FormCreate.render, Order, 'default' ],
-			'nuevo gasto'        : [ FormCreate.render, Expense, 'default' ],
-			'produccion del dia' : [ DayTable.render, Agenda, 'primary' ]
+			'por cobrar'         : [ onNavigate, '/porcobrar', 'basic' ],
+			'nuevo pedido'       : [ onNavigate, '/pedidos#nuevo', 'default' ],
+			'nuevo gasto'        : [ onNavigate, '/gastos#nuevo', 'default' ],
+			'produccion del dia' : [ onNavigate, '/produccion', 'primary' ]
 		};
 	}
 }

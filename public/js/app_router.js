@@ -9,15 +9,25 @@ const resume = '<h1> yo, r whatup </h1>';
 const rootDiv = document.getElementById('root');
 
 routes = {
-	'/public/'         : homePage(),
-	'/public/orders'   : contact,
-	'/public/expenses' : resume,
-	'/contact'         : 'contactPage'
+	'/pedidos'       : { function: Table.render, argument: Order },
+	'/pedidos#nuevo' : { function: FormCreate.render, argument: Order },
+	'/gastos'        : { function: Table.render, argument: Expense },
+	'/gastos#nuevo'  : { function: FormCreate.render, argument: Expense },
+	'/produccion'    : { function: DayTable.render, argument: Agenda },
+	'/reportes'      : { function: Table.render, argument: Report },
+	'/porcobrar'     : { function: Order.showUnpaid, argument: '' },
+	render           : function(pathname) {
+		this[pathname].function(this[pathname].argument);
+	}
+};
+
+window.onpopstate = function() {
+	routes.render(this.location.pathname);
 };
 
 // routes[window.location.pathname];
 
 const onNavigate = (pathname) => {
 	window.history.pushState({}, pathname, window.location.origin + pathname);
-	rootDiv.innerHTML = routes[pathname];
+	routes.render(pathname);
 };
