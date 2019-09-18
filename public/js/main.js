@@ -34,6 +34,7 @@ function loadPage() {
 		REPORTS = objs;
 		Report.create();
 	});
+
 	SHOWING = { period: 'Week', current: moment() };
 	FILTERS = {};
 	document.getElementById('siteContainer').setAttribute('style', 'display:none');
