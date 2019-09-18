@@ -18,10 +18,10 @@
       <!-- @ creo que este return false de abajo no esta haciendo nada -->
         <form onsubmit="signInAdmin(this); return false" class="localForm">
           <div class="form-group">
-            <input type="email" class="form-control" placeholder="email">
+            <input id="signIn-email" type="email" class="form-control" placeholder="email">
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" placeholder="password">
+            <input id="signIn-password" type="password" class="form-control" placeholder="password">
           </div>
           <button type="submit" class="btn btn-primary btnSubmit">Iniciar Sesion</button>
         </form>
@@ -47,7 +47,6 @@
       <script src="js/firebase-config.js"></script>
       <script src="js/database.js"></script>
       <script src="js/accounting.js"></script>
-      <script src="js/app_admins.js"></script>
       <script src="js/cb_Sheet.js"></script>
       <script src="js/cc_Product.js"></script>
       <script src="js/cc_Order.js"></script>
@@ -61,6 +60,7 @@
       <script src="js/render_Card.js"></script>
       <script src="js/render_Table.js"></script>
       <script src="js/render_Nav.js"></script>
+      <script src="js/app_admins.js"></script>
       <script src="js/main.js"></script>
       <script src="js/app_router.js"></script>
     </span>

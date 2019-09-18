@@ -1,8 +1,8 @@
-function signInAdmin(form) {
-	let [ email, password ] = getFormValues(form);
+function signInAdmin(from_form) {
+	let props = Form.getFormValues(from_form);
 	firebase
 		.auth()
-		.signInWithEmailAndPassword(email, password)
+		.signInWithEmailAndPassword(props.email, props.password)
 		.catch(function(error) {
 			var errorCode = error.code;
 			var errorMessage = error.message;

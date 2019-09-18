@@ -151,9 +151,9 @@ class Form {
 
 	// for create()
 
-	static getFormValues(form) {
+	static getFormValues(from_form) {
 		const props = {};
-		Array.from(form.getElementsByTagName('input')).map((e) => {
+		Array.from(from_form.getElementsByTagName('input')).map((e) => {
 			if (e.type == 'date' && e.value != '') {
 				props[e.id.split('-')[1]] = moment(e.value).format();
 			} else {

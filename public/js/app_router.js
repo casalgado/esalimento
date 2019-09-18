@@ -10,6 +10,8 @@ const rootDiv = document.getElementById('root');
 
 routes = {
 	'/pedidos'       : { function: Table.render, argument: Order },
+	'/'              : { function: Table.render, argument: Order },
+	'/public/'       : { function: Table.render, argument: Order },
 	'/pedidos#nuevo' : { function: FormCreate.render, argument: Order },
 	'/gastos'        : { function: Table.render, argument: Expense },
 	'/gastos#nuevo'  : { function: FormCreate.render, argument: Expense },
@@ -22,7 +24,8 @@ routes = {
 };
 
 window.onpopstate = function() {
-	routes.render(this.location.pathname);
+	let path = '/' + window.location.href.split('/').pop();
+	routes.render(path);
 };
 
 // routes[window.location.pathname];
