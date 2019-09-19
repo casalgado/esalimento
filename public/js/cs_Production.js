@@ -1,4 +1,4 @@
-class Agenda extends Order {
+class Production extends Order {
 	constructor(id, name, client, product, quantity) {
 		super(id, name, client, product);
 		this.quantity = quantity;
@@ -24,7 +24,7 @@ class Agenda extends Order {
 	static byDay(momentObj) {
 		let objects = super.byDay(momentObj);
 		return objects.map((o) => {
-			return Agenda.instantiate(o);
+			return Production.instantiate(o);
 		});
 	}
 

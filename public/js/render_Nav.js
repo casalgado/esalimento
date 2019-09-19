@@ -25,6 +25,7 @@ class Nav {
 			'crear producto'     : [ FormCreate.render, Product, 'basic' ],
 			'crear cliente'      : [ FormCreate.render, Client, 'basic' ],
 			'por cobrar'         : [ onNavigate, '/porcobrar', 'basic' ],
+			'ventas dia'         : [ onNavigate, '/ventasdia', 'default' ],
 			'nuevo pedido'       : [ onNavigate, '/pedidos#nuevo', 'default' ],
 			'nuevo gasto'        : [ onNavigate, '/gastos#nuevo', 'default' ],
 			'produccion del dia' : [ onNavigate, '/produccion', 'primary' ]

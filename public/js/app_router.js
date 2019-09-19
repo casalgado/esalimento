@@ -13,9 +13,12 @@ routes = {
 	'/'              : { function: Table.render, argument: Order },
 	'/public/'       : { function: Table.render, argument: Order },
 	'/pedidos#nuevo' : { function: FormCreate.render, argument: Order },
+	'/pedidos#edit'  : { function: FormCreate.render, argument: Order },
 	'/gastos'        : { function: Table.render, argument: Expense },
 	'/gastos#nuevo'  : { function: FormCreate.render, argument: Expense },
-	'/produccion'    : { function: DayTable.render, argument: Agenda },
+	'/gastos#edit'   : { function: FormCreate.render, argument: Expense },
+	'/produccion'    : { function: DayTable.render, argument: Production },
+	'/ventasdia'     : { function: DayTable.render, argument: Paid },
 	'/reportes'      : { function: Table.render, argument: Report },
 	'/porcobrar'     : { function: Order.showUnpaid, argument: '' },
 	render           : function(pathname) {

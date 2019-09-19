@@ -200,8 +200,8 @@ class FormEdit extends Form {
 
 		form.addEventListener('submit', (e) => {
 			constructor.update(form, object);
-			Table.render(constructor);
 			e.preventDefault();
+			window.history.go(-1);
 		});
 
 		if (constructor == Order) {
