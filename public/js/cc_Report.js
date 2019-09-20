@@ -107,8 +107,8 @@ class Report extends Sheet {
 					btnId      : 'editBtn',
 					btnTitle   : 'edit',
 					btnMain    : 'E',
-					funcToCall : FormEdit.render,
-					args       : [ Report, this ]
+					funcToCall : onNavigate,
+					args       : { pathname: '/reportes#editar', state: { objectId: this.id } }
 				},
 				{ btnId: 'deleteBtn', btnTitle: 'delete', btnMain: 'X', funcToCall: Report.remove, args: this }
 			]

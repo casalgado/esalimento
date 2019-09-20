@@ -168,6 +168,10 @@ section.localTable p#total {
   font-weight: bold;
 }
 
+section.localTable #paginationPlaceholder {
+  height: 15px;
+}
+
 section.localTable #download-link-wrapper {
   width: 100px;
   margin: 0 auto;

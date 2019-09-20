@@ -93,7 +93,7 @@ class Table {
 		if (c.table().hasPagination) {
 			return new Pagination(c);
 		} else {
-			p.setAttribute('class', 'pagination');
+			p.setAttribute('id', 'paginationPlaceholder');
 			return p;
 		}
 	}

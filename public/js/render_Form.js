@@ -213,8 +213,9 @@ class FormEdit extends Form {
 		form.appendChild(buttonCont);
 	}
 
-	static render(array) {
-		let [ constructor, object ] = array;
+	static render(constructor) {
+		// is it good practice to take the id from history.state?
+		let object = constructor.getFromLocal('id', window.history.state.objectId);
 		new FormEdit('square', constructor, object);
 		HTML.addClass('rectangle', 'hide');
 		window.scrollTo(0, 0);

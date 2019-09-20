@@ -10,6 +10,7 @@ class Nav {
 		rect.classList.toggle('hide');
 		let nav = HTML.create('section', '', 'insideNav');
 		for (const [ key, value ] of Object.entries(Nav.props())) {
+			// refactor below to use object to assign arguments instead of array
 			let button = HTML.createButton('', 'navBtn btn-' + value[2], [ key ], value[0], value[1]);
 			nav.appendChild(button);
 		}
@@ -19,16 +20,16 @@ class Nav {
 
 	static props() {
 		return {
-			'ver pedidos'        : [ onNavigate, '/pedidos', 'default' ],
-			'ver gastos'         : [ onNavigate, '/gastos', 'default' ],
-			'ver reportes'       : [ onNavigate, '/reportes', 'default' ],
+			'ver pedidos'        : [ onNavigate, { pathname: '/pedidos' }, 'default' ],
+			'ver gastos'         : [ onNavigate, { pathname: '/gastos' }, 'default' ],
+			'ver reportes'       : [ onNavigate, { pathname: '/reportes' }, 'default' ],
 			'crear producto'     : [ FormCreate.render, Product, 'basic' ],
 			'crear cliente'      : [ FormCreate.render, Client, 'basic' ],
-			'por cobrar'         : [ onNavigate, '/porcobrar', 'basic' ],
-			'ventas dia'         : [ onNavigate, '/ventasdia', 'default' ],
-			'nuevo pedido'       : [ onNavigate, '/pedidos#nuevo', 'default' ],
-			'nuevo gasto'        : [ onNavigate, '/gastos#nuevo', 'default' ],
-			'produccion del dia' : [ onNavigate, '/produccion', 'primary' ]
+			'por cobrar'         : [ onNavigate, { pathname: '/porcobrar' }, 'default' ],
+			'ventas dia'         : [ onNavigate, { pathname: '/ventasdia' }, 'default' ],
+			'nuevo pedido'       : [ onNavigate, { pathname: '/pedidos#nuevo' }, 'default' ],
+			'nuevo gasto'        : [ onNavigate, { pathname: '/gastos#nuevo' }, 'default' ],
+			'produccion del dia' : [ onNavigate, { pathname: '/produccion' }, 'primary' ]
 		};
 	}
 }

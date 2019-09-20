@@ -50,8 +50,8 @@ class Expense extends Sheet {
 					btnId      : 'editBtn',
 					btnTitle   : 'edit',
 					btnMain    : 'E',
-					funcToCall : FormEdit.render,
-					args       : [ Expense, this ]
+					funcToCall : onNavigate,
+					args       : { pathname: '/gastos#editar', state: { objectId: this.id } }
 				},
 				{ btnId: 'deleteBtn', btnTitle: 'delete', btnMain: 'X', funcToCall: Expense.remove, args: this }
 			]
@@ -70,7 +70,7 @@ class Expense extends Sheet {
 
 	static form() {
 		return {
-			fields : [
+			fields    : [
 				{ customSelectField: { property: 'category', target: 'provider' } },
 				{ customSelectField: { property: 'provider', target: 'name' } },
 				{ customSelectField: { property: 'name', target: 'provider' } },
@@ -80,8 +80,9 @@ class Expense extends Sheet {
 				{ basicField: { property: 'units', type: 'text', defaultValue: 'g', label: 'unidades:' } },
 				{ basicField: { property: 'date', type: 'date', label: 'fecha de compra:' } }
 			],
-			button : 'Gasto',
-			title  : 'Ingresar Gasto'
+			button    : 'Gasto',
+			title     : 'Ingresar Gasto',
+			editTitle : 'Editar Gasto'
 		};
 	}
 

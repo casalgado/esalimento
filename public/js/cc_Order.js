@@ -139,8 +139,8 @@ class Order extends Sheet {
 					btnId      : 'editBtn',
 					btnTitle   : 'edit',
 					btnMain    : 'E',
-					funcToCall : FormEdit.render,
-					args       : [ Order, this ]
+					funcToCall : onNavigate,
+					args       : { pathname: '/pedidos#editar', state: { objectId: this.id } }
 				},
 				{ btnId: 'deleteBtn', btnTitle: 'delete', btnMain: 'X', funcToCall: Order.remove, args: this }
 			]
