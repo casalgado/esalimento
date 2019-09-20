@@ -93,4 +93,14 @@ Array.prototype.countByProp = function(key, value) {
 	return count;
 };
 
+// scroll events
+document.addEventListener('scroll', () => {
+	document.documentElement.dataset.scroll = window.scrollY;
+	if (window.scrollY > 50) {
+		document.getElementsByClassName('pagination')[0].classList.add('whiteBorderBottom');
+	} else {
+		document.getElementsByClassName('pagination')[0].classList.remove('whiteBorderBottom');
+	}
+});
+
 // module.exports.getUnique = getUnique;

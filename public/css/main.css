@@ -146,7 +146,7 @@ section.localTable tr {
 }
 
 section.localTable tr:first-child {
-  height: inherit;
+  height: 2.5em;
 }
 
 section.localTable table tr td:first-child,
@@ -230,6 +230,10 @@ section.localTable #download-link-wrapper #download-as-csv {
 
 #ordersTable th:nth-of-type(4) {
   width: 8%;
+}
+
+.whiteBorderBottom {
+  border-bottom: 1px solid white;
 }
 
 section.localCard {

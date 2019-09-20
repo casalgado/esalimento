@@ -32,7 +32,7 @@ section.localTable {
 	}
 
 	tr:first-child {
-		height: inherit;
+		height: 2.5em;
 	}
 
 	table tr td:first-child,
@@ -113,4 +113,7 @@ section.localTable {
 	th:nth-of-type(4) {
 		width: 8%;
 	}
+}
+.whiteBorderBottom {
+	border-bottom: 1px solid white;
 }
