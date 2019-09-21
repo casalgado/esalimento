@@ -23,10 +23,10 @@ class Nav {
 			'ver pedidos'        : [ onNavigate, { pathname: '/pedidos' }, 'default' ],
 			'ver gastos'         : [ onNavigate, { pathname: '/gastos' }, 'default' ],
 			'ver reportes'       : [ onNavigate, { pathname: '/reportes' }, 'default' ],
-			'crear producto'     : [ FormCreate.render, Product, 'basic' ],
-			'crear cliente'      : [ FormCreate.render, Client, 'basic' ],
+			// 'crear producto'     : [ FormCreate.render, Product, 'basic' ],
+			// 'crear cliente'      : [ FormCreate.render, Client, 'basic' ],
 			'por cobrar'         : [ onNavigate, { pathname: '/porcobrar' }, 'default' ],
-			'ventas dia'         : [ onNavigate, { pathname: '/ventasdia' }, 'default' ],
+			ingresos             : [ onNavigate, { pathname: '/ventasdia' }, 'default' ],
 			'nuevo pedido'       : [ onNavigate, { pathname: '/pedidos#nuevo' }, 'default' ],
 			'nuevo gasto'        : [ onNavigate, { pathname: '/gastos#nuevo' }, 'default' ],
 			'produccion del dia' : [ onNavigate, { pathname: '/produccion' }, 'primary' ]

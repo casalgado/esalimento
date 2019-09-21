@@ -1,3 +1,5 @@
+//export const getUnique = getUnique;
+
 function onLoad() {
 	CLIENTS = [];
 	PRODUCTS = [];
@@ -102,5 +104,3 @@ document.addEventListener('scroll', () => {
 		document.getElementsByClassName('pagination')[0].classList.remove('whiteBorderBottom');
 	}
 });
-
-// module.exports.getUnique = getUnique;

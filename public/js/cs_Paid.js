@@ -6,11 +6,11 @@ class Paid extends Order {
 	}
 
 	static table() {
-		return { title: 'Pedidos Pagados', hasPagination: true };
+		return { title: 'Ingresos', hasPagination: true };
 	}
 
 	static sheet() {
-		return 'pagados';
+		return 'ingresos';
 	}
 
 	static hasDayTable() {
@@ -33,7 +33,7 @@ class Paid extends Order {
 
 	table() {
 		return {
-			title   : 'Ventas Dia',
+			title   : 'Ingresos',
 			header  : [ 'Producto', 'Ctd', 'Cliente', 'Total' ],
 			row     : [ this.product, this.quantity, this.client, this.total ],
 			datestr : this.date
