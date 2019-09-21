@@ -85,6 +85,10 @@ Array.prototype.sortBy = function(property) {
 	}
 };
 
+Array.prototype.sortByDatestr = function() {
+	return this.sort((a, b) => (moment(a.datestr()) > moment(b.datestr()) ? 1 : -1));
+};
+
 Array.prototype.countByProp = function(key, value) {
 	let count = 0;
 	for (let i = 0; i < this.length; i++) {

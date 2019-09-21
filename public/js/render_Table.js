@@ -114,9 +114,16 @@ class Table {
 	}
 
 	static render(constructor, property) {
-		let prop = property || 'createdAt';
+		// refactor code below
+		let objects = constructor.byWeek(SHOWING.current);
+		if (objects[0].datestr()) {
+			objects.sortByDatestr();
+		} else {
+			let prop = property || 'createdAt';
+			objects.sortBy(prop);
+		}
 		SHOWING.period = 'week';
-		let objects = constructor.byWeek(SHOWING.current).sortBy(prop);
+
 		new Table('square', objects, constructor);
 		HTML.addClass('rectangle', 'hide');
 		window.scrollTo(0, 0);

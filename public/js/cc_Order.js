@@ -112,7 +112,7 @@ class Order extends Sheet {
 			title   : 'Pedidos',
 			header  : [ 'Dia', 'Cliente', 'Producto', 'C', 'Total' ],
 			row     : [
-				moment(this.confirmed).format('DD/M'),
+				moment(this.produced).format('DD/M'),
 				this.client,
 				this.product,
 				this.quantity,

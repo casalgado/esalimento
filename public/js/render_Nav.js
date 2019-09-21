@@ -20,15 +20,16 @@ class Nav {
 
 	static props() {
 		return {
-			'ver pedidos'        : [ onNavigate, { pathname: '/pedidos' }, 'default' ],
-			'ver gastos'         : [ onNavigate, { pathname: '/gastos' }, 'default' ],
-			'ver reportes'       : [ onNavigate, { pathname: '/reportes' }, 'default' ],
+			'ver pedidos'        : [ onNavigate, { pathname: '/pedidos' }, 'secondary' ],
+			'ver gastos'         : [ onNavigate, { pathname: '/gastos' }, 'secondary' ],
+			'ver reportes'       : [ onNavigate, { pathname: '/reportes' }, 'secondary' ],
 			// 'crear producto'     : [ FormCreate.render, Product, 'basic' ],
 			// 'crear cliente'      : [ FormCreate.render, Client, 'basic' ],
-			'por cobrar'         : [ onNavigate, { pathname: '/porcobrar' }, 'default' ],
-			ingresos             : [ onNavigate, { pathname: '/ventasdia' }, 'default' ],
-			'nuevo pedido'       : [ onNavigate, { pathname: '/pedidos#nuevo' }, 'default' ],
-			'nuevo gasto'        : [ onNavigate, { pathname: '/gastos#nuevo' }, 'default' ],
+			'por cobrar'         : [ onNavigate, { pathname: '/porcobrar' }, 'success' ],
+			ingresos             : [ onNavigate, { pathname: '/ingresos' }, 'success' ],
+			egresos              : [ onNavigate, { pathname: '/egresos' }, 'success' ],
+			'nuevo pedido'       : [ onNavigate, { pathname: '/pedidos#nuevo' }, 'secondary' ],
+			'nuevo gasto'        : [ onNavigate, { pathname: '/gastos#nuevo' }, 'secondary' ],
 			'produccion del dia' : [ onNavigate, { pathname: '/produccion' }, 'primary' ]
 		};
 	}
