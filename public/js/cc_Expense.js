@@ -60,11 +60,12 @@ class Expense extends Sheet {
 
 	table() {
 		return {
-			title   : 'Gastos',
-			header  : [ 'Dia ', 'Nombre', 'Total' ],
-			row     : [ moment(this.date).format('DD/M'), this.name, accounting.formatMoney(this.total) ],
-			sortby  : [ 'name', 'total' ],
-			datestr : this.date
+			title    : 'Gastos',
+			header   : [ 'Dia ', 'Nombre', 'Total' ],
+			row      : [ moment(this.date).format('DD/M'), this.name, accounting.formatMoney(this.total) ],
+			rowClass : this.paid == '' ? 'unpaid' : 'paid',
+			sortby   : [ 'name', 'total' ],
+			datestr  : this.date
 		};
 	}
 

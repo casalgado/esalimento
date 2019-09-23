@@ -117,8 +117,9 @@ class Report extends Sheet {
 
 	table() {
 		return {
-			header : [ 'Nombre', 'Ingresos', 'Gastos', 'U. Neta' ],
-			row    : [ this.name, this.grossIncome(), this.grossExpenses(), this.profit() ]
+			header   : [ 'Nombre', 'Ingresos', 'Gastos', 'U. Neta' ],
+			row      : [ this.name, this.grossIncome(), this.grossExpenses(), this.profit() ],
+			rowClass : this.paid == '' ? 'unpaid' : 'paid'
 		};
 	}
 }

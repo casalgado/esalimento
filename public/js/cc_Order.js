@@ -109,17 +109,18 @@ class Order extends Sheet {
 
 	table() {
 		return {
-			title   : 'Pedidos',
-			header  : [ 'Dia', 'Cliente', 'Producto', 'C', 'Total' ],
-			row     : [
+			title    : 'Pedidos',
+			header   : [ 'Dia', 'Cliente', 'Producto', 'C', 'Total' ],
+			row      : [
 				moment(this.produced).format('DD/M'),
 				this.client,
 				this.product,
 				this.quantity,
 				this.total.formatK()
 			],
-			sortby  : [ 'confirmed', 'product', 'client', 'quantity', 'total' ],
-			datestr : this.datestr()
+			rowClass : this.paid == '' ? 'unpaid' : 'paid',
+			sortby   : [ 'confirmed', 'product', 'client', 'quantity', 'total' ],
+			datestr  : this.datestr()
 		};
 	}
 

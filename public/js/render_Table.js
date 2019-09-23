@@ -16,7 +16,7 @@ class Table {
 			for (let i = 0; i < objects.length; i++) {
 				let row = t.createRow(objects[i].table().row);
 				row.setAttribute('data-id', objects[i].id);
-				row.setAttribute('class', 'tableRow');
+				row.setAttribute('class', `tableRow ${objects[i].table().rowClass}`);
 				row.addEventListener('click', (e) => {
 					Inter.toggleCard(c, row, e);
 				});
@@ -116,7 +116,7 @@ class Table {
 	static render(constructor, property) {
 		// refactor code below
 		let objects = constructor.byWeek(SHOWING.current);
-		if (objects[0].datestr()) {
+		if (objects[0] && objects[0].datestr()) {
 			objects.sortByDatestr();
 		} else {
 			let prop = property || 'createdAt';
