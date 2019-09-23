@@ -102,13 +102,13 @@ section.localTable {
 
 	.paid {
 		td:last-child {
-			text-decoration: underline double forestgreen;
+			text-decoration: underline forestgreen;
 		}
 	}
 
 	.unpaid {
 		td:last-child {
-			text-decoration: underline double firebrick;
+			text-decoration: underline firebrick;
 		}
 	}
 

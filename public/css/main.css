@@ -217,13 +217,13 @@ section.localTable #download-link-wrapper #download-as-csv {
 }
 
 #ordersTable .paid td:last-child {
-  -webkit-text-decoration: underline double forestgreen;
-          text-decoration: underline double forestgreen;
+  -webkit-text-decoration: underline forestgreen;
+          text-decoration: underline forestgreen;
 }
 
 #ordersTable .unpaid td:last-child {
-  -webkit-text-decoration: underline double firebrick;
-          text-decoration: underline double firebrick;
+  -webkit-text-decoration: underline firebrick;
+          text-decoration: underline firebrick;
 }
 
 #ordersTable th:nth-of-type(1) {

@@ -1,6 +1,8 @@
 //export const getUnique = getUnique;
+console.log(`document: ${moment().format('mm:ss.SS')}`);
 
 function onLoad() {
+	console.log(`onLoad: ${moment().format('mm:ss.SS')}`);
 	CLIENTS = [];
 	PRODUCTS = [];
 	ORDERS = [];
@@ -11,6 +13,7 @@ function onLoad() {
 	Nav.renderMainButton();
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
+			console.log(`User: ${moment().format('mm:ss.SS')}`);
 			loadPage();
 		} else {
 			document.getElementById('siteContainer').setAttribute('style', 'display:block');
@@ -25,16 +28,22 @@ function loadPage() {
 	Product.all().then((objs) => {
 		PRODUCTS = objs;
 	});
-	Order.all().then((objs) => {
+	let orderPromise = Order.all().then((objs) => {
 		ORDERS = objs;
-		Table.render(Order);
+		console.log(`Orders: ${moment().format('mm:ss.SS')}`);
 	});
-	Expense.all().then((objs) => {
+	let expensePromise = Expense.all().then((objs) => {
 		EXPENSES = objs;
+		console.log(`Expenses: ${moment().format('mm:ss.SS')}`);
 	});
-	Report.all().then((objs) => {
+	let reportPromise = Report.all().then((objs) => {
 		REPORTS = objs;
+		console.log(`Reports: ${moment().format('mm:ss.SS')}`);
 		Report.create();
+	});
+	Promise.all([ orderPromise, expensePromise, reportPromise ]).then(() => {
+		onNavigate({ pathname: window.location.pathname });
+		console.log(`Promise all: ${moment().format('mm:ss.SS')}`);
 	});
 
 	SHOWING = { period: 'Week', current: moment() };

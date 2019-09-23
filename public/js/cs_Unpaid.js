@@ -1,8 +1,9 @@
 class Unpaid extends Order {
-	constructor(id, name, client, product, quantity, total) {
+	constructor(id, name, client, product, quantity, total, date) {
 		super(id, name, client, product);
 		this.quantity = quantity;
 		this.total = total;
+		this.date = date;
 	}
 
 	static table() {
@@ -15,7 +16,7 @@ class Unpaid extends Order {
 
 	static instantiate(orderInstance) {
 		const o = orderInstance;
-		return new this(o.id, o.name, o.client, o.product, o.quantity, o.total);
+		return new this(o.id, o.name, o.client, o.product, o.quantity, o.total, o.produced);
 	}
 
 	static byWeek(momentObj) {
@@ -30,8 +31,9 @@ class Unpaid extends Order {
 	table() {
 		return {
 			title   : 'Ventas Dia',
-			header  : [ 'Producto', 'Ctd', 'Cliente', 'Total' ],
-			row     : [ this.product, this.quantity, this.client, this.total ],
+			header  : [ 'Dia', 'Producto', 'Ctd', 'Cliente', 'Total' ],
+			row     : [ moment(this.produced).format('DD/M'), this.product, this.quantity, this.client, this.total ],
+			sortby  : [ 'product', 'quantity', 'client', 'total' ],
 			datestr : this.date
 		};
 	}

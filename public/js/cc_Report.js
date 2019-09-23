@@ -22,8 +22,6 @@ class Report extends Sheet {
 			pastReport.setUnpaid().update();
 			let newReport = new Report(this.setLocalId(), pastReport.realWealthAtEnd());
 			newReport.save();
-		} else {
-			console.log('Report not created');
 		}
 	}
 
