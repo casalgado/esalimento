@@ -96,6 +96,21 @@ section.localTable {
 	}
 }
 
+#expensesTable {
+	table-layout: fixed;
+	width: 100%;
+
+	th:nth-of-type(1) {
+		width: 20%;
+	}
+	th:nth-of-type(2) {
+		width: 40%;
+	}
+	th:nth-of-type(3) {
+		width: 40%;
+	}
+}
+
 #ordersTable {
 	table-layout: fixed;
 	width: 100%;

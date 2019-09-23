@@ -211,6 +211,23 @@ section.localTable #download-link-wrapper #download-as-csv {
   width: 40%;
 }
 
+#expensesTable {
+  table-layout: fixed;
+  width: 100%;
+}
+
+#expensesTable th:nth-of-type(1) {
+  width: 20%;
+}
+
+#expensesTable th:nth-of-type(2) {
+  width: 40%;
+}
+
+#expensesTable th:nth-of-type(3) {
+  width: 40%;
+}
+
 #ordersTable {
   table-layout: fixed;
   width: 100%;

@@ -80,7 +80,9 @@ String.prototype.isEmpty = function() {
 };
 
 String.prototype.formatK = function() {
-	if (this.endsWith('000')) {
+	if (this.endsWith(',000')) {
+		return this.slice(0, -4) + 'k';
+	} else if (this.endsWith('000')) {
 		return this.slice(0, -3) + 'k';
 	}
 	return this;
