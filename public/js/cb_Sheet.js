@@ -108,7 +108,6 @@ class Sheet {
 				})
 				.then(() => {
 					local.splice(local.indexOf(c.getFromLocal('id', key)), 1);
-					Table.render(c);
 				});
 		}
 	}

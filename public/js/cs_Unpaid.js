@@ -11,7 +11,7 @@ class Unpaid extends Order {
 	}
 
 	static sheet() {
-		return 'pagados';
+		return 'unpaid';
 	}
 
 	static instantiate(orderInstance) {

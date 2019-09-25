@@ -10,7 +10,7 @@ class Spent extends Expense {
 	}
 
 	static sheet() {
-		return 'egresos';
+		return 'spent';
 	}
 
 	static hasDayTable() {
