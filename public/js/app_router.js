@@ -1,6 +1,7 @@
 const onNavigate = ({ pathname, state = {} }) => {
 	window.history.pushState(state, pathname, window.location.origin + pathname);
 	routes.render(pathname);
+	window.scrollTo(0, 0);
 };
 
 routes = {
