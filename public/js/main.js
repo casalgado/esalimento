@@ -10,6 +10,7 @@ function onLoad() {
 	REPORTS = [];
 	SHOWING = { period: 'Week', current: moment() };
 	FILTERS = {};
+	HTML = new Html();
 	Nav.renderMainButton();
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
@@ -48,9 +49,8 @@ function loadPage() {
 
 	SHOWING = { period: 'Week', current: moment() };
 	FILTERS = {};
-	document.getElementById('siteContainer').setAttribute('style', 'display:none');
-	document.getElementById('loaderContainer').setAttribute('style', 'display:none');
-	document.getElementById('appContainer').setAttribute('style', 'display:block');
+	document.getElementById('siteContainer').classList.add('hide');
+	document.getElementById('appContainer').classList.add('show');
 }
 
 function drawAll(array, target, property) {

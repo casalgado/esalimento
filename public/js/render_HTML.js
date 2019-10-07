@@ -1,5 +1,7 @@
-class HTML {
-	static create(type, oid, oclass, attributes) {
+class Html {
+	constructor() {}
+
+	create(type, oid, oclass, attributes) {
 		let id = oid || '';
 		let classname = oclass || '';
 		let element = document.createElement(type);
@@ -13,7 +15,7 @@ class HTML {
 		return element;
 	}
 
-	static createIconButton(btnId, btnClass, iconClass, funcToCall, argument) {
+	createIconButton(btnId, btnClass, iconClass, funcToCall, argument) {
 		let button = HTML.create('button', btnId, 'btn ' + btnClass);
 		button.addEventListener('click', () => {
 			funcToCall(argument);
@@ -24,7 +26,7 @@ class HTML {
 		return button;
 	}
 
-	static createSquareButton({ btnId = '', btnClass = '', btnTitle = '', btnMain = '', funcToCall, args }) {
+	createSquareButton({ btnId = '', btnClass = '', btnTitle = '', btnMain = '', funcToCall, args }) {
 		let button = HTML.create('div', btnId, 'btn btn-square ' + btnClass);
 		let title = HTML.create('p', btnId + '-title', btnClass + ' btn-square-title');
 		title.innerHTML = btnTitle;
@@ -38,7 +40,7 @@ class HTML {
 		return button;
 	}
 
-	static createButton(btnId, btnClass, display, funcToCall, argument) {
+	createButton(btnId, btnClass, display, funcToCall, argument) {
 		let button = HTML.create('button', btnId, 'btn ' + btnClass);
 		button.addEventListener('click', () => {
 			funcToCall(argument);
@@ -47,25 +49,25 @@ class HTML {
 		return button;
 	}
 
-	static get(id) {
+	get(id) {
 		return document.getElementById(id);
 	}
 
-	static addClass(id, classname) {
+	addClass(id, classname) {
 		document.getElementById(id).classList.add(classname);
 	}
 
-	static removeClass(id, classname) {
+	removeClass(id, classname) {
 		document.getElementById(id).classList.remove(classname);
 	}
 
-	static removeClassAll(group, classname) {
+	removeClassAll(group, classname) {
 		Array.from(document.querySelectorAll(group)).map((e) => {
 			e.classList.remove(classname);
 		});
 	}
 
-	static list(parent, childType, childClass, object) {
+	list(parent, childType, childClass, object) {
 		// @this method is only used by card. is it possible to combine with navList()?
 		for (const [ key, value ] of Object.entries(object)) {
 			let child = HTML.create(childType, '', childClass);

@@ -13,9 +13,12 @@
 
 #siteContainer,
 #appContainer {
-	display: none;
 	color: $fontColor;
 	background-color: $offWhite;
+}
+
+#printContainer {
+	display: none;
 }
 
 #rectangle {
@@ -24,6 +27,10 @@
 
 .hide {
 	display: none;
+}
+
+.show {
+	display: block;
 }
 
 .selected {
@@ -85,3 +92,5 @@ label:focus,
 	-webkit-appearance: none;
 	box-shadow: none !important;
 }
+
+@import 'print';

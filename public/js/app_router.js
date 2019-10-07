@@ -5,21 +5,22 @@ const onNavigate = ({ pathname, state = {} }) => {
 };
 
 routes = {
-	'/pedidos'         : { function: Table.render, argument: Order },
-	'/'                : { function: Table.render, argument: Order },
-	'/public/'         : { function: Table.render, argument: Order },
-	'/pedidos#nuevo'   : { function: FormCreate.render, argument: Order },
-	'/pedidos#editar'  : { function: FormEdit.render, argument: Order },
-	'/gastos'          : { function: Table.render, argument: Expense },
-	'/gastos#nuevo'    : { function: FormCreate.render, argument: Expense },
-	'/gastos#editar'   : { function: FormEdit.render, argument: Expense },
-	'/produccion'      : { function: DayTable.render, argument: Production },
-	'/ingresos'        : { function: DayTable.render, argument: Paid },
-	'/egresos'         : { function: DayTable.render, argument: Spent },
-	'/reportes'        : { function: Table.render, argument: Report },
-	'/reportes#editar' : { function: FormEdit.render, argument: Report },
-	'/porcobrar'       : { function: Table.render, argument: Unpaid },
-	render             : function(pathname) {
+	'/pedidos'           : { function: Table.render, argument: Order },
+	'/'                  : { function: Table.render, argument: Order },
+	'/public/'           : { function: Table.render, argument: Order },
+	'/public/index.html' : { function: Table.render, argument: Order },
+	'/pedidos#nuevo'     : { function: FormCreate.render, argument: Order },
+	'/pedidos#editar'    : { function: FormEdit.render, argument: Order },
+	'/gastos'            : { function: Table.render, argument: Expense },
+	'/gastos#nuevo'      : { function: FormCreate.render, argument: Expense },
+	'/gastos#editar'     : { function: FormEdit.render, argument: Expense },
+	'/produccion'        : { function: DayTable.render, argument: Production },
+	'/ingresos'          : { function: DayTable.render, argument: Paid },
+	'/egresos'           : { function: DayTable.render, argument: Spent },
+	'/reportes'          : { function: Table.render, argument: Report },
+	'/reportes#editar'   : { function: FormEdit.render, argument: Report },
+	'/porcobrar'         : { function: Table.render, argument: Unpaid },
+	render               : function(pathname) {
 		this[pathname].function(this[pathname].argument);
 	}
 };

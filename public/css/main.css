@@ -109,17 +109,17 @@ section.insideNav .navBtn {
   border-radius: 999px;
 }
 
-section.localTable {
+.localTable {
   background-color: #262626;
   font-size: 14px;
 }
 
-section.localTable .tableRow,
-section.localTable .tableHeader {
+.localTable .tableRow,
+.localTable .tableHeader {
   cursor: pointer;
 }
 
-section.localTable div.pagination {
+.localTable div.pagination {
   background-color: #262626;
   position: -webkit-sticky;
   position: sticky;
@@ -133,7 +133,7 @@ section.localTable div.pagination {
       grid-template-columns: 1fr 3fr 1fr;
 }
 
-section.localTable h6 {
+.localTable h6 {
   padding-top: 8px;
   padding-bottom: 8px;
   margin-bottom: 0px;
@@ -141,38 +141,38 @@ section.localTable h6 {
   text-align: center;
 }
 
-section.localTable tr {
+.localTable tr {
   height: 3.5em;
 }
 
-section.localTable tr:first-child {
+.localTable tr:first-child {
   height: 2.5em;
 }
 
-section.localTable table tr td:first-child,
-section.localTable table tr th:first-child {
+.localTable table tr td:first-child,
+.localTable table tr th:first-child {
   padding-left: 10px;
 }
 
-section.localTable table tr td:last-child {
+.localTable table tr td:last-child {
   padding-right: 10px;
 }
 
-section.localTable table tr:nth-child(even) {
+.localTable table tr:nth-child(even) {
   background-color: #373737;
 }
 
-section.localTable p#total {
+.localTable p#total {
   margin-top: 15px;
   text-align: center;
   font-weight: bold;
 }
 
-section.localTable #paginationPlaceholder {
+.localTable #paginationPlaceholder {
   height: 15px;
 }
 
-section.localTable #download-link-wrapper {
+.localTable #download-link-wrapper {
   width: 100px;
   margin: 0 auto;
   margin-top: 30px;
@@ -180,16 +180,16 @@ section.localTable #download-link-wrapper {
   border-radius: 99px;
 }
 
-section.localTable #download-link-wrapper:hover {
+.localTable #download-link-wrapper:hover {
   background-color: white;
   color: black;
 }
 
-section.localTable #download-link-wrapper:hover #download-as-csv {
+.localTable #download-link-wrapper:hover #download-as-csv {
   color: #262626;
 }
 
-section.localTable #download-link-wrapper #download-as-csv {
+.localTable #download-link-wrapper #download-as-csv {
   width: inherit;
   color: #f9fafb;
 }
@@ -430,9 +430,12 @@ table {
 
 #siteContainer,
 #appContainer {
-  display: none;
   color: #f9fafb;
   background-color: #262626;
+}
+
+#printContainer {
+  display: none;
 }
 
 #rectangle {
@@ -441,6 +444,10 @@ table {
 
 .hide {
   display: none;
+}
+
+.show {
+  display: block;
 }
 
 .selected {
@@ -504,5 +511,24 @@ label:focus,
   -webkit-appearance: none;
   -webkit-box-shadow: none !important;
           box-shadow: none !important;
+}
+
+@media print {
+  .localTable {
+    color: black;
+    font-size: 14px;
+  }
+  #content {
+    max-width: 100%;
+    margin: 3cm;
+    padding: 0px;
+  }
+  #printContainer {
+    display: block;
+    width: 100%;
+  }
+  #appContainer {
+    display: none;
+  }
 }
 /*# sourceMappingURL=main.css.map */

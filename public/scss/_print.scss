@@ -1,0 +1,21 @@
+@media print {
+	.localTable {
+		color: black;
+		font-size: 14px;
+	}
+
+	#content {
+		max-width: 100%;
+		margin: 3cm;
+		padding: 0px;
+	}
+
+	#printContainer {
+		display: block;
+		width: 100%;
+	}
+
+	#appContainer {
+		display: none;
+	}
+}
