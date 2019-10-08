@@ -218,15 +218,14 @@ class Sheet {
 		return moment(this.datestr()).isSame(momentObj, 'day');
 	}
 
-	static byWeek(momentObj) {
-		return this.local().filter((e) => {
-			return e.belongsToWeek(momentObj);
-		});
+	belongsToPeriod(momentObj, period) {
+		// constructor must have the datestr() method.
+		return moment(this.datestr()).isSame(momentObj, period);
 	}
 
-	static byDay(momentObj) {
+	static byPeriod(momentObj, period) {
 		return this.local().filter((e) => {
-			return e.belongsToDay(momentObj);
+			return e.belongsToPeriod(momentObj, period);
 		});
 	}
 

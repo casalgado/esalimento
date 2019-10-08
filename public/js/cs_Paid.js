@@ -5,16 +5,12 @@ class Paid extends Order {
 		this.total = total;
 	}
 
-	static table() {
-		return { title: 'Ingresos', hasPagination: true };
-	}
-
 	static sheet() {
 		return 'ingresos';
 	}
 
-	static hasDayTable() {
-		return true;
+	static local() {
+		return ORDERS;
 	}
 
 	static instantiate(orderInstance) {
@@ -22,13 +18,22 @@ class Paid extends Order {
 		return new this(o.id, o.name, o.client, o.product, o.quantity, o.total);
 	}
 
-	static byDay(momentObj) {
-		let objects = this.local().filter((e) => {
-			return moment(e.paid).isSame(momentObj, 'day');
-		});
-		return objects.map((o) => {
-			return Paid.instantiate(o);
-		});
+	static byPeriod(momentObj) {
+		return this.local()
+			.filter((e) => {
+				return moment(e.paid).isSame(momentObj, 'day');
+			})
+			.map((o) => {
+				return Paid.instantiate(o);
+			});
+	}
+
+	static hasDayTable() {
+		return true;
+	}
+
+	static table() {
+		return { title: 'Ingresos', hasPagination: true, period: 'day' };
 	}
 
 	table() {

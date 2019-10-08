@@ -18,11 +18,43 @@ class Client extends Sheet {
 		return this.createdAt;
 	}
 
+	totalOrders() {
+		return ORDERS.filter((e) => {
+			return e.client == this.name;
+		}).length;
+	}
+
+	orderDetails() {
+		let tally = {};
+		let tallyArray = [];
+		ORDERS.filter((e) => {
+			return e.client == this.name;
+		}).map((e) => {
+			if (tally[e.product]) {
+				tally[e.product]++;
+			} else {
+				tally[e.product] = 1;
+			}
+		});
+		for (const prop in tally) {
+			tallyArray.push({ product: prop, amount: tally[prop] });
+		}
+		return tallyArray.sortBy('amount').reverse();
+	}
+
+	static byPeriod() {
+		return this.local().sortBy('name').reverse();
+	}
+
+	static table() {
+		return { title: 'Clientes', hasPagination: false, period: 'all' };
+	}
+
 	table() {
 		return {
 			title   : 'Clientes',
-			header  : [ 'Nombre', 'Telefono', 'Direccion' ],
-			row     : [ this.name, this.phone, this.address ],
+			header  : [ 'Nombre', 'Pedidos', 'Producto Fav' ],
+			row     : [ this.name, this.totalOrders(), this.orderDetails() ],
 			datestr : ''
 		};
 	}

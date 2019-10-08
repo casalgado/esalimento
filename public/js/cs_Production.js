@@ -4,8 +4,8 @@ class Production extends Order {
 		this.quantity = quantity;
 	}
 
-	static table() {
-		return { title: 'Produccion del Dia', hasPagination: true };
+	static local() {
+		return ORDERS;
 	}
 
 	static sheet() {
@@ -21,11 +21,15 @@ class Production extends Order {
 		return new this(o.id, o.name, o.client, o.product, o.quantity);
 	}
 
-	static byDay(momentObj) {
-		let objects = super.byDay(momentObj);
+	static byPeriod(momentObj, period) {
+		let objects = super.byPeriod(momentObj, period);
 		return objects.map((o) => {
 			return Production.instantiate(o);
 		});
+	}
+
+	static table() {
+		return { title: 'Produccion del Dia', hasPagination: true, period: 'day' };
 	}
 
 	table() {

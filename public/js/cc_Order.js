@@ -104,7 +104,7 @@ class Order extends Sheet {
 	}
 
 	static table() {
-		return { title: 'Pedidos', hasPagination: true };
+		return { title: 'Pedidos', hasPagination: true, period: 'week' };
 	}
 
 	table() {

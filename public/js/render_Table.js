@@ -115,31 +115,19 @@ class Table {
 
 	static render(constructor, property) {
 		// refactor code below
-		let objects = constructor.byWeek(SHOWING.current);
+		let c = constructor;
+		let objects = c.byPeriod(SHOWING.current, c.table().period);
 		if (objects[0] && objects[0].datestr()) {
 			objects.sortByDatestr();
 		} else {
 			let prop = property || 'createdAt';
 			objects.sortBy(prop);
 		}
-		SHOWING.period = 'week';
+		SHOWING.period = c.table().period;
 
-		new Table('square', objects, constructor);
+		new Table('square', objects, c);
 		HTML.addClass('rectangle', 'hide');
 		window.scrollTo(0, 0);
-	}
-}
-
-class DayTable extends Table {
-	constructor(parentId, objects, constructor) {
-		super(parentId, objects, constructor);
-	}
-
-	static render(constructor) {
-		SHOWING.period = 'day';
-		let objects = constructor.byDay(SHOWING.current);
-		new DayTable('square', objects, constructor);
-		HTML.addClass('rectangle', 'hide');
 	}
 }
 
@@ -179,6 +167,8 @@ class Pagination {
 	}
 }
 
+// @refactor add methods (below) to class Pagination
+
 function currentlyShowing() {
 	// returns a string
 	let current = moment(SHOWING.current.format('X'), 'X');
@@ -188,21 +178,13 @@ function currentlyShowing() {
 function showNext(constructor) {
 	SHOWING.current.add(1, SHOWING.period);
 	Pagination.renderCurrentlyShowing();
-	if (constructor.hasDayTable()) {
-		DayTable.render(constructor);
-	} else {
-		Table.render(constructor);
-	}
+	Table.render(constructor);
 	HTML.addClass('rectangle', 'hide');
 }
 
 function showPrevious(constructor) {
 	SHOWING.current.subtract(1, SHOWING.period);
 	Pagination.renderCurrentlyShowing();
-	if (constructor.hasDayTable()) {
-		DayTable.render(constructor);
-	} else {
-		Table.render(constructor);
-	}
+	Table.render(constructor);
 	HTML.addClass('rectangle', 'hide');
 }

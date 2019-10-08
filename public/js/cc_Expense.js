@@ -19,7 +19,7 @@ class Expense extends Sheet {
 	}
 
 	static table() {
-		return { title: 'Gastos', hasPagination: true };
+		return { title: 'Gastos', hasPagination: true, period: 'week' };
 	}
 
 	static extendsCreate() {

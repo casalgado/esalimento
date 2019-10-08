@@ -5,8 +5,8 @@ class Spent extends Expense {
 		this.date = moment(date).format() || moment().format();
 	}
 
-	static table() {
-		return { title: 'Egresos', hasPagination: true };
+	static local() {
+		return EXPENSES;
 	}
 
 	static sheet() {
@@ -22,11 +22,15 @@ class Spent extends Expense {
 		return new this(o.id, o.name, o.total, o.date);
 	}
 
-	static byDay(momentObj) {
-		let objects = super.byDay(momentObj);
+	static byPeriod(momentObj, period) {
+		let objects = super.byPeriod(momentObj, period);
 		return objects.map((o) => {
 			return Spent.instantiate(o);
 		});
+	}
+
+	static table() {
+		return { title: 'Egresos', hasPagination: true, period: 'day' };
 	}
 
 	table() {

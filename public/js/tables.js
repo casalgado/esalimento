@@ -1,11 +1,3 @@
-//@optimization convert tables.js to Table.js (create a class)
-// this class draws a table with the draw method, Table.draw()
-// it takes in two argumentns. The id of a <table> element, and
-// an array of objects.
-// These objects must have the following methods defined:
-// object.columTitles() and object.rowContent()
-// the limitation of this approach is that it allows one table per class.
-
 class Table {
 	constructor(id, objects) {
 		this.draw(id, objects);
@@ -65,12 +57,12 @@ function currentlyShowing() {
 
 function showNext(table, constructor) {
 	SHOWING.current.add(1, SHOWING.period);
-	array = constructor.byWeek(SHOWING.current);
+	array = constructor.byPeriod(SHOWING.current, SHOWING.period);
 	new Table(table, array);
 }
 
 function showPrevious(table, constructor) {
 	SHOWING.current.subtract(1, SHOWING.period);
-	array = constructor.byWeek(SHOWING.current);
+	array = constructor.byPeriod(SHOWING.current, SHOWING.period);
 	new Table(table, array);
 }

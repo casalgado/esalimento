@@ -7,7 +7,7 @@ class Unpaid extends Order {
 	}
 
 	static table() {
-		return { title: 'Pedidos por Cobrar', hasPagination: false };
+		return { title: 'Pedidos por Cobrar', hasPagination: false, period: false };
 	}
 
 	static sheet() {
@@ -19,7 +19,7 @@ class Unpaid extends Order {
 		return new this(o.id, o.name, o.client, o.product, o.quantity, o.total, o.produced);
 	}
 
-	static byWeek(momentObj) {
+	static byPeriod() {
 		let objects = this.local().filter((e) => {
 			return e.paid == '';
 		});
