@@ -22,7 +22,7 @@ class Nav {
 		return {
 			'ver pedidos'        : [ onNavigate, { pathname: '/pedidos' }, 'secondary' ],
 			'ver gastos'         : [ onNavigate, { pathname: '/gastos' }, 'secondary' ],
-			'ver reportes'       : [ onNavigate, { pathname: '/reportes' }, 'secondary' ],
+			'ver clientes'       : [ onNavigate, { pathname: '/clientes' }, 'secondary' ],
 			// 'crear producto'     : [ FormCreate.render, Product, 'basic' ],
 			// 'crear cliente'      : [ FormCreate.render, Client, 'basic' ],
 			'por cobrar'         : [ onNavigate, { pathname: '/porcobrar' }, 'success' ],

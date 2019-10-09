@@ -30,15 +30,18 @@ class Spent extends Expense {
 	}
 
 	static table() {
-		return { title: 'Egresos', hasPagination: true, period: 'day' };
+		return {
+			title         : 'Egresos',
+			header        : [ 'Dia ', 'Nombre', 'Total' ],
+			sortby        : [ 'date', 'name', 'total' ],
+			hasPagination : true,
+			period        : 'day'
+		};
 	}
 
 	table() {
 		return {
-			title   : 'Egresos',
-			header  : [ 'Dia ', 'Nombre', 'Total' ],
 			row     : [ moment(this.date).format('DD/M'), this.name, accounting.formatMoney(this.total) ],
-			sortby  : [ 'name', 'total' ],
 			datestr : this.date
 		};
 	}

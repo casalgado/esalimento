@@ -61,6 +61,20 @@ function importOrders(array) {
 	}
 }
 
+function createClientsFromLocalOrders() {
+	clients = [];
+	let newClient;
+	j = ORDERS;
+	for (let i = 0; i < j.length; i++) {
+		//create client
+		if (!clients.includes(j[i].client)) {
+			newClient = new Client('id', j[i].client, '', '', '');
+			newClient.save();
+			clients.push(j[i].client);
+		}
+	}
+}
+
 function importOrdersDatabase() {
 	clients = [];
 	products = [];

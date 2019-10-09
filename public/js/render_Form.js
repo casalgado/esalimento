@@ -132,7 +132,7 @@ class Form {
 	}
 
 	static drawSelectMenus() {
-		drawSelectMenu('orders-client-selection', Order.spotlight('client', Client, 'name', 10), 'name');
+		drawSelectMenu('orders-client-selection', Order.spotlight('client', Client, 'name', 20), 'name');
 		drawSelectMenu('orders-product-selection', PRODUCTS.sortBy('name'), 'name');
 		drawSelectMenu('expenses-name-selection', Expense.spotlight('name', Expense, 'name', 10), 'name');
 		drawSelectMenu(

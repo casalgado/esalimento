@@ -52,6 +52,7 @@ class Order extends Sheet {
 			let newClient = new Client('id', newObject.client, '', '', '');
 			newClient.save();
 			CLIENTS.push(newClient);
+			alert('new client added to database');
 		}
 		newObject.save();
 		Form.reset();
@@ -104,13 +105,17 @@ class Order extends Sheet {
 	}
 
 	static table() {
-		return { title: 'Pedidos', hasPagination: true, period: 'week' };
+		return {
+			title         : 'Pedidos',
+			header        : [ 'Dia', 'Cliente', 'Producto', 'C', 'Total' ],
+			sortby        : [ 'confirmed', 'client', 'product', 'quantity', 'total' ],
+			hasPagination : true,
+			period        : 'week'
+		};
 	}
 
 	table() {
 		return {
-			title    : 'Pedidos',
-			header   : [ 'Dia', 'Cliente', 'Producto', 'C', 'Total' ],
 			row      : [
 				moment(this.produced).format('DD/M'),
 				this.client,
@@ -119,7 +124,6 @@ class Order extends Sheet {
 				this.total.formatK()
 			],
 			rowClass : this.paid == '' ? 'unpaid' : 'paid',
-			sortby   : [ 'confirmed', 'product', 'client', 'quantity', 'total' ],
 			datestr  : this.datestr()
 		};
 	}

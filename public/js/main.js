@@ -23,12 +23,6 @@ function onLoad() {
 }
 
 function loadPage() {
-	Client.all().then((objs) => {
-		CLIENTS = objs;
-	});
-	Product.all().then((objs) => {
-		PRODUCTS = objs;
-	});
 	let orderPromise = Order.all().then((objs) => {
 		ORDERS = objs;
 		console.log(`Orders: ${moment().format('mm:ss.SS')}`);
@@ -42,10 +36,21 @@ function loadPage() {
 		console.log(`Reports: ${moment().format('mm:ss.SS')}`);
 		Report.create();
 	});
-	Promise.all([ orderPromise, expensePromise, reportPromise ]).then(() => {
-		onNavigate({ pathname: window.location.pathname });
-		console.log(`Promise all: ${moment().format('mm:ss.SS')}`);
-	});
+	Promise.all([ orderPromise, expensePromise, reportPromise ])
+		.then(() => {
+			onNavigate({ pathname: window.location.pathname });
+			console.log(`Promises O + E + R: ${moment().format('mm:ss.SS')}`);
+		})
+		.then(() => {
+			Client.all().then((objs) => {
+				CLIENTS = objs;
+				console.log(`Clients: ${moment().format('mm:ss.SS')}`);
+			});
+			Product.all().then((objs) => {
+				PRODUCTS = objs;
+				console.log(`Products: ${moment().format('mm:ss.SS')}`);
+			});
+		});
 
 	SHOWING = { period: 'Week', current: moment() };
 	FILTERS = {};
@@ -113,9 +118,40 @@ Array.prototype.countByProp = function(key, value) {
 // scroll events
 document.addEventListener('scroll', () => {
 	document.documentElement.dataset.scroll = window.scrollY;
-	if (window.scrollY > 50) {
-		document.getElementsByClassName('pagination')[0].classList.add('whiteBorderBottom');
-	} else {
-		document.getElementsByClassName('pagination')[0].classList.remove('whiteBorderBottom');
+	if (document.getElementsByClassName('pagination').length > 0) {
+		if (window.scrollY > 50) {
+			document.getElementsByClassName('pagination')[0].classList.add('whiteBorderBottom');
+		} else {
+			document.getElementsByClassName('pagination')[0].classList.remove('whiteBorderBottom');
+		}
 	}
 });
+
+function rowComparer(idx, asc) {
+	return function(a, b) {
+		return compare(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+	};
+}
+
+function getCellValue(tr, idx) {
+	return tr.children[idx].innerText || tr.children[idx].textContent;
+}
+
+function compare(v1, v2) {
+	if (parseInt(v1[0])) {
+		v1 = convertToInteger(v1);
+		v2 = convertToInteger(v2);
+		return v1 - v2;
+	} else {
+		return v1.toString().localeCompare(v2);
+	}
+}
+
+function convertToInteger(string) {
+	// strip the k at the end of the string
+	if (string[string.length - 1] == 'k' && parseInt(string[0])) {
+		return parseInt(string.slice(0, -1));
+	} else if (parseInt(string[0])) {
+		return parseInt(string);
+	}
+}

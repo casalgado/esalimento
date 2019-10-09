@@ -20,6 +20,7 @@ routes = {
 	'/reportes'          : { function: Table.render, argument: Report },
 	'/reportes#editar'   : { function: FormEdit.render, argument: Report },
 	'/porcobrar'         : { function: Table.render, argument: Unpaid },
+	'/clientes'          : { function: Table.render, argument: Client },
 	render               : function(pathname) {
 		this[pathname].function(this[pathname].argument);
 	}

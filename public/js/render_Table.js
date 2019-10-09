@@ -11,7 +11,7 @@ class Table {
 		s.appendChild(t.createTitle(c.table().title));
 		s.appendChild(t.createPagination(c));
 		if (objects[0]) {
-			table.appendChild(t.createHeader(c, o.table()));
+			table.appendChild(t.createHeader(c.table()));
 
 			for (let i = 0; i < objects.length; i++) {
 				let row = t.createRow(objects[i].table().row);
@@ -98,13 +98,8 @@ class Table {
 		}
 	}
 
-	createHeader(c, tableObject) {
+	createHeader(tableObject) {
 		let row = this.createTableRow('th', tableObject.header);
-		for (let i = 0; i < row.children.length; i++) {
-			row.children[i].addEventListener('click', function() {
-				Table.render(c, tableObject.sortby[i]);
-			});
-		}
 		row.setAttribute('class', 'tableHeader');
 		return row;
 	}
@@ -117,16 +112,27 @@ class Table {
 		// refactor code below
 		let c = constructor;
 		let objects = c.byPeriod(SHOWING.current, c.table().period);
-		if (objects[0] && objects[0].datestr()) {
-			objects.sortByDatestr();
-		} else {
-			let prop = property || 'createdAt';
-			objects.sortBy(prop);
+		if (objects.length > 0) {
+			if (property) {
+				objects.sortBy(property);
+			} else if (objects[0].datestr()) {
+				objects.sortByDatestr();
+			} else {
+				objects.sortBy('createdAt');
+			}
 		}
 		SHOWING.period = c.table().period;
 
 		new Table('square', objects, c);
 		HTML.addClass('rectangle', 'hide');
+		document.querySelectorAll('th').forEach((th) =>
+			th.addEventListener('click', () => {
+				const table = th.closest('table');
+				let array = Array.from(table.querySelectorAll('tr:nth-child(n+2)'));
+				let sub_array = Array.from(th.parentNode.children).indexOf(th);
+				array.sort(rowComparer(sub_array, (this.asc = !this.asc))).forEach((tr) => table.appendChild(tr));
+			})
+		);
 		window.scrollTo(0, 0);
 	}
 }

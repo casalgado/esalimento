@@ -18,10 +18,17 @@ class Product extends Sheet {
 		return this.createdAt;
 	}
 
+	static table() {
+		return {
+			title         : 'Products',
+			header        : [ 'Nombre', 'Categoria', 'Costo', 'Venta' ],
+			hasPagination : false,
+			period        : false
+		};
+	}
+
 	table() {
 		return {
-			title   : 'Products',
-			header  : [ 'Nombre', 'Categoria', 'Costo', 'Venta' ],
 			row     : [ this.name, this.category, this.cost, this.price ],
 			datestr : ''
 		};

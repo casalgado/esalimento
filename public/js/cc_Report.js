@@ -72,10 +72,6 @@ class Report extends Sheet {
 		return this.date;
 	}
 
-	static table() {
-		return { title: 'Reportes', hasPagination: true };
-	}
-
 	card() {
 		return {
 			t       : `${this.name}`,
@@ -113,9 +109,16 @@ class Report extends Sheet {
 		};
 	}
 
+	static table() {
+		return {
+			title         : 'Reportes',
+			header        : [ 'Nombre', 'Ingresos', 'Gastos', 'U. Neta' ],
+			hasPagination : true
+		};
+	}
+
 	table() {
 		return {
-			header   : [ 'Nombre', 'Ingresos', 'Gastos', 'U. Neta' ],
 			row      : [ this.name, this.grossIncome(), this.grossExpenses(), this.profit() ],
 			rowClass : this.paid == '' ? 'unpaid' : 'paid'
 		};

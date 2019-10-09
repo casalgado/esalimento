@@ -33,13 +33,17 @@ class Paid extends Order {
 	}
 
 	static table() {
-		return { title: 'Ingresos', hasPagination: true, period: 'day' };
+		return {
+			title         : 'Ingresos',
+			header        : [ 'Producto', 'Ctd', 'Cliente', 'Total' ],
+			sortBy        : [ 'product', 'quantity', 'client', 'total' ],
+			hasPagination : true,
+			period        : 'day'
+		};
 	}
 
 	table() {
 		return {
-			title   : 'Ingresos',
-			header  : [ 'Producto', 'Ctd', 'Cliente', 'Total' ],
 			row     : [ this.product, this.quantity, this.client, this.total ],
 			datestr : this.date
 		};

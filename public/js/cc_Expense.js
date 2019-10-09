@@ -18,10 +18,6 @@ class Expense extends Sheet {
 		return EXPENSES;
 	}
 
-	static table() {
-		return { title: 'Gastos', hasPagination: true, period: 'week' };
-	}
-
 	static extendsCreate() {
 		return true;
 	}
@@ -58,13 +54,20 @@ class Expense extends Sheet {
 		};
 	}
 
+	static table() {
+		return {
+			title         : 'Gastos',
+			header        : [ 'Dia ', 'Nombre', 'Total' ],
+			sortby        : [ 'date', 'name', 'total' ],
+			hasPagination : true,
+			period        : 'week'
+		};
+	}
+
 	table() {
 		return {
-			title    : 'Gastos',
-			header   : [ 'Dia ', 'Nombre', 'Total' ],
 			row      : [ moment(this.date).format('DD/M'), this.name, accounting.formatMoney(this.total) ],
 			rowClass : this.paid == '' ? 'unpaid' : 'paid',
-			sortby   : [ 'name', 'total' ],
 			datestr  : this.date
 		};
 	}
@@ -72,8 +75,8 @@ class Expense extends Sheet {
 	static form() {
 		return {
 			fields    : [
-				{ customSelectField: { property: 'category', target: 'provider' } },
 				{ customSelectField: { property: 'provider', target: 'name' } },
+				{ customSelectField: { property: 'category', target: 'provider' } },
 				{ customSelectField: { property: 'name', target: 'provider' } },
 				{ priceField: { property: 'total', label: 'total:' } },
 				{ priceField: { property: 'quantity', step: '0.5', defaultValue: '1', label: 'cantidad:' } },

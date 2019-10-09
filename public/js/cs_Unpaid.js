@@ -6,10 +6,6 @@ class Unpaid extends Order {
 		this.produced = produced;
 	}
 
-	static table() {
-		return { title: 'Pedidos por Cobrar', hasPagination: false, period: false };
-	}
-
 	static sheet() {
 		return 'unpaid';
 	}
@@ -28,10 +24,19 @@ class Unpaid extends Order {
 		});
 	}
 
+	static table() {
+		return {
+			title         : 'Pedidos por Cobrar',
+			header        : [ 'Dia', 'Producto', 'Ctd', 'Cliente', 'Total' ],
+			sortby        : [ 'product', 'quantity', 'client', 'total' ],
+			hasPagination : false,
+			period        : false
+		};
+	}
+
 	table() {
 		return {
 			title   : 'Ventas Dia',
-			header  : [ 'Dia', 'Producto', 'Ctd', 'Cliente', 'Total' ],
 			row     : [
 				moment(this.produced).format('DD/M'),
 				this.product,
@@ -39,7 +44,6 @@ class Unpaid extends Order {
 				this.client,
 				this.total.formatK()
 			],
-			sortby  : [ 'product', 'quantity', 'client', 'total' ],
 			datestr : this.date
 		};
 	}

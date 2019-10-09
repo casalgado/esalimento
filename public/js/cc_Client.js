@@ -42,20 +42,46 @@ class Client extends Sheet {
 		return tallyArray.sortBy('amount').reverse();
 	}
 
+	lastOrder() {
+		let daysAgo = moment().diff(
+			moment(
+				ORDERS.filter((e) => {
+					return e.client == this.name;
+				})
+					.map((e) => {
+						return e.produced;
+					})
+					.reduce((latest, current) => {
+						return moment(current).isAfter(latest) ? current : latest;
+					}, '2018-01-01T00:00:00-05:00')
+			),
+			'days'
+		);
+		let string = `${daysAgo} Dia`;
+		if (daysAgo == 1) {
+			return string;
+		} else {
+			return string + 's';
+		}
+	}
+
 	static byPeriod() {
 		return this.local().sortBy('name').reverse();
 	}
 
 	static table() {
-		return { title: 'Clientes', hasPagination: false, period: 'all' };
+		return {
+			title         : 'Clientes',
+			header        : [ 'Nombre', 'Pedidos', 'Pidio hace' ],
+			hasPagination : false,
+			period        : false
+		};
 	}
 
 	table() {
 		return {
-			title   : 'Clientes',
-			header  : [ 'Nombre', 'Pedidos', 'Producto Fav' ],
-			row     : [ this.name, this.totalOrders(), this.orderDetails() ],
-			datestr : ''
+			row     : [ this.name, this.totalOrders(), this.lastOrder() ],
+			datestr : this.datestr()
 		};
 	}
 

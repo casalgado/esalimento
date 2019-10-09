@@ -29,13 +29,16 @@ class Production extends Order {
 	}
 
 	static table() {
-		return { title: 'Produccion del Dia', hasPagination: true, period: 'day' };
+		return {
+			title         : 'Produccion del Dia',
+			header        : [ 'Producto', 'Ctd', 'Cliente' ],
+			hasPagination : true,
+			period        : 'day'
+		};
 	}
 
 	table() {
 		return {
-			title   : 'Produccion del Dia',
-			header  : [ 'Producto', 'Ctd', 'Cliente' ],
 			row     : [ this.product, this.quantity, this.client ],
 			datestr : this.date
 		};
