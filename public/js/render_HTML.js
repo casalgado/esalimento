@@ -1,6 +1,10 @@
 class Html {
 	constructor() {}
 
+	add(a, b) {
+		return a + b;
+	}
+
 	create(type, oid, oclass, attributes) {
 		let id = oid || '';
 		let classname = oclass || '';
@@ -77,3 +81,7 @@ class Html {
 		return parent;
 	}
 }
+
+// module.exports = {
+// 	Html
+// };

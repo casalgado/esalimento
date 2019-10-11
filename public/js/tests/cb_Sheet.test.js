@@ -16,7 +16,15 @@ describe('zeroPad', () => {
 
 describe('belongsToWeek', () => {
 	it('should return TRUE if datestr() is same week as momentObj', () => {
+		jest.mock('moment', () => () => ({ format: () => '2018–01–30T12:34:56+00:00' }));
 		let localObj = new Sheet();
-		expect(localObj.belongsToWeek(moment().format())).toBe(true);
+		expect(localObj.belongsToWeek('2018–01–30T12:34:56+00:00')).toBe(true);
+	});
+});
+
+describe('add', () => {
+	it('should add a to b', () => {
+		let localObj = new Sheet();
+		expect(localObj.add(2, 3).toBe(5));
 	});
 });

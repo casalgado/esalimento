@@ -1,4 +1,3 @@
-//export const getUnique = getUnique;
 console.log(`document: ${moment().format('mm:ss.SS')}`);
 
 function onLoad() {
@@ -155,3 +154,5 @@ function convertToInteger(string) {
 		return parseInt(string);
 	}
 }
+
+// module.exports = { convertToInteger };

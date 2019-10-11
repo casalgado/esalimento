@@ -285,7 +285,4 @@ function zeroPad(value, padding) {
 	return (zeroes + value).slice(-padding);
 }
 
-// module.exports = {
-//	Sheet,
-//	zeroPad
-// };
+// module.exports = { Sheet, zeroPad };

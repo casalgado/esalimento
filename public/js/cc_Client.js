@@ -43,20 +43,10 @@ class Client extends Sheet {
 	}
 
 	lastOrder() {
-		let daysAgo = moment().diff(
-			moment(
-				ORDERS.filter((e) => {
-					return e.client == this.name;
-				})
-					.map((e) => {
-						return e.produced;
-					})
-					.reduce((latest, current) => {
-						return moment(current).isAfter(latest) ? current : latest;
-					}, '2018-01-01T00:00:00-05:00')
-			),
-			'days'
-		);
+		let object = ORDERS.reverse().find((e) => {
+			return e.client == this.name;
+		});
+		let daysAgo = moment().diff(moment(object.produced), 'days');
 		let string = `${daysAgo} Dia`;
 		if (daysAgo == 1) {
 			return string;
