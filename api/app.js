@@ -5,8 +5,20 @@ app.get('/', (req, res) => {
 	res.send('Hello World!');
 });
 
-app.get('/api/users', (req, res) => {
+/**
+ * GET /orders
+ * Purpose: Get all orders 
+ */
+app.get('/orders', (req, res) => {
 	res.send([ 1, 2, 3 ]);
+});
+
+/**
+ * GET /orders/:period/:day
+ * Purpose: Get all orders for a given day and period.
+ */
+app.get('/orders/:period/:day', (req, res) => {
+	res.send(req.params);
 });
 
 const port = process.env.PORT || 3000;
