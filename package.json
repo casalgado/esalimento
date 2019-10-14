@@ -2,5 +2,8 @@
 	"license": "UNLICENSED",
 	"devDependencies": {
 		"jest": "^24.9.0"
+	},
+	"dependencies": {
+		"moment": "^2.24.0"
 	}
 }

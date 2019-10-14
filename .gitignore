@@ -1,6 +1,7 @@
 # Other docs
 es_alimentoM.txt
 .vscode/
+.DS_Store
 
 # Logs
 logs
