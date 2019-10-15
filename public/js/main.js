@@ -154,5 +154,3 @@ function convertToInteger(string) {
 		return parseInt(string);
 	}
 }
-
-// module.exports = { convertToInteger };
