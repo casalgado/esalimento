@@ -9,11 +9,14 @@
 
     <script src="https://kit.fontawesome.com/349071ea41.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
     <link rel="stylesheet" href="css/main.css">
+
   </head>
   <div id="root"></div>
   <body onload="onLoad()">
     <div id="printContainer"></div>
+    <div id="mocha" class="hide"></div>
     <div id="siteContainer" class="container hide">
       <!-- @ creo que este return false de abajo no esta haciendo nada -->
         <form onsubmit="signInAdmin(this); return false" class="localForm">
@@ -68,6 +71,18 @@
       <script src="js/app_admins.js"></script>
       <script src="js/main.js"></script>
       <script src="js/app_router.js"></script>
+
+      <!-- Tests -->
+      <!-- <script src="js/test/chai.js"></script>
+      <script src="js/test/mocha.js"></script>
+      <script class="mocha-init">
+        mocha.setup('bdd');
+        mocha.checkLeaks();
+      </script>
+      <script src="js/test/test.sheet.js"></script>
+      <script class="mocha-exec">
+        mocha.run();
+      </script> -->
 
     </span>
   </body>
