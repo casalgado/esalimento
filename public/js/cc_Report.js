@@ -18,11 +18,11 @@ class Report extends Sheet {
 
 	static create() {
 		const pastReport = Report.getLast();
-		if (!moment(pastReport.date).isSame(moment(), 'week')) {
-			pastReport.setUnpaid().update();
-			let newReport = new Report(this.setLocalId(), pastReport.realWealthAtEnd());
-			newReport.save();
-		}
+		// if (!moment(pastReport.date).isSame(moment(), 'week')) {
+		// 	pastReport.setUnpaid().update();
+		// 	let newReport = new Report(this.setLocalId(), pastReport.realWealthAtEnd());
+		// 	newReport.save();
+		// }
 	}
 
 	static setLocalId() {

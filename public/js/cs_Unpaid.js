@@ -17,7 +17,7 @@ class Unpaid extends Order {
 
 	static byPeriod() {
 		let objects = this.local().filter((e) => {
-			return e.paid == '';
+			return e.paid == '' && e.client != '';
 		});
 		return objects.map((o) => {
 			return Unpaid.instantiate(o);
@@ -37,13 +37,7 @@ class Unpaid extends Order {
 	table() {
 		return {
 			title   : 'Ventas Dia',
-			row     : [
-				moment(this.produced).format('DD/M'),
-				this.product,
-				this.quantity,
-				this.client,
-				this.total.formatK()
-			],
+			row     : [ moment(this.produced).format('DD/M'), this.product, this.quantity, this.client, this.total ],
 			datestr : this.date
 		};
 	}

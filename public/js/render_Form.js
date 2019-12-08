@@ -122,6 +122,22 @@ class Form {
 		return button;
 	}
 
+	static basicField({ property, type, defaultValue = '', label = null }) {
+		let formGroup = HTML.create('div', '', 'form-group basicFieldGroup');
+		let labelDOM = HTML.create('label', '', `${type}-${property}`, { for: `${this.sheet}-${property}` });
+		labelDOM.innerHTML = label || property;
+		let input = HTML.create('input', `${this.sheet}-${property}`, 'basicField form-control form-control-sm', {
+			type  : type,
+			value : defaultValue
+		});
+		if (property != 'paid') {
+			input.setAttribute('required', true);
+		}
+		formGroup.appendChild(labelDOM);
+		formGroup.appendChild(input);
+		return formGroup;
+	}
+
 	static reset() {
 		let forms = Array.from(document.getElementsByTagName('form'));
 		for (let i = 0; i < forms.length; i++) {
@@ -173,6 +189,15 @@ class FormCreate extends Form {
 			constructor.create(form);
 			e.preventDefault();
 		});
+
+		if (constructor.combo) {
+			let comboButtons = constructor.comboButtons();
+			comboButtons.map((e) => {
+				let btn = HTML.createSquareButton(e);
+				form.appendChild(btn);
+			});
+			console.log('I am here');
+		}
 	}
 
 	static render(constructor) {
