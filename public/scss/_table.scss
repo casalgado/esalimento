@@ -118,13 +118,12 @@
 
 	.paid {
 		td:last-child {
-			text-decoration: underline forestgreen;
+			color: $borderGray;
 		}
 	}
 
 	.unpaid {
 		td:last-child {
-			text-decoration: underline firebrick;
 		}
 	}
 

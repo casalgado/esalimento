@@ -238,13 +238,7 @@ section.insideNav .navBtn {
 }
 
 #ordersTable .paid td:last-child {
-  -webkit-text-decoration: underline forestgreen;
-          text-decoration: underline forestgreen;
-}
-
-#ordersTable .unpaid td:last-child {
-  -webkit-text-decoration: underline firebrick;
-          text-decoration: underline firebrick;
+  color: #57585a;
 }
 
 #ordersTable th:nth-of-type(1) {
