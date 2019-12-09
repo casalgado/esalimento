@@ -170,3 +170,24 @@ function convertToCSV(objects) {
 	let csvContent = 'data:text/csv;charset=utf-8,' + rows.map((e) => e.join(',')).join('\n');
 	return csvContent;
 }
+
+function importOrdersFromJSON(objs) {
+	objects = Object.values(objs);
+	for (let i = 0; i < objects.length; i++) {
+		firebase
+			.database()
+			.ref('devAccount/orders')
+			.push(objects[i], function(error) {
+				if (error) {
+					console.log('The write failed');
+				} else {
+					console.log('Data saved successfully!');
+				}
+			})
+			.then((e) => {
+				firebase.database().ref('devAccount/orders').child(e.getKey()).update({
+					id : e.getKey()
+				});
+			});
+	}
+}

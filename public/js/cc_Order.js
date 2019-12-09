@@ -87,8 +87,6 @@ class Order extends Sheet {
 			// @refactor code below
 			document.getElementById('paidBtn').classList.add('paid');
 			document.getElementById('paidBtn').classList.remove('unpaid');
-			document.getElementById('paidBtn-title').innerHTML = obj.squareBtnTitle();
-			document.getElementById('paidBtn-main').innerHTML = obj.squareBtnMain();
 		}
 	}
 
