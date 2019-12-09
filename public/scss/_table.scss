@@ -117,14 +117,11 @@
 	width: 100%;
 
 	.paid {
-		td:last-child {
-			color: $borderGray;
-		}
+		color: $borderGray;
 	}
 
 	.unpaid {
-		td:last-child {
-		}
+		color: $fontColor;
 	}
 
 	th:nth-of-type(1) {

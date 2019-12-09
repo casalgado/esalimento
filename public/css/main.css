@@ -237,8 +237,12 @@ section.insideNav .navBtn {
   width: 100%;
 }
 
-#ordersTable .paid td:last-child {
+#ordersTable .paid {
   color: #57585a;
+}
+
+#ordersTable .unpaid {
+  color: #f9fafb;
 }
 
 #ordersTable th:nth-of-type(1) {
