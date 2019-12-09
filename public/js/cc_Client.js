@@ -46,12 +46,16 @@ class Client extends Sheet {
 		let object = ORDERS.reverse().find((e) => {
 			return e.client == this.name;
 		});
-		let daysAgo = moment().diff(moment(object.produced), 'days');
-		let string = `${daysAgo} Dia`;
-		if (daysAgo == 1) {
-			return string;
+		if (object) {
+			let daysAgo = moment().diff(moment(object.produced), 'days');
+			let string = `${daysAgo} Dia`;
+			if (daysAgo == 1) {
+				return string;
+			} else {
+				return string + 's';
+			}
 		} else {
-			return string + 's';
+			return '-';
 		}
 	}
 
