@@ -9,11 +9,13 @@ function onLoad() {
 	REPORTS = [];
 	SHOWING = { period: 'Week', current: moment() };
 	FILTERS = {};
+	DB_REF = '';
 	HTML = new Html();
 	Nav.renderMainButton();
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			console.log(`User: ${moment().format('mm:ss.SS')}`);
+			DB_REF = dbPath(firebase.auth().currentUser.uid);
 			loadPage();
 		} else {
 			document.getElementById('siteContainer').setAttribute('style', 'display:block');
@@ -55,6 +57,17 @@ function loadPage() {
 	FILTERS = {};
 	document.getElementById('siteContainer').classList.add('hide');
 	document.getElementById('appContainer').classList.add('show');
+}
+
+function dbPath(uid) {
+	const db_paths = {
+		QetHHTYdJxMITVG4fwBksq3uD0z2 : 'devAccount',
+		WvbSPu6YNMZlwxEas5qEx8uqRCZ2 : 'devAccount',
+		qmS5zdK0UuVXnCFofAeyc244DPp1 : 'devAccount',
+		s2LmuhBpKAg2np85D653Iqdx8hX2 : 'devAccount',
+		mvmSzFpWnSVCSVwxKj7kXrqTTM63 : 'nutriplantas'
+	};
+	return db_paths[uid];
 }
 
 function drawAll(array, target, property) {

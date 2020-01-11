@@ -1,26 +1,26 @@
-function fetchAll(constructor, directory) {
-	return new Promise((resolve) => {
-		var objects = [];
-		firebase.database().ref(`devAccount/${directory}`).once('value').then(function(snapshot) {
-			snapshot.forEach(function(item) {
-				objects.push(instantiateEntry(constructor, item.val()));
-			});
-			resolve(objects);
-		});
-	});
-}
+// function fetchAll(constructor, directory) {
+// 	return new Promise((resolve) => {
+// 		var objects = [];
+// 		firebase.database().ref(`${DB_REF}/${directory}`).once('value').then(function(snapshot) {
+// 			snapshot.forEach(function(item) {
+// 				objects.push(instantiateEntry(constructor, item.val()));
+// 			});
+// 			resolve(objects);
+// 		});
+// 	});
+// }
 
-function updateAll() {
-	return new Promise((resolve) => {
-		var objects = [];
-		firebase.database().ref(`devAccount/orders`).once('value').then(function(snapshot) {
-			snapshot.forEach(function(item) {
-				objects.push(instantiateEntry(constructor, item.val()));
-			});
-			resolve(objects);
-		});
-	});
-}
+// function updateAll() {
+// 	return new Promise((resolve) => {
+// 		var objects = [];
+// 		firebase.database().ref(`${DB_REF}/orders`).once('value').then(function(snapshot) {
+// 			snapshot.forEach(function(item) {
+// 				objects.push(instantiateEntry(constructor, item.val()));
+// 			});
+// 			resolve(objects);
+// 		});
+// 	});
+// }
 
 function instantiateEntry(constructor, dbObj) {
 	// called when retreiving objects from database
@@ -171,23 +171,23 @@ function convertToCSV(objects) {
 	return csvContent;
 }
 
-function importOrdersFromJSON(objs) {
-	objects = Object.values(objs);
-	for (let i = 0; i < objects.length; i++) {
-		firebase
-			.database()
-			.ref('devAccount/orders')
-			.push(objects[i], function(error) {
-				if (error) {
-					console.log('The write failed');
-				} else {
-					console.log('Data saved successfully!');
-				}
-			})
-			.then((e) => {
-				firebase.database().ref('devAccount/orders').child(e.getKey()).update({
-					id : e.getKey()
-				});
-			});
-	}
-}
+// function importOrdersFromJSON(objs) {
+// 	objects = Object.values(objs);
+// 	for (let i = 0; i < objects.length; i++) {
+// 		firebase
+// 			.database()
+// 			.ref(`${DB_REF}/orders`)
+// 			.push(objects[i], function(error) {
+// 				if (error) {
+// 					console.log('The write failed');
+// 				} else {
+// 					console.log('Data saved successfully!');
+// 				}
+// 			})
+// 			.then((e) => {
+// 				firebase.database().ref(`${DB_REF}/orders`).child(e.getKey()).update({
+// 					id : e.getKey()
+// 				});
+// 			});
+// 	}
+// }

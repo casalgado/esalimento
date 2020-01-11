@@ -8,7 +8,7 @@ class Sheet {
 	}
 
 	static path() {
-		return `devAccount/${this.sheet()}`;
+		return `${DB_REF}/${this.sheet()}`;
 	}
 
 	static create(from_form) {
@@ -38,7 +38,8 @@ class Sheet {
 			})
 			.then((e) => {
 				firebase.database().ref(c.path()).child(e.getKey()).update({
-					id : e.getKey()
+					id        : e.getKey(),
+					bug_probe : Order.local().length
 				});
 				this.id = e.getKey();
 				c.local().push(this);
