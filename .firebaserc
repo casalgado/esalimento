@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "es-alimento"
+    "default": "es-alimento",
+    ".": "zabsal",
+    "zabsal": "zabsal",
+    "es": "es-alimento"
   }
 }

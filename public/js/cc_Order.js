@@ -128,7 +128,10 @@ class Order extends Sheet {
 
 	card() {
 		return {
-			t       : `${this.client} ${this.quantity} ${this.product}`,
+			t       : `${Client.getFromLocal('name', this.client).phone} &nbsp ${Client.getFromLocal(
+				'name',
+				this.client
+			).address}`,
 			btnData : [
 				{
 					btnId      : 'paidBtn',
