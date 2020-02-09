@@ -59,6 +59,21 @@ class Client extends Sheet {
 		}
 	}
 
+	static updateFromJSON(json) {
+		this.all().then((e) => {
+			for (let i = 0; i < e.length; i++) {
+				for (let j = 0; j < json.length; j++) {
+					if (json[j].name == e[i].name) {
+						// e[i].phone = json[j].number;
+						// e[i].comment = json[j].comment;
+						// e[i].origin = json[j].origin;
+						// e[i].update();
+					}
+				}
+			}
+		});
+	}
+
 	static byPeriod() {
 		return this.local().sortBy('name').reverse();
 	}

@@ -53,16 +53,21 @@ class Sheet {
 		const c = this.constructor;
 		const key = this.id;
 		const path = c.path() + '/' + key;
+		let quote = smith[Math.floor(Math.random() * smith.length)];
 		this.lastModified = moment().format();
-		firebase.database().ref(path).update(this, function(error) {
-			if (error) {
-				console.log('The write failed');
-			} else {
-				console.log('Data saved successfully!');
+		if (key == '') {
+			alert(quote);
+		} else {
+			firebase.database().ref(path).update(this, function(error) {
+				if (error) {
+					console.log('The write failed');
+				} else {
+					console.log('Data saved successfully!');
+				}
+			});
+			if (noRefresh != 'noRefresh') {
+				Table.render(c);
 			}
-		});
-		if (noRefresh != 'noRefresh') {
-			Table.render(c);
 		}
 	}
 
@@ -285,6 +290,21 @@ function zeroPad(value, padding) {
 	var zeroes = new Array(padding + 1).join('0');
 	return (zeroes + value).slice(-padding);
 }
+
+let smith = [
+	'Mr. Anderson.',
+	'Hmm, Mr. Anderson. You disappoint me.',
+	'We meet again Mr. Anderson',
+	"And tell me, Mr. Anderson, what good is a phone call if you're unable to speak?",
+	"You're going to help us, Mr. Anderson. Whether you want to or not.",
+	'The great Morpheus; we meet at last.',
+	"I'd like to share a revelation I've had during my time here. It came to me when I tried to classify your species. I realized that you're not actually mammals. Every mammal on this planet instinctively develops a natural equilibrium with their surrounding environment, but you humans do not. You move to another area, and you multiply, and you multiply, until every natural resource is consumed. The only way you can survive is to spread to another area. There is another organism on this planet that follows the same pattern. Do you know what it is? A virus. Human beings are a disease, a cancer of this planet. You are a plague, and we are the cure.",
+	"Can you hear me, Morpheus? I'm going to be honest with you: I hate this place. This zoo. This prison. This reality, whatever you want to call it. I can't stand it any longer. It's the smell- if there is such a thing. I feel... saturated by it.",
+	'Find them and destroy them.',
+	"Never send a human to do a machine's job.",
+	"I'm going to enjoy watching you die, Mr. Anderson.",
+	'You hear that, Mr. Anderson? That is the sound of inevitability. It is the sound of your death. Goodbye, Mr. Anderson.'
+];
 
 // const moment = require('moment');
 
