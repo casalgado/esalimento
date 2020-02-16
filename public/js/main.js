@@ -65,6 +65,7 @@ function dbPath(uid) {
 		WvbSPu6YNMZlwxEas5qEx8uqRCZ2 : 'devAccount',
 		qmS5zdK0UuVXnCFofAeyc244DPp1 : 'devAccount',
 		s2LmuhBpKAg2np85D653Iqdx8hX2 : 'devAccount',
+		ZOuIlFxAWaOGE39jI0lndkdNkdb2 : 'devAccount',
 		mvmSzFpWnSVCSVwxKj7kXrqTTM63 : 'nutriplantas'
 	};
 	return db_paths[uid];
