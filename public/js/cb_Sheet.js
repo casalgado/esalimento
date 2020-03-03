@@ -37,11 +37,12 @@ class Sheet {
 				}
 			})
 			.then((e) => {
-				firebase.database().ref(c.path()).child(e.getKey()).update({
-					id        : e.getKey(),
+				let eKey = e.getKey();
+				firebase.database().ref(c.path()).child(eKey).update({
+					id        : eKey,
 					bug_probe : Order.local().length
 				});
-				this.id = e.getKey();
+				this.id = eKey;
 				c.local().push(this);
 			});
 	}

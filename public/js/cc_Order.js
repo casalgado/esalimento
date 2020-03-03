@@ -131,7 +131,7 @@ class Order extends Sheet {
 			t       : `${Client.getFromLocal('name', this.client).phone} &nbsp ${Client.getFromLocal(
 				'name',
 				this.client
-			).address}`,
+			).address} &nbsp ${this.id}`,
 			btnData : [
 				{
 					btnId      : 'paidBtn',
