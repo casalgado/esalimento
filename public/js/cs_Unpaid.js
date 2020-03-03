@@ -26,7 +26,7 @@ class Unpaid extends Order {
 
 	static table() {
 		return {
-			title         : 'Pedidos por Cobrar',
+			title         : 'Pedidos por cobrar',
 			header        : [ 'Dia', 'Producto', 'Ctd', 'Cliente', 'Total' ],
 			sortby        : [ 'product', 'quantity', 'client', 'total' ],
 			hasPagination : false,
