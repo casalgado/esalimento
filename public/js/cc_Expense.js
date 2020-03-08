@@ -92,7 +92,7 @@ class Expense extends Sheet {
 
 	export() {
 		return [
-			moment(this.date).format('DD/MM/YYYY'),
+			moment(this.date).format('MM/DD/YYYY'),
 			this.provider,
 			this.name,
 			this.total,

@@ -131,7 +131,7 @@ class Order extends Sheet {
 			t       : `${Client.getFromLocal('name', this.client).phone} &nbsp ${Client.getFromLocal(
 				'name',
 				this.client
-			).address} &nbsp ${this.id}`,
+			).address}`,
 			btnData : [
 				{
 					btnId      : 'paidBtn',
@@ -178,14 +178,14 @@ class Order extends Sheet {
 
 	export() {
 		return [
-			moment(this.confirmed).format('DD/MM/YYYY'),
+			moment(this.confirmed).format('MM/DD/YYYY'),
 			this.client,
 			this.quantity,
 			this.product,
 			this.unitPrice,
 			this.total,
-			moment(this.produced).format('DD/MM/YYYY'),
-			moment(this.delivered).format('DD/MM/YYYY'),
+			moment(this.produced).format('MM/DD/YYYY'),
+			moment(this.delivered).format('MM/DD/YYYY'),
 			this.paidstr()
 		];
 	}

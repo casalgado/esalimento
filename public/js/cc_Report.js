@@ -1,11 +1,8 @@
 class Report extends Sheet {
-	constructor(name, wealthAtStart, cash, bank, date, id) {
+	constructor(name, unpaid, id) {
 		super(id, name);
-		this.date = date || moment().format();
-		this.cash = cash || 0;
-		this.bank = bank || 0;
-		this.unpaid = null;
-		this.wealthAtStart = wealthAtStart;
+		this.date = moment().format();
+		this.unpaid = unpaid;
 	}
 
 	static sheet() {
@@ -18,11 +15,10 @@ class Report extends Sheet {
 
 	static create() {
 		const pastReport = Report.getLast();
-		// if (!moment(pastReport.date).isSame(moment(), 'week')) {
-		// 	pastReport.setUnpaid().update();
-		// 	let newReport = new Report(this.setLocalId(), pastReport.realWealthAtEnd());
-		// 	newReport.save();
-		// }
+		if (!moment(pastReport.date).isSame(moment(), 'day')) {
+			let newReport = new Report(this.setLocalId(), Order.totalUnpaid());
+			newReport.save();
+		}
 	}
 
 	static setLocalId() {
@@ -63,7 +59,7 @@ class Report extends Sheet {
 	}
 
 	setUnpaid() {
-		let unpaid = this.unpaid || Order.totalUnpaid();
+		let unpaid = Order.totalUnpaid();
 		this.unpaid = unpaid;
 		return this;
 	}

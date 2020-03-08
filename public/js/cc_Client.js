@@ -1,9 +1,10 @@
 class Client extends Sheet {
-	constructor(id, name, email, phone, address) {
+	constructor(id, name, email, phone, address, birthday) {
 		super(id, name);
 		this.email = email || '';
 		this.phone = phone || '';
 		this.address = address || '';
+		this.birthday = birthday || '';
 	}
 
 	static sheet() {
