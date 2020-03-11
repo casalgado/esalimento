@@ -65,7 +65,7 @@ class Form {
 		labelDOM.innerHTML = label || property;
 		let input = HTML.create('input', `${this.sheet}-${property}`, 'priceField form-control form-control-sm', {
 			type     : 'number',
-			min      : '1',
+			min      : '0',
 			step     : step,
 			onchange : `updatePriceValues(this, '${firstProperty}')`,
 			onkeyup  : `updatePriceValues(this, '${firstProperty}')`,

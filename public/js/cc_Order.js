@@ -178,7 +178,7 @@ class Order extends Sheet {
 
 	export() {
 		return [
-			moment(this.confirmed).format('MM/DD/YYYY'),
+			moment(this.produced).format('MM/DD/YYYY'),
 			this.client,
 			this.quantity,
 			this.product,
